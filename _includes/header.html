@@ -1,0 +1,58 @@
+{% assign current = page.url | downcase | split: '/' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{page.title}} | The Parker Lab</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<link rel='stylesheet' type='text/css' href='css/main_style.css' />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,700,400italic,700italic' rel='stylesheet' type='text/css' />
+
+{% if current[1] == 'publications.html' %} {% include pub_buttons.html %} {% endif %}
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+
+{% include tracking.html %}
+
+<script>
+window.onload = function() {
+  var a = document.getElementsByTagName('a');
+  for (i = 0; i < a.length; i++) {
+    if (a[i].hostname === location.hostname) {
+      if (a[i].href.match(/(zip|dmg|txt|cfg|gz|pl|pdf)$/i)) {
+        a[i].setAttribute('target', '_blank');
+        a[i].onclick = function() {
+          ga('send', 'event', 'Downloads', 'Click', this.getAttribute('href'));
+        };
+      }
+    }
+  }
+}
+</script>
+
+</head>
+<body class='short-header-page'>
+<div id="header-wrap">
+	<div class="container">
+		<table id="header">
+			<tr>
+				<td id="header-right">
+					<table>
+						<tr>
+							<td class="phone-number"><img src="assets/images/U-M_2color-HorizontalReversed.30px.png" height=30></td>
+							<td>
+								<div style="text-align:left;">
+									<span class="wsite-social">
+									<a class='wsite-social-item wsite-social-flickr' href='http://scholar.google.com/citations?user=F4UZ_jIAAAAJ' target='_blank'></a><a class='wsite-social-item wsite-social-mail' href='mailto:scjp@umich.edu' target='_blank'></a>
+									</span>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div><!-- end container -->
+</div><!-- end header-wrap -->  		
