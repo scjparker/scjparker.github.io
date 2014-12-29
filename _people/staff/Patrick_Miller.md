@@ -2,7 +2,7 @@
 publish: true
 name: Patrick J. Miller, MS, MPH
 title: Lab Manager
-picture: Patrick_pic.jpg
+picture: placeholder.png
 google-scholar: 
 CV:
 linked-in: pub/patrick-miller
