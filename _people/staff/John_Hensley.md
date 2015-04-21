@@ -1,6 +1,6 @@
 ---
 publish: true
-name: Patrick Hensley
+name: John Hensley
 title: Research Computer Specialist
 picture: jhensley.jpg
 google-scholar: 
