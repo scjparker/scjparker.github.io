@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Hadley VanRenterghem
-title: Summer intern (coming soon!)
+title: Summer intern (starting soon!)
 picture: hvanrenterghem.jpg
 google-scholar: 
 CV:
