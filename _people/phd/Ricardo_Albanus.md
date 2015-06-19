@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Ricardo D'Oliveira Albanus
-title: PhD graduate student (PIBS)
+title: Computational Medicine & Bioinformatics Pre-candidate
 picture: ralbanus.jpg
 google-scholar: 
 CV:

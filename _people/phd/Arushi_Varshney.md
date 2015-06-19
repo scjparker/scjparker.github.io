@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Arushi Varshney
-title: PhD graduate student (PIBS)
+title: Human Genetics Pre-candidate
 picture: avarshney.jpg
 google-scholar: 
 CV:
