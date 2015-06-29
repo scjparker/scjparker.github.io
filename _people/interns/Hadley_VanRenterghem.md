@@ -1,11 +1,11 @@
 ---
 publish: true
 name: Hadley VanRenterghem
-title: Summer intern (starting soon!)
+title: Summer intern
 picture: hvanrenterghem.jpg
 google-scholar: 
 CV:
 linked-in: 
 twitter:
-email:
+email: hvanr@umich.edu
 ---
