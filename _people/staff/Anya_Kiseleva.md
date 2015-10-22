@@ -2,7 +2,7 @@
 publish: true
 name: Anya Kiseleva
 title: Research Laboratory Tech Senior
-picture: placeholder.png
+picture: akiseleva.jpg
 google-scholar: 
 CV:
 linked-in: 
