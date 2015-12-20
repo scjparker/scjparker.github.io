@@ -1,6 +1,6 @@
 ---
 publish: true
-name: Yasuhiro (Yoshi) Kyono
+name: Yasuhiro (Yoshi) Kyono, Ph.D.
 title: Postdoctoral Fellow, joint with the <a href="http://www.hg.med.umich.edu/faculty/jacob-kitzman-phd" target='_blank'>Jacob Kitzman Lab</a>
 picture: ykyono.jpg
 google-scholar: 
