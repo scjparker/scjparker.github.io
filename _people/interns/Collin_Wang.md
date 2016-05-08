@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Collin Wang
-title: Summer intern
+title: Summer intern from Detroit Country Day Upper School
 picture: cwang.jpg
 google-scholar: 
 CV:
