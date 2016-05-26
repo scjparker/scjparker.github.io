@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Arushi Varshney
-title: Human Genetics Pre-candidate
+title: Human Genetics Candidate
 picture: avarshney.jpg
 google-scholar: 
 CV:
