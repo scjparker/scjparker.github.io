@@ -166,7 +166,7 @@ td {
 }
 
 .cleaner {
-    flex: 0 0 1em;
+    flex: 0 0 2em;
     text-align: right;
     font-weight: 700;
     border: none;
@@ -332,6 +332,7 @@ td {
 
 #legends > div:first-child {
     padding-right: 2em;
+    flex: 1 1 50%;
 }
 
 #legends h4 {

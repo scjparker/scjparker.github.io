@@ -73,7 +73,7 @@ function makeReporters() {
     }
 }
 
-var format_number_for_locale = new Intl.NumberFormat(window.navigator.languages || [window.navigator.language || window.navigator.userLanguage], { localeMatcher: 'best fit', maximumFractionDigits: 4 }).format;
+var format_number_for_locale = window.Intl ? new Intl.NumberFormat(window.navigator.languages || [window.navigator.language || window.navigator.userLanguage], { localeMatcher: 'best fit', maximumFractionDigits: 4 }).format : function(n) {return n;};
 
 d3.selection.prototype.moveToFront = function() {
     return this.each(function() {
