@@ -235,7 +235,7 @@ td {
 
 #main {
     position: relative;
-    padding: 1em;
+    padding: 0 1em;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -270,11 +270,9 @@ td {
 
 #plotContainer {
     position: relative;
-    margin-top: 2em;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    min-height: 400px;
 }
 
 #plot {
@@ -282,6 +280,7 @@ td {
     flex: 1 1 50%;
     pointer-events: none;
     background: #fff;
+    min-height: 320px;
 }
 
 #plot svg {
@@ -313,26 +312,15 @@ td {
 #control {
     position: relative;
     display: flex;
-    flex: 1 1 30%;
+    flex: 1 1 40%;
     flex-direction: column;
     padding-right: 4em;
     font-size: small;
 }
 
 #legends {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-#legends > div {
-    flex: 1;
-}
-
-#legends > div:first-child {
-    padding-right: 2em;
-    flex: 1 1 50%;
+    display: block;
+    padding-bottom: 1em;
 }
 
 #legends h4 {
@@ -355,7 +343,7 @@ td {
     display: flex;
     flex-direction: row;
     cursor: pointer;
-    padding: 0.25em 0;
+    padding: 0;
     white-space: nowrap;
     font-weight: 400;
     font-size: 0.9em;
@@ -504,15 +492,24 @@ td {
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (min-width: 1024px) {
+
     #legends {
-        display: block;
-        padding-bottom: 1em;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 
     #legends > div {
         flex: 1;
     }
+
+    #legends > div:first-child {
+        padding-right: 2em;
+        flex: 1 1 50%;
+    }
+
 }
 
 @media print {

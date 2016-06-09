@@ -8,7 +8,7 @@
 
 'use strict';
 
-var margin = {top: 10, right: 50, bottom: 100, left: 70};
+var margin = {top: 10, right: 50, bottom: 60, left: 70};
 var plot;
 var width;
 var height;
@@ -48,7 +48,7 @@ var filters = {
 
 var geneQuery = null;
 
-var consoleEnabled = true;
+var consoleEnabled = false;
 var snpDetails = {};
 
 var gburlbase = 'http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=hensley&hgS_otherUserSessionName=20160603_islet_eQTL&position=';
@@ -453,8 +453,28 @@ function addSNPDetails(d, i) {
 }
 
 function showTooltip(d, i) {
+    var container = document.getElementById('plot');
+    var bounds = container.getBoundingClientRect();
+    var horizontal = 'e';
+    var vertical = 's';
+    var offsetTop = -10;
+    var offsetLeft = 10;
+
+    var x = d3.event.pageX;
+    var y = d3.event.pageY;
     d3.select(d3.event.target).moveToFront();
     d3.event.target.classList.add('opaque');
+
+    if ((bounds.right - x) < 300) {
+        horizontal = 'w';
+        offsetLeft = 0;
+    }
+    if ((bounds.bottom - y) < 300) {
+        vertical = 'n';
+        offsetTop = 0;
+    }
+    tip.direction(vertical + horizontal);
+    tip.offset([offsetTop, offsetLeft]);
     tip.show(d, i);
 }
 
