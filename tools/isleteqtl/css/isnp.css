@@ -1,0 +1,629 @@
+/*
+ * Copyright 2015 Stephen Parker
+ *
+ * Licensed under Version 3 of the GPL or any later version
+ */
+
+@font-face {
+    font-family: "Source Sans Pro";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Source Sans Pro"), url("../fonts/SourceSansPro-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Source Sans Pro";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Source Sans Pro Bold"), url("../fonts/SourceSansPro-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Source Sans Pro";
+    font-style: italic;
+    font-weight: 400;
+    src: local("Source Sans Pro Italic"), url("../fonts/SourceSansPro-Italic.ttf");
+}
+
+@font-face {
+    font-family: "Source Sans Pro";
+    font-style: italic;
+    font-weight: 700;
+    src: local("Source Sans Pro SemiBold Italic"), url("../fonts/SourceSansPro-BoldItalic.ttf");
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #393930;
+}
+
+body {
+    min-width: 760px;
+}
+
+button {
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background: #f0f0f0;
+}
+
+button:active {
+    box-shadow: inset 0 0 20px 2px rgba(255, 255, 255, 0.5);
+}
+
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    background: #ddd;
+}
+
+a {
+    color: #357;
+}
+
+dt {
+    font-weight: 700;
+}
+
+dd {
+    margin: 0.25em 1em .5em 1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 1.5em 0 0.5em 0;
+    padding: 0;
+    line-height: 1;
+}
+
+h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p {
+    margin-top: 0.5em;
+}
+
+nav ul {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    flex: 0 1 auto;
+    padding: 0;
+    margin: 0.25em 2em 0.25em 0;
+}
+
+nav li + li {
+    margin-right: 1em;
+}
+
+section {
+    margin: 0 0 2em 0;
+}
+
+section h2 {
+    border-bottom: 2px solid #f0f0f0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+thead {
+    background: #f6f6f6;
+}
+
+tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+th {
+    padding: 0.25em 10px 0.25em 0.25em;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: bottom;
+    border-right: 2px solid #fff;
+    white-space: nowrap;
+}
+
+td {
+    padding: 0.25em 10px 0.25em 0.25em;
+    text-align: left;
+    vertical-align: top;
+}
+
+.inputbox {
+    position: relative;
+    display: flex;
+    border:solid 1px #ccc;
+    border-radius: 4px;
+    padding: 0.25em 0 0.25em 0.25em;
+    margin: 0.5em 0;
+}
+
+.inputbox input {
+    flex: 1 1 auto;
+    border: none;
+    outline: none;
+}
+
+.cleaner {
+    flex: 0 0 1em;
+    text-align: right;
+    font-weight: 700;
+    border: none;
+    background: transparent;
+}
+
+.cleaner:hover {
+    background: transparent;
+    color: #f00;
+}
+
+
+.busy {
+    cursor: wait !important;
+}
+
+.hidden {
+    display: none;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.instruction {
+    font-style: italic;
+    color: #999;
+}
+
+.opaque {
+    opacity: 1 !important;
+}
+
+.rotate45 {
+    transform: rotate(45deg);
+}
+
+#banner {
+    padding: 0.5em;
+    background: #357;
+    color: #fff;
+    display: flex;
+    font-size: 1em;
+    letter-spacing: .15em;
+}
+
+#banner h1 {
+    flex: 1;
+    font-size: 1em;
+    font-weight: 400;
+    margin: 0.25em;
+}
+
+#banner nav {
+    flex: 1;
+}
+
+#banner a {
+    color: #f0f0f0;
+    text-decoration: none;
+}
+
+#banner a:hover {
+    color: #adf;
+}
+
+#main {
+    position: relative;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#main > h2 {
+    flex: 1;
+}
+
+#authors {
+    display: none;
+    font-size: smaller;
+}
+
+#authors a {
+    text-decoration: none;
+}
+
+#authorDetails {
+    display: none;
+}
+
+#authorDetails ul {
+    list-style: inside;
+    margin: 0;
+    padding: 0;
+}
+
+#authorDetails li {
+    margin: 0;
+}
+
+#plotContainer {
+    position: relative;
+    margin-top: 2em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 400px;
+}
+
+#plot {
+    position: relative;
+    flex: 1 1 50%;
+    pointer-events: none;
+    background: #fff;
+}
+
+#plot svg {
+    pointer-events: visible;
+}
+
+.dot {
+    z-index: 1;
+    opacity: 0.7;
+    vector-effect: non-scaling-stroke;
+    -webkit-transition: opacity 100ms;
+}
+
+.dot.highlight {
+    visibility: visible;
+}
+
+.axis {
+    font-size: 0.75em;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #999;
+    shape-rendering: crispEdges;
+}
+
+#control {
+    position: relative;
+    display: flex;
+    flex: 1 1 30%;
+    flex-direction: column;
+    padding-right: 4em;
+    font-size: small;
+}
+
+#legends {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#legends > div {
+    flex: 1;
+}
+
+#legends > div:first-child {
+    padding-right: 2em;
+}
+
+#legends h4 {
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+.legend {
+    position: relative;
+    padding: 0em 1em 1em 0;
+    margin: 0 0 1em 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    list-style: none;
+}
+
+.legend li {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    padding: 0.25em 0;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 0.9em;
+}
+
+.legend li.header {
+    font-size: smaller;
+    color: #999;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 0;
+    margin-bottom: 0.5em;
+    cursor: default;
+}
+
+.legend li:not(.header):hover {
+    background: #ffc;
+}
+
+.legend li.selected {
+    font-weight: 700;
+}
+
+.legend li span.label {
+    flex: 1;
+    width: 12em;
+}
+
+.enrichment {
+    flex: 1 0 auto;
+    position: relative;
+    vertical-align: bottom;
+    text-align: right;
+    float: right;
+    width: 8em;
+    height: 1.7em;
+}
+
+.enrichment svg {
+    height: 1.7em;
+    width: 8.25em;
+}
+
+.enrichment svg text {
+}
+
+
+.legendColor {
+    flex: 0 1 auto;
+    position: relative;
+    margin-right: 0.25em;
+}
+
+.legendColor svg {
+    position: relative;
+    height: 1.2em;
+    width: 1.2em;
+    top: 0.1em;
+}
+
+#snpDetails {
+    font-size: small;
+}
+
+.d3-tip {
+    position: relative;
+    background: #fff;
+    color: #000;
+    border-radius: 8px;
+    border: 1px outset rgba(128, 128, 128, 0.5);
+    pointer-events: none;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    font-size: .7em;
+}
+
+.d3-tip h3 {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background: #f0f0f0;
+    padding: 0.5em 1em;
+    margin: 0;
+}
+
+.d3-tip table {
+    width: auto;
+    margin: 0.5em 1em 1em 1em;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Northward tooltips */
+.d3-tip.n:after {
+    content: "\25BC";
+    margin: -3px 0 0 0;
+    top: 100%;
+    left: 0;
+    text-align: center;
+}
+
+/* Eastward tooltips */
+.d3-tip.e:after {
+    content: "\25C0";
+    margin: -4px 0 0 0;
+    top: 50%;
+    left: -8px;
+}
+
+/* Southward tooltips */
+.d3-tip.s:after {
+    content: "\25B2";
+    margin: 0 0 1px 0;
+    top: -8px;
+    left: 0;
+    text-align: center;
+}
+
+/* Westward tooltips */
+.d3-tip.w:after {
+    content: "\25B6";
+    margin: -4px 0 0 -1px;
+    top: 50%;
+    left: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    #plotContainer {
+        display: block;
+    }
+
+    #plot {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 760px) and (max-width: 1024px) {
+    .axis {
+        font-size: 0.6em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #legends {
+        display: block;
+        padding-bottom: 1em;
+    }
+
+    #legends > div {
+        flex: 1;
+    }
+}
+
+@media print {
+    @page {
+        size: letter landscape;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+    }
+
+    table, figure {
+        page-break-inside: avoid;
+    }
+
+    button, .cleaner {
+        display: none;
+    }
+
+    html, body {
+        margin: 0.5in 0;
+        max-height: 7.5in;
+        max-width: 10in;
+        widows: 3;
+        orphans: 3;
+        color: #000;
+    }
+
+    ::-webkit-input-placeholder { /* WebKit browsers */
+        color: transparent;
+    }
+
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: transparent;
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10+ */
+        color: transparent;
+    }
+
+    .instruction {
+        display: none;
+    }
+
+    #banner {
+        background: transparent;
+        color: #000;
+    }
+
+    #banner h1 {
+        font-weight: 700;
+    }
+
+    nav {
+        display: none;
+    }
+
+    #main {
+        display: block;
+        width: 90%;
+    }
+
+    #plotContainer {
+        display: block;
+    }
+
+    #plot, #control, #snpDetailsContainer {
+        display: block;
+        page-break-inside: avoid;
+    }
+
+    #plot {
+        width: 10in;
+        height: 5in;
+    }
+
+    #plot svg {
+        width: 10in;
+        height: 5in;
+    }
+
+    #searchContainer {
+        display: block;
+        border: none;
+        padding: 0;
+    }
+
+    #search {
+        display: block;
+        padding: 0;
+        margin: 0;
+    }
+
+    #searchContainer::before {
+        content: 'Gene Name: ';
+        font-weight: 700;
+        padding: 0;
+        margin: 0 1em 0 0;
+    }
+
+    table {
+        white-space: nowrap;
+    }
+
+    #snpDetails th:last-child,
+    #snpDetails td:last-child {
+        display: none;
+    }
+
+    #about,
+    #help,
+    #authorDetails {
+        display: none;
+    }
+}
