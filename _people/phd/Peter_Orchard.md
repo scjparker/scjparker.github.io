@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Peter Orchard
-title: PIBS Rotation Student
+title: Computational Medicine & Bioinformatics Pre-candidate
 picture: porchard.jpg
 google-scholar: 
 CV:
