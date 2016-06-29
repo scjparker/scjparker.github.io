@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Ricardo D'Oliveira Albanus
-title: Computational Medicine & Bioinformatics Pre-candidate
+title: Computational Medicine & Bioinformatics Candidate
 picture: ralbanus.jpg
 google-scholar: 
 CV:
