@@ -4,11 +4,99 @@
 // Licensed under Version 3 of the GPL or any later version
 //
 
-/* global d3, hg19References, hg19ReferenceByName, hg19ReferenceByPosition, chromatinColors, data, footprints, biotypes, eQTLChromatinStateEnrichment, eQTLChromatinStateEnrichmentScaled */
+/* global d3, data, variantCount */
 
 'use strict';
 
-var margin = {top: 10, right: 50, bottom: 60, left: 70};
+var hg19References = [
+	{name: '1', offset: 0, length: 249250621},
+	{name: '2', offset: 249250621, length: 243199373},
+	{name: '3', offset: 492449994, length: 198022430},
+	{name: '4', offset: 690472424, length: 191154276},
+	{name: '5', offset: 881626700, length: 180915260},
+	{name: '6', offset: 1062541960, length: 171115067},
+	{name: '7', offset: 1233657027, length: 159138663},
+	{name: '8', offset: 1392795690, length: 146364022},
+	{name: '9', offset: 1539159712, length: 141213431},
+	{name: '10', offset: 1680373143, length: 135534747},
+	{name: '11', offset: 1815907890, length: 135006516},
+	{name: '12', offset: 1950914406, length: 133851895},
+	{name: '13', offset: 2084766301, length: 115169878},
+	{name: '14', offset: 2199936179, length: 107349540},
+	{name: '15', offset: 2307285719, length: 102531392},
+	{name: '16', offset: 2409817111, length: 90354753},
+	{name: '17', offset: 2500171864, length: 81195210},
+	{name: '18', offset: 2581367074, length: 78077248},
+	{name: '19', offset: 2659444322, length: 59128983},
+	{name: '20', offset: 2718573305, length: 63025520},
+	{name: '21', offset: 2781598825, length: 48129895},
+	{name: '22', offset: 2829728720, length: 51304566}
+];
+
+var hg19ReferenceByName = {};
+var hg19ref;
+for (hg19ref of hg19References) {
+    hg19ReferenceByName[hg19ref.name] = hg19ref;
+}
+
+var hg19ReferenceByPosition = {};
+for (hg19ref of hg19References) {
+    hg19ReferenceByPosition[hg19ref.offset] = hg19ref;
+}
+
+var chromatinColors = {
+    'active_tss': {'fill': '#ff0000', 'stroke': '#ff0000'},
+    'weak_tss': {'fill': '#ff4500', 'stroke': '#ff4500'},
+    'flanking_tss': {'fill': '#ff4500', 'stroke': '#ff4500'},
+    'strong_transcription': {'fill': '#008000', 'stroke': '#008000'},
+    'weak_transcription': {'fill': '#006400', 'stroke': '#006400'},
+    'genic_enhancer': {'fill': '#c2e105', 'stroke': '#c2e105'},
+    'active_enhancer_1': {'fill': '#ffc34d', 'stroke': '#ffc34d'},
+    'active_enhancer_2': {'fill': '#ffc34d', 'stroke': '#ffc34d'},
+    'weak_enhancer': {'fill': '#ffff00', 'stroke': '#ffff00'},
+    'bivalent_poised_tss': {'fill': '#cd5c5c', 'stroke': '#cd5c5c'},
+    'repressed_polycomb': {'fill': '#808080', 'stroke': '#808080'},
+    'weak_repressed_polycomb': {'fill': '#c0c0c0', 'stroke': '#c0c0c0'},
+    'quiescent_or_low_signal': {'fill': '#ffffff', 'stroke':  '#555'}
+};
+
+var eQTLChromatinStateEnrichment = {
+    'active_tss': 1.021,
+    'weak_tss': 0.819,
+    'flanking_tss': 1.088,
+    'strong_transcription': 0.653,
+    'weak_transcription': 0.310,
+    'genic_enhancer': 1.090,
+    'active_enhancer_1': 0.427,
+    'active_enhancer_2': 0.409,
+    'weak_enhancer': 0.436,
+    'bivalent_poised_tss': 0.003,
+    'repressed_polycomb': -0.211,
+    'weak_repressed_polycomb': -0.183,
+    'quiescent_or_low_signal': -0.141
+};
+
+var eQTLChromatinStateEnrichmentScaled = {
+    'active_tss': 0.937,
+    'weak_tss': 0.751,
+    'flanking_tss': 0.998,
+    'strong_transcription': 0.599,
+    'weak_transcription': 0.284,
+    'genic_enhancer': 1.000,
+    'active_enhancer_1': 0.391,
+    'active_enhancer_2': 0.375,
+    'weak_enhancer': 0.400,
+    'bivalent_poised_tss': 0.003,
+    'repressed_polycomb': -0.194,
+    'weak_repressed_polycomb': -0.168,
+    'quiescent_or_low_signal': -0.129
+};
+
+var footprints = ['yes', 'no'];
+
+var biotypes = ['lincRNA', 'protein_coding'];
+
+var margin = {top: 10, right: 10, bottom: 60, left: 70};
 var plot;
 var width;
 var height;
@@ -29,29 +117,34 @@ var tip;
 var svg;
 var objects;
 
-var biotypeLegendContainer;
-var chromatinStateLegendContainer;
-var footprintLegendContainer;
+var biotypeFilterList;
+var chromatinStateFilterList;
+var footprintFilterList;
+var iesiFilterList;
+
+var iesiRange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 var filters = {
     click: {
         chromatinStateFilters: [],
         footprintFilters: [],
-        biotypeFilters: []
+        biotypeFilters: [],
+        iesiFilters: []
     },
     hover: {
         chromatinStateFilters: [],
         footprintFilters: [],
-        biotypeFilters: []
+        biotypeFilters: [],
+        iesiFilters: []
     }
 };
 
 var geneQuery = null;
 
 var consoleEnabled = false;
-var snpDetails = {};
+var variantDetails = {};
 
-var gburlbase = 'http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=hensley&hgS_otherUserSessionName=20160603_islet_eQTL&position=';
+var gburlbase = 'http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=hensley&hgS_otherUserSessionName=20160603_islet_eQTL&position=chr';
 
 function log(msg) {
     if (consoleEnabled) {
@@ -112,7 +205,8 @@ function querySelectorAll(selectors, elementOrId) {
 }
 
 function changeClassList(selector, classesToAdd, classesToRemove) {
-    querySelectorAll(selector).map(function(el) {
+    var elements = querySelectorAll(selector);
+    elements.map(function(el) {
         var classList = el.classList;
         if (classesToAdd.length > 0) {
             classList.add.apply(classList, classesToAdd);
@@ -121,6 +215,7 @@ function changeClassList(selector, classesToAdd, classesToRemove) {
             classList.remove.apply(classList, classesToRemove);
         }
     });
+    return elements.length;
 }
 
 function getWidth(el) {
@@ -137,30 +232,21 @@ function getHeight(el) {
     return height;
 }
 
-function clickFiltersExist() {
-    return (filters.click.biotypeFilters.length > 0 || filters.click.footprintFilters.length > 0 || filters.click.chromatinStateFilters.length > 0);
+function filtersExist(filterType) {
+    for (var filterSet in filters[filterType]) {
+        if (filters[filterType][filterSet].length > 0) {
+            return true;
+        }
+    }
+    return false;
 }
 
-function hoverFiltersExist() {
-    return (filters.hover.biotypeFilters.length > 0 || filters.hover.footprintFilters.length > 0 || filters.hover.chromatinStateFilters.length > 0);
-}
-
-function filtersExist() {
-    return (geneQuery !== null || clickFiltersExist() || hoverFiltersExist());
+function shouldFilter() {
+    return geneQuery !== null || filtersExist('click') || filtersExist('hover');
 }
 
 function matchesFilters(filters, filter) {
     return filters.length > 0 && filters.indexOf(filter) !== -1;
-}
-
-function classForDot(d) {
-    var classes = [
-        'dot'
-    ];
-    classes.push(d.cs);
-    classes.push(d.bt);
-    classes.push(d.fp);
-    return classes.join(' ');
 }
 
 function combineArrays(arrays) {
@@ -194,12 +280,14 @@ function combineArrays(arrays) {
 }
 
 function filterDots() {
-    if (filtersExist()) {
+    var dotCount = 0;
+    if (shouldFilter()) {
         var dotSelectors = [];
 
         var biotypeFilters;
         var chromatinStateFilters;
         var footprintFilters;
+        var iesiFilters;
         var geneFilters = [];
         var allFilters;
 
@@ -212,15 +300,18 @@ function filterDots() {
         biotypeFilters = filters.click.biotypeFilters.concat(filters.hover.biotypeFilters).map(function(f) {return '[data-bt=' + f + ']';});
         chromatinStateFilters = filters.click.chromatinStateFilters.concat(filters.hover.chromatinStateFilters).map(function(f) {return '[data-cs=' + f + ']';});
         footprintFilters = filters.click.footprintFilters.concat(filters.hover.footprintFilters).map(function(f) {return '[data-fp=' + f + ']';});
-        allFilters = [biotypeFilters, chromatinStateFilters, footprintFilters, geneFilters];
+        iesiFilters = filters.click.iesiFilters.concat(filters.hover.iesiFilters).map(function(f) {return '[data-si="' + f + '"]';});
+        allFilters = [biotypeFilters, chromatinStateFilters, footprintFilters, iesiFilters, geneFilters];
         dotSelectors = combineArrays(allFilters);
 
         if (dotSelectors.length > 0) {
-            changeClassList(dotSelectors, ['highlight'], ['invisible']);
+            dotCount = changeClassList(dotSelectors, ['highlight'], ['invisible']);
         }
     } else {
         changeClassList('.highlight, .invisible', [], ['invisible', 'highlight']);
+        dotCount = variantCount;
     }
+    document.getElementById('dotCount').innerHTML = 'ISLET eQTL VARIANTS SHOWN: <span>' + dotCount + '</span>';
 }
 
 function addFilter(filters, selector) {
@@ -290,6 +381,12 @@ function handleFootprintClick(evt) {
     }
 }
 
+function handleIESIClick(evt) {
+    evt.stopPropagation();
+    if (changeFilters(filters.click.iesiFilters, evt.currentTarget)) {
+        requestAnimationFrame(filterDots);
+    }
+}
 
 function setSearchFilter(s) {
     var changed = false;
@@ -314,6 +411,7 @@ function reset() {
     filters.click.biotypeFilters = [];
     filters.click.chromatinStateFilters = [];
     filters.click.footprintFilters = [];
+    filters.click.iesiFilters = [];
     geneQuery = null;
     document.getElementById('search').value = '';
     draw();
@@ -352,12 +450,12 @@ function makeEnrichmentBar(cs) {
 }
 
 function makeChromatinStateContent(cs) {
-    return '<span class="legendColor"><svg><rect x="0.1em" y="0.1em" width="1em" height="1em" fill="' + fillColor(cs) + '" stroke="' + strokeColor(cs) + '" stroke-width="0.5px"/></svg></span><span class="label">' + delabel(cs) + '</span>';
+    return '<span class="filterColor"><svg><rect x="0.1em" y="0.1em" width="1em" height="1em" fill="' + fillColor(cs) + '" stroke="' + strokeColor(cs) + '" stroke-width="0.5px"/></svg></span><span class="label">' + delabel(cs) + '</span>';
 }
 
 var footPrintContent = {
-    'yes': '<span class="legendColor"><svg class="rotate45"><rect x="0.1em" y="0.1em" width="0.85em" height="0.85em" fill="#999"/></svg></span>yes',
-    'no': '<span class="legendColor"><svg><circle cx="0.5em" cy="0.5em" r="0.5em" fill="#999"/></svg></span>no'
+    'yes': '<span class="filterColor"><svg class="rotate45"><rect x="0.1em" y="0.1em" width="0.85em" height="0.85em" fill="#999"/></svg></span>yes',
+    'no': '<span class="filterColor"><svg><circle cx="0.5em" cy="0.5em" r="0.5em" fill="#999"/></svg></span>no'
 };
 
 function makeFootprintContent(o) {
@@ -373,18 +471,18 @@ function placeDot(d) {
     return tx;
 }
 
-function makeSNPSortKey(snpID) {
-    var chr = Number(snpID.split(':')[0]);
-    var pos = Number(snpID.split(':')[1].split('_')[0]);
-    var alleles = snpID.split('_')[1];
+function makeVariantSortKey(variantID) {
+    var chr = Number(variantID.split(':')[0]);
+    var pos = Number(variantID.split(':')[1].split('_')[0]);
+    var alleles = variantID.split('_')[1];
     return [chr, pos, alleles];
 }
 
-function sortSNPs(a, b) {
+function sortVariants(a, b) {
     var i;
     var cmp;
-    var k1 = makeSNPSortKey(a);
-    var k2 = makeSNPSortKey(b);
+    var k1 = makeVariantSortKey(a);
+    var k2 = makeVariantSortKey(b);
     for (i = 0; i < k1.length; i++) {
         cmp = k1[i] - k2[i];
         if (cmp !== 0) {
@@ -394,26 +492,26 @@ function sortSNPs(a, b) {
     return cmp;
 }
 
-function removeSNPDetails(evt) {
+function removeVariantDetails(evt) {
     evt.stopPropagation();
     var tr = evt.currentTarget.parentNode.parentNode;
-    delete snpDetails[tr.firstChild.innerHTML];
-    requestAnimationFrame(makeSNPDetailsTable);
+    delete variantDetails[tr.firstChild.innerHTML];
+    requestAnimationFrame(makeVariantDetailsTable);
 }
 
-function makeSNPDetailsTable() {
+function makeVariantDetailsTable() {
     var tr;
     var td;
     var remover;
 
-    var tbody = document.getElementById('snpDetailsBody');
+    var tbody = document.getElementById('variantDetailsBody');
 
-    var snps = Object.keys(snpDetails).sort(sortSNPs);
-    if (snps.length > 0) {
+    var variants = Object.keys(variantDetails).sort(sortVariants);
+    if (variants.length > 0) {
         tbody.innerHTML = '';
-        for (var snp of snps) {
+        for (var variant of variants) {
             tr = document.createElement('tr');
-            for (var field of snpDetails[snp]) {
+            for (var field of variantDetails[variant]) {
                 td = document.createElement('td');
                 td.innerHTML = field;
                 tr.appendChild(td);
@@ -421,17 +519,17 @@ function makeSNPDetailsTable() {
             td = document.createElement('td');
             remover = document.createElement('button');
             remover.innerHTML = 'Remove';
-            remover.addEventListener('click', removeSNPDetails, true);
+            remover.addEventListener('click', removeVariantDetails, true);
             td.appendChild(remover);
             tr.appendChild(td);
             tbody.appendChild(tr);
         }
     } else {
-        tbody.innerHTML = '<td colspan="9"><span class="instruction">Click on a SNP in the plot to show its details here.</span></td>';
+        tbody.innerHTML = '<td colspan="9"><span class="instruction">Click on a variant in the plot to show its details here.</span></td>';
     }
 }
 
-function addSNPDetails(d, i) {
+function addVariantDetails(d, i) {
     d3.event.preventDefault();
     hideTooltip(d, i);
     var gbwindow = d.chr + ':' + (d.pos - 50000) + '-' + (d.pos + 49999);
@@ -446,9 +544,9 @@ function addSNPDetails(d, i) {
         d.lp,
         d.a1 + '/' + d.a2
     ];
-    snpDetails[d.snp] = fields;
-    if (Object.keys(snpDetails).length > 0) {
-        requestAnimationFrame(makeSNPDetailsTable);
+    variantDetails[d.snp] = fields;
+    if (Object.keys(variantDetails).length > 0) {
+        requestAnimationFrame(makeVariantDetailsTable);
     }
 }
 
@@ -493,9 +591,10 @@ function draw() {
     plot = document.getElementById('plot');
     plot.innerHTML = '';
     d3.select('.d3-tip').remove();
-    document.getElementById('chromatinStateLegend').innerHTML = '';
-    document.getElementById('footprintLegend').innerHTML = '';
-    document.getElementById('biotypeLegend').innerHTML = '';
+    document.getElementById('chromatinStateFilterList').innerHTML = '';
+    document.getElementById('footprintFilterList').innerHTML = '';
+    document.getElementById('biotypeFilterList').innerHTML = '';
+    document.getElementById('iesiFilterList').innerHTML = '';
 
     width = Math.max(getWidth(plot) - margin.left - margin.right);
     var controlHeight = getHeight(document.getElementById('control'));
@@ -539,7 +638,7 @@ function draw() {
         .direction('se')
         .html(
             function(d) {
-                return '<div><h3>SNP ' + d.snp + '</h3>' +
+                return '<div><h3>' + d.snp + '</h3>' +
                     '<table><tbody>' +
                     '<tr><th>Gene</th><td>' + d.g + '</td></tr>' +
                     '<tr><th>Gene name</th><td>' + d.gn + '</td></tr>' +
@@ -549,6 +648,7 @@ function draw() {
                     '<tr><th>ATAC-seq footprint?</th><td>' + makeFootprintContent(d) + '</td></tr>' +
                     '<tr><th>eQTL -log<sub>10</sub>(p-value)</th><td>' + d.lp + '</td></tr>' +
                     '<tr><th>Allele 1/2</th><td>' + d.a1 + '/' + d.a2 + '</td></tr>' +
+                    '<tr><th>Islet expression specificity index</th><td><progress max="10" value="' + d.si + '"></progress> ' + d.si + '</td></tr>' +
                     '<tbody></table></div>';
             }
         );
@@ -618,13 +718,14 @@ function draw() {
         .data(data)
         .enter().append('path')
         .attr('d', d3.svg.symbol().type(getShape))
-        .attr('class', classForDot)
+        .attr('class', 'dot')
         .attr('id', function(d) {return d.id;})
         .attr('data-g', function(d) {return d.g;})
         .attr('data-gn', function(d) {return d.gn;})
         .attr('data-cs', function(d) {return d.cs;})
         .attr('data-bt', function(d) {return d.bt;})
         .attr('data-fp', function(d) {return d.fp;})
+        .attr('data-si', function(d) {return d.si;})
         .attr('transform', placeDot)
         .style('fill', fillColor)
         .style('stroke', strokeColor)
@@ -632,14 +733,14 @@ function draw() {
         .on('mouseout', hideTooltip)
         .on('touchstart', showTooltip)
         .on('touchmove', hideTooltip)
-        .on('click', addSNPDetails)
-        .on('touchend', addSNPDetails);
+        .on('click', addVariantDetails)
+        .on('touchend', addVariantDetails);
 
-    chromatinStateLegendContainer = document.getElementById('chromatinStateLegend');
+    chromatinStateFilterList = document.getElementById('chromatinStateFilterList');
     li = document.createElement('li');
     li.classList.add('header');
-    li.innerHTML = '<span class="legendColor">State</span><span class="enrichment">eQTL log2 fold enrichment</span>';
-    chromatinStateLegendContainer.appendChild(li);
+    li.innerHTML = '<span class="filterColor">State</span><span class="enrichment">eQTL log2 fold enrichment</span>';
+    chromatinStateFilterList.appendChild(li);
 
     Object.keys(chromatinColors).map(function(chromatinState) {
         li = document.createElement('li');
@@ -651,10 +752,10 @@ function draw() {
         li.addEventListener('mouseover', makeDotHighlighter(filters.hover.chromatinStateFilters), true);
         li.addEventListener('mouseleave', makeDotHighlightResetter(filters.hover.chromatinStateFilters), true);
         li.addEventListener('click', handleChromatinStateClick, true);
-        chromatinStateLegendContainer.appendChild(li);
+        chromatinStateFilterList.appendChild(li);
     });
 
-    footprintLegendContainer = document.getElementById('footprintLegend');
+    footprintFilterList = document.getElementById('footprintFilterList');
 
     footprints.map(function(footprint) {
         li = document.createElement('li');
@@ -666,10 +767,10 @@ function draw() {
         li.addEventListener('mouseover', makeDotHighlighter(filters.hover.footprintFilters), true);
         li.addEventListener('mouseleave', makeDotHighlightResetter(filters.hover.footprintFilters), true);
         li.addEventListener('click', handleFootprintClick, true);
-        footprintLegendContainer.appendChild(li);
+        footprintFilterList.appendChild(li);
     });
 
-    biotypeLegendContainer = document.getElementById('biotypeLegend');
+    biotypeFilterList = document.getElementById('biotypeFilterList');
 
     biotypes.map(function(biotype) {
         li = document.createElement('li');
@@ -681,13 +782,29 @@ function draw() {
         li.addEventListener('mouseover', makeDotHighlighter(filters.hover.biotypeFilters), true);
         li.addEventListener('mouseleave', makeDotHighlightResetter(filters.hover.biotypeFilters), true);
         li.addEventListener('click', handleBiotypeClick, true);
-        biotypeLegendContainer.appendChild(li);
+        biotypeFilterList.appendChild(li);
+    });
+
+    iesiFilterList = document.getElementById('iesiFilterList');
+
+    iesiRange.map(function(iesi) {
+        li = document.createElement('li');
+        if (matchesFilters(filters.click.iesiFilters, iesi)) {
+            li.classList.add('selected');
+        }
+        li.dataset.filter = iesi;
+        li.innerHTML = delabel(iesi);
+        li.addEventListener('mouseover', makeDotHighlighter(filters.hover.iesiFilters), true);
+        li.addEventListener('mouseleave', makeDotHighlightResetter(filters.hover.iesiFilters), true);
+        li.addEventListener('click', handleIESIClick, true);
+        iesiFilterList.appendChild(li);
     });
 
     requestAnimationFrame(filterDots);
     drawing = false;
 }
 
+document.getElementById('variantCount').innerHTML = variantCount;
 window.addEventListener('resize', function() {requestAnimationFrame(draw);});
 window.addEventListener('orientationchange', function() {requestAnimationFrame(draw);});
 document.getElementById('search').addEventListener('change', handleSearchInput);
@@ -698,4 +815,5 @@ for (var clearButton of querySelectorAll('.inputbox .cleaner')) {
 }
 document.getElementById('search').value = '';
 makeReporters();
+d3.shuffle(data);
 draw();

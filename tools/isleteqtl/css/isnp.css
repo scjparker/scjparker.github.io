@@ -50,14 +50,18 @@ body {
 }
 
 button {
+    padding: 0.5em;
     outline: none;
     border-radius: 4px;
-    border: 1px solid #ddd;
-    background: #f0f0f0;
+    border: 1px solid #06c;
+    background: #06c;
+    color: #fff;
+    font-size: small;
+    text-transform: uppercase;
 }
 
 button:active {
-    box-shadow: inset 0 0 20px 2px rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.05);
 }
 
 button:focus {
@@ -65,7 +69,7 @@ button:focus {
 }
 
 button:hover {
-    background: #ddd;
+    background-image: linear-gradient(transparent,rgba(0, 0, 0, .05) 10%,rgba(0, 0, 0, .1));
 }
 
 a {
@@ -103,19 +107,30 @@ nav ul {
 nav li {
     flex: 0 1 auto;
     padding: 0;
-    margin: 0.25em 2em 0.25em 0;
+    margin: 0.25em 3em 0.25em 0;
 }
 
-nav li + li {
+nav li:last-child {
     margin-right: 1em;
 }
 
-section {
-    margin: 0 0 2em 0;
+progress {
+    max-width: 10em;
 }
 
-section h2 {
-    border-bottom: 2px solid #f0f0f0;
+section {
+    margin: 1em 0;
+    background: #fff;
+}
+
+section > div,
+section > p,
+section > table {
+    margin: 1em;
+}
+
+sup {
+    margin-left: 0.1em;
 }
 
 table {
@@ -171,6 +186,7 @@ td {
     font-weight: 700;
     border: none;
     background: transparent;
+    color: #000;
 }
 
 .cleaner:hover {
@@ -181,6 +197,15 @@ td {
 
 .busy {
     cursor: wait !important;
+}
+
+.footnote {
+    margin: 1em;
+    font-size: smaller;
+}
+
+.footnote sup {
+    margin-left: 1em;
 }
 
 .hidden {
@@ -204,9 +229,41 @@ td {
     transform: rotate(45deg);
 }
 
+#authors tr:nth-child(even) {
+    background: #fafafa;
+}
+
+#authors td {
+    padding: 1em 0;
+}
+
+#authors ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#authors a {
+    text-decoration: none;
+}
+
+#authorDetails {
+    display: none;
+}
+
+#authorDetails ul {
+    list-style: inside;
+    margin: 0;
+    padding: 0;
+}
+
+#authorDetails li {
+    margin: 0;
+}
+
 #banner {
     padding: 0.5em;
-    background: #357;
+    background: #035;
     color: #fff;
     display: flex;
     font-size: 1em;
@@ -230,42 +287,65 @@ td {
 }
 
 #banner a:hover {
-    color: #adf;
+    color: #09b;
+}
+
+#control {
+    position: relative;
+    display: flex;
+    flex: 1 1 40%;
+    flex-direction: column;
+    margin-right: 1em;
+    font-size: small;
+    background: #fff;
+}
+
+#filters {
+    display: block;
+    padding-bottom: 1em;
+}
+
+#filters h4 {
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+#doc {
+    padding: 1em 1.25em;
+}
+
+#doc h2 {
+    border-bottom: 2px solid #f0f0f0;
 }
 
 #main {
     position: relative;
-    padding: 0 1em;
+    padding: 1em;
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    background: #e0e5e9;
+    box-shadow: inset 2px 2px 20px rgba(0, 0, 0, 0.25);
 }
 
-#main > h2 {
-    flex: 1;
+#main section {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-#authors {
-    display: none;
-    font-size: smaller;
+#main h2 {
+    padding: 0.5em;
+    margin: 0 0 10px 0;
+    font-size: small;
+    font-weight: 700;
+    background: #f0f5f9;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
-#authors a {
-    text-decoration: none;
-}
-
-#authorDetails {
-    display: none;
-}
-
-#authorDetails ul {
-    list-style: inside;
-    margin: 0;
-    padding: 0;
-}
-
-#authorDetails li {
-    margin: 0;
+#main h4 {
+    margin: 0.25em 0;
 }
 
 #plotContainer {
@@ -273,9 +353,10 @@ td {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    font-size: small;
 }
 
-#plot {
+#plotBox {
     position: relative;
     flex: 1 1 50%;
     pointer-events: none;
@@ -283,8 +364,16 @@ td {
     min-height: 320px;
 }
 
+#plot {
+    margin: 3em 1em 1em 1em;
+}
+
 #plot svg {
     pointer-events: visible;
+}
+
+#variantDetails {
+    font-size: small;
 }
 
 .dot {
@@ -292,6 +381,7 @@ td {
     opacity: 0.7;
     vector-effect: non-scaling-stroke;
     -webkit-transition: opacity 100ms;
+    cursor: pointer;
 }
 
 .dot.highlight {
@@ -309,26 +399,7 @@ td {
     shape-rendering: crispEdges;
 }
 
-#control {
-    position: relative;
-    display: flex;
-    flex: 1 1 40%;
-    flex-direction: column;
-    padding-right: 4em;
-    font-size: small;
-}
-
-#legends {
-    display: block;
-    padding-bottom: 1em;
-}
-
-#legends h4 {
-    border-bottom: 1px solid #ddd;
-    position: relative;
-}
-
-.legend {
+.filterList {
     position: relative;
     padding: 0em 1em 1em 0;
     margin: 0 0 1em 0;
@@ -338,7 +409,7 @@ td {
     list-style: none;
 }
 
-.legend li {
+.filterList li {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -349,7 +420,7 @@ td {
     font-size: 0.9em;
 }
 
-.legend li.header {
+.filterList li.header {
     font-size: smaller;
     color: #999;
     border-bottom: 1px solid #f0f0f0;
@@ -358,17 +429,29 @@ td {
     cursor: default;
 }
 
-.legend li:not(.header):hover {
+.filterList li:not(.header):hover {
     background: #ffc;
 }
 
-.legend li.selected {
+.filterList li.selected {
     font-weight: 700;
 }
 
-.legend li span.label {
+.filterList li span.label {
     flex: 1;
     width: 12em;
+}
+
+.filterList.numeric {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.filterList.numeric li {
+    display: block;
+    width: 1.5em;
+    text-align: center;
 }
 
 .enrichment {
@@ -390,21 +473,17 @@ td {
 }
 
 
-.legendColor {
+.filterColor {
     flex: 0 1 auto;
     position: relative;
     margin-right: 0.25em;
 }
 
-.legendColor svg {
+.filterColor svg {
     position: relative;
     height: 1.2em;
     width: 1.2em;
     top: 0.1em;
-}
-
-#snpDetails {
-    font-size: small;
 }
 
 .d3-tip {
@@ -494,18 +573,18 @@ td {
 
 @media screen and (min-width: 1024px) {
 
-    #legends {
+    #filters {
         position: relative;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
     }
 
-    #legends > div {
+    #filters > div {
         flex: 1;
     }
 
-    #legends > div:first-child {
+    #filters > div:first-child {
         padding-right: 2em;
         flex: 1 1 50%;
     }
@@ -525,6 +604,16 @@ td {
         page-break-inside: avoid;
     }
 
+    section {
+        border: none;
+        box-shadow: none;
+        page-break-inside: avoid;
+    }
+
+    section h2 {
+        background: #fff;
+    }
+
     button, .cleaner {
         display: none;
     }
@@ -536,6 +625,10 @@ td {
         widows: 3;
         orphans: 3;
         color: #000;
+    }
+
+    nav {
+        display: none;
     }
 
     ::-webkit-input-placeholder { /* WebKit browsers */
@@ -563,21 +656,27 @@ td {
         font-weight: 700;
     }
 
-    nav {
-        display: none;
+    #filters {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    #filters > div {
+        flex: 1;
+    }
+
+    #filters > div:first-child {
+        padding-right: 2em;
+        flex: 1 1 50%;
     }
 
     #main {
-        display: block;
-        width: 90%;
+        background: #fff;
     }
 
-    #plotContainer {
-        display: block;
-    }
-
-    #plot, #control, #snpDetailsContainer {
-        display: block;
+    #plot, #control, #variantDetailsContainer {
         page-break-inside: avoid;
     }
 
@@ -603,25 +702,18 @@ td {
         margin: 0;
     }
 
-    #searchContainer::before {
-        content: 'Gene Name: ';
-        font-weight: 700;
-        padding: 0;
-        margin: 0 1em 0 0;
-    }
-
     table {
         white-space: nowrap;
     }
 
-    #snpDetails th:last-child,
-    #snpDetails td:last-child {
+    #variantDetails th:last-child,
+    #variantDetails td:last-child {
         display: none;
     }
 
     #about,
     #help,
-    #authorDetails {
+    #authors {
         display: none;
     }
 }
