@@ -144,7 +144,7 @@ var geneQuery = null;
 var consoleEnabled = false;
 var variantDetails = {};
 
-var gburlbase = 'http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=hensley&hgS_otherUserSessionName=20160603_islet_eQTL&position=chr';
+var gburlbase = 'http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=arushiv&hgS_otherUserSessionName=2016_07_15_islet_eQTL&position=chr';
 
 function log(msg) {
     if (consoleEnabled) {
