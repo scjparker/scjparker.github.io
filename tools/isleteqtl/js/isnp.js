@@ -566,11 +566,11 @@ function showTooltip(d, i) {
     d3.select(d3.event.target).moveToFront();
     d3.event.target.classList.add('opaque');
 
-    if ((bounds.right - x) < 300) {
+    if ((bounds.right - x) < 400) {
         horizontal = 'w';
         offsetLeft = 0;
     }
-    if ((bounds.bottom - y) < 300) {
+    if ((bounds.bottom - y) < 400) {
         vertical = 'n';
         offsetTop = 0;
     }

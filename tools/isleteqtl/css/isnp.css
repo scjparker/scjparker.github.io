@@ -486,6 +486,7 @@ td {
     border-radius: 8px;
     border: 1px outset rgba(128, 128, 128, 0.5);
     pointer-events: none;
+    font-size: small;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
