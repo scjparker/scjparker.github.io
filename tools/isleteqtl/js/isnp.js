@@ -4,33 +4,33 @@
 // Licensed under Version 3 of the GPL or any later version
 //
 
-/* global d3, data, variantCount */
+/* global d3 */
 
 'use strict';
 
 var hg19References = [
-	{name: '1', offset: 0, length: 249250621},
-	{name: '2', offset: 249250621, length: 243199373},
-	{name: '3', offset: 492449994, length: 198022430},
-	{name: '4', offset: 690472424, length: 191154276},
-	{name: '5', offset: 881626700, length: 180915260},
-	{name: '6', offset: 1062541960, length: 171115067},
-	{name: '7', offset: 1233657027, length: 159138663},
-	{name: '8', offset: 1392795690, length: 146364022},
-	{name: '9', offset: 1539159712, length: 141213431},
-	{name: '10', offset: 1680373143, length: 135534747},
-	{name: '11', offset: 1815907890, length: 135006516},
-	{name: '12', offset: 1950914406, length: 133851895},
-	{name: '13', offset: 2084766301, length: 115169878},
-	{name: '14', offset: 2199936179, length: 107349540},
-	{name: '15', offset: 2307285719, length: 102531392},
-	{name: '16', offset: 2409817111, length: 90354753},
-	{name: '17', offset: 2500171864, length: 81195210},
-	{name: '18', offset: 2581367074, length: 78077248},
-	{name: '19', offset: 2659444322, length: 59128983},
-	{name: '20', offset: 2718573305, length: 63025520},
-	{name: '21', offset: 2781598825, length: 48129895},
-	{name: '22', offset: 2829728720, length: 51304566}
+    {name: '1', offset: 0, length: 249250621},
+    {name: '2', offset: 249250621, length: 243199373},
+    {name: '3', offset: 492449994, length: 198022430},
+    {name: '4', offset: 690472424, length: 191154276},
+    {name: '5', offset: 881626700, length: 180915260},
+    {name: '6', offset: 1062541960, length: 171115067},
+    {name: '7', offset: 1233657027, length: 159138663},
+    {name: '8', offset: 1392795690, length: 146364022},
+    {name: '9', offset: 1539159712, length: 141213431},
+    {name: '10', offset: 1680373143, length: 135534747},
+    {name: '11', offset: 1815907890, length: 135006516},
+    {name: '12', offset: 1950914406, length: 133851895},
+    {name: '13', offset: 2084766301, length: 115169878},
+    {name: '14', offset: 2199936179, length: 107349540},
+    {name: '15', offset: 2307285719, length: 102531392},
+    {name: '16', offset: 2409817111, length: 90354753},
+    {name: '17', offset: 2500171864, length: 81195210},
+    {name: '18', offset: 2581367074, length: 78077248},
+    {name: '19', offset: 2659444322, length: 59128983},
+    {name: '20', offset: 2718573305, length: 63025520},
+    {name: '21', offset: 2781598825, length: 48129895},
+    {name: '22', offset: 2829728720, length: 51304566}
 ];
 
 var hg19ReferenceByName = {};
@@ -95,6 +95,9 @@ var eQTLChromatinStateEnrichmentScaled = {
 var footprints = ['yes', 'no'];
 
 var biotypes = ['lincRNA', 'protein_coding'];
+
+var data = {};
+var currentData;
 
 var margin = {top: 10, right: 10, bottom: 60, left: 70};
 var plot;
@@ -309,9 +312,9 @@ function filterDots() {
         }
     } else {
         changeClassList('.highlight, .invisible', [], ['invisible', 'highlight']);
-        dotCount = variantCount;
+        dotCount = currentData.variantCount;
     }
-    document.getElementById('dotCount').innerHTML = 'ISLET eQTL VARIANTS SHOWN: <span>' + dotCount + '</span>';
+    document.getElementById('dotCount').innerHTML = 'Islet eQTL variants shown: <span>' + dotCount + '</span>';
 }
 
 function addFilter(filters, selector) {
@@ -395,7 +398,7 @@ function setSearchFilter(s) {
         geneQuery = null;
     } else if (geneQuery === null || s != geneQuery.source) {
         changed = true;
-        geneQuery = s; // new RegExp(s, 'ig');
+        geneQuery = s.trim();
     }
     if (changed) {
         requestAnimationFrame(filterDots);
@@ -616,7 +619,7 @@ function draw() {
 
     yValue = function(d) { return d.lp;};
     yMap = function(d) { return yScale(yValue(d));};
-    yRange = d3.extent([-1, d3.max(data, function(d) { return d.lp; }) + 5]);
+    yRange = d3.extent([-1, d3.max(currentData.variants, function(d) { return d.lp; }) + 5]);
 
     yScale = d3.scale.linear().domain(yRange).range([height, 0]);
 
@@ -715,7 +718,7 @@ function draw() {
         .attr('height', height);
 
     objects.selectAll('.dot')
-        .data(data)
+        .data(currentData.variants)
         .enter().append('path')
         .attr('d', d3.svg.symbol().type(getShape))
         .attr('class', 'dot')
@@ -804,16 +807,43 @@ function draw() {
     drawing = false;
 }
 
-document.getElementById('variantCount').innerHTML = variantCount;
-window.addEventListener('resize', function() {requestAnimationFrame(draw);});
-window.addEventListener('orientationchange', function() {requestAnimationFrame(draw);});
-document.getElementById('search').addEventListener('change', handleSearchInput);
-document.getElementById('search').addEventListener('keyup', handleSearchInput);
-document.getElementById('reset').addEventListener('click', reset);
-for (var clearButton of querySelectorAll('.inputbox .cleaner')) {
-    clearButton.addEventListener('click', clearInput, true);
+function populateDataSelector() {
+    var selector = document.getElementById('dataSelector');
+    for (var dataset in data) {
+        var option = document.createElement('option');
+        option.value = dataset;
+        option.innerHTML = data[dataset].label;
+        selector.appendChild(option);
+    }
+    selector.addEventListener('change', function(evt) {
+        currentData = data[this.value];
+        draw();
+    });
 }
-document.getElementById('search').value = '';
-makeReporters();
-d3.shuffle(data);
-draw();
+
+function ready(fn) {
+    if (document.readyState != 'loading') {
+        fn();
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }}
+
+function initialize() {
+    currentData = data[Object.keys(data)[0]];
+    populateDataSelector();
+    document.getElementById('variantCount').innerHTML = currentData.variantCount;
+    window.addEventListener('resize', function() {requestAnimationFrame(draw);});
+    window.addEventListener('orientationchange', function() {requestAnimationFrame(draw);});
+    document.getElementById('search').addEventListener('change', handleSearchInput);
+    document.getElementById('search').addEventListener('keyup', handleSearchInput);
+    document.getElementById('reset').addEventListener('click', reset);
+    for (var clearButton of querySelectorAll('.inputbox .cleaner')) {
+        clearButton.addEventListener('click', clearInput, true);
+    }
+    document.getElementById('search').value = '';
+    makeReporters();
+    d3.shuffle(currentData.variants);
+    draw();
+}
+
+ready(initialize);

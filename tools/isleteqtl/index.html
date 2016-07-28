@@ -14,10 +14,11 @@
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/isnp.css">
-        <script src="js/d3.v3.js" defer></script>
-        <script src="js/d3-tip.js" defer></script>
-        <script src="js/data.js" defer></script>
-        <script src="js/isnp.js" defer></script>
+        <script src="js/d3.v3.js"></script>
+        <script src="js/d3-tip.js"></script>
+        <script src="js/isnp.js"></script>
+        <script src="js/data.r8.js"></script>
+        <script src="js/data.r9.js"></script>
     </head>
     <body>
         <header id="banner">
@@ -34,12 +35,18 @@
         <div id="main">
             <div id="plotContainer">
                 <section id="control">
-                    <h2>FILTERS</h2>
+                    <h2>Filters</h2>
                     <div>
-                        <h4>Gene</h4>
-                        <div id="searchContainer" class="inputbox">
-                            <input type="search" id="search" placeholder="Search for a gene by name or Ensembl ID..."/>
-                            <button class="cleaner"><i class="fa fa-times-circle"></i></button>
+                        <div>
+                            <h4>Chromatin state annotation LD threshold</h4>
+                            <select id="dataSelector"></select>
+                        </div>
+                        <div>
+                            <h4>Gene</h4>
+                            <div id="searchContainer" class="inputbox">
+                                <input type="search" id="search" placeholder="Search for a gene by name or Ensembl ID..."/>
+                                <button class="cleaner"><i class="fa fa-times-circle"></i></button>
+                            </div>
                         </div>
                     </div>
                     <div id="filters">
@@ -57,7 +64,9 @@
                         </div>
                     </div>
                     <div>
-                        <button id="reset">Reset plot</button>
+                        <div>
+                            <button id="reset">Reset plot</button>
+                        </div>
                     </div>
                 </section>
                 <section id="plotBox">
@@ -67,7 +76,7 @@
             </div>
 
             <section id="variantDetailsContainer">
-                <h2>VARIANT DETAILS</h2>
+                <h2>Variant details</h2>
                 <div>
                     <table id="variantDetails">
                         <thead>
@@ -122,8 +131,8 @@
                         in a filter category is equivalent to selecting none.</p>
                     <h4>The plot itself</h4>
                     <p>Hovering over any shape in the plot will display a tooltip containing the variant's details.</p>
-                    <p>Clicking any shape in the plot will add its details to the table below the plot labeled <b>VARIANT DETAILS</b>. The <b>Gene</b> column in that table contains links to the Ensembl page for the variant's gene. The <b>Position</b> column
-                    contains links to 100kb windows centered on the variants in <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&amp;hgS_otherUserName=hensley&amp;hgS_otherUserSessionName=20160603_islet_eQTL" target="_blank">this UCSC Genome Browser session</a>. If you click a variant by mistake, you can remove it from the table by clicking the <b>Remove</b> button in the last column.</p>
+                    <p>Clicking any shape in the plot will add its details to the table below the plot labeled <b>Variant Details</b>. The <b>Gene</b> column in that table contains links to the Ensembl page for the variant's gene. The <b>Position</b> column
+                        contains links to 100kb windows centered on the variants in <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&amp;hgS_otherUserName=hensley&amp;hgS_otherUserSessionName=20160603_islet_eQTL" target="_blank">this UCSC Genome Browser session</a>. If you click a variant by mistake, you can remove it from the table by clicking the <b>Remove</b> button in the last column.</p>
                     <p>You can zoom the plot with your mouse wheel or trackpad. Zooming in separates the variants, making them easier to
                         click. You can also pan the plot by dragging with the mouse. At any time, you can get back to the starting zoom and
                         position by clicking the <b>Reset plot</b> button at the top of the control panel.</p>
