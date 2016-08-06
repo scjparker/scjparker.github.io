@@ -108,7 +108,7 @@
                 <h2>About</h2>
                 <div>
                     <p>The data from our 2016 manuscript includes <span id="variantCount">over 3000</span> variants
-                        in islet eQTLs. This tool lets you quickly find those relevant to your research.</p>
+                        in islet cis-eQTLs. This tool lets you quickly find those relevant to your research.</p>
                 </div>
             </section>
 
@@ -124,7 +124,7 @@
                     <h4>Filters</h4>
                     <p>At any time, you can reset the plot to its initial state with the <b>Reset plot</b> button.</p>
                     <p>If you're interested in a particular gene, type part of its name or Ensembl ID in the text input labeled <b>Gene</b>.</p>
-                    <p>You can filter the variants by chromatin state, by biotype, by IESI (islet expression specificity index), or
+                    <p>You can filter the variants by chromatin state, by biotype, by iESI (islet expression specificity index), or
                         whether an ATAC-seq footprint was observed at the variant location. Simply click any filter in the
                         list. Hovering over a filter will preview the variants it matches. Clicking a filter again will remove it
                         from the active filters. You can select multiple filters to combine sets of variants. Selecting all filters
@@ -138,7 +138,7 @@
                         position by clicking the <b>Reset plot</b> button at the top of the control panel.</p>
                     <h4>The data</h4>
                     <h5 id="iesiHelp">Islet expression specificity index</h5>
-                    <p>The islet expression specificity index (IESI) is a measure of islet-specific gene expression, with a range of 1&#8211;10. A variant with an IESI of 10 is associated with a gene expressed highly and specifically in islets compared to other tissue types.</p>
+                    <p>The islet expression specificity index (iESI) is a measure of islet-specific gene expression, with a range from 0 to 1. Here we partition the scores into deciles. A gene with an iESI score in decile 10 is expressed highly and specifically in islets compared to other tissue types.</p>
                     <h4>Printing</h4>
                     <p>You should be able to print the page at any time using your browser's default print dialog. If you notice
                         problems with the output, please let us know.</p>
