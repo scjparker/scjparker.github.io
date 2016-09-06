@@ -303,9 +303,7 @@ td {
 #control {
     position: relative;
     display: flex;
-    flex: 1 1 40%;
     flex-direction: column;
-    margin-right: 1em;
     background: #fff;
 }
 
@@ -354,14 +352,10 @@ td {
 
 #plotContainer {
     position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
 }
 
 #plotBox {
     position: relative;
-    flex: 1 1 50%;
     pointer-events: none;
     background: #fff;
     min-height: 320px;
@@ -385,6 +379,10 @@ td {
 
 .dot.highlight {
     visibility: visible;
+}
+
+.axis {
+    font-size: 0.6em;
 }
 
 .axis path,
@@ -448,6 +446,7 @@ td {
 }
 
 .enrichment {
+    font-size: 0.75em;
     flex: 1 0 auto;
     position: relative;
     vertical-align: bottom;
@@ -548,31 +547,34 @@ td {
     left: 100%;
 }
 
-@media screen and (max-width: 768px) {
-    #plotContainer {
-        display: block;
-    }
-
-    #plot {
-        display: block;
-    }
-}
-
 @media screen and (min-width: 1024px) {
+    #plotContainer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    #control {
+        flex: 0 1 48%;
+    }
+
+    #plotBox {
+        flex: 0 1 50%;
+    }
 
     #control > div {
+        font-size: 0.75em;
         position: relative;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        justify-content: space-between;
         flex: 0 1 auto;
     }
 
     #control > div > div {
-        flex: 1 1 auto;
-    }
-
-    #control > div > div:first-child {
+        flex: 0 0 45%;
         padding-right: 2em;
     }
 
