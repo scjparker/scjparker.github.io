@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Sophia Manduca
-title: UROP Biology
+title: <a href="https://lsa.umich.edu/urop" target='_blank'>UROP</a> Biology
 picture: smanduca.jpg
 google-scholar: 
 CV:
