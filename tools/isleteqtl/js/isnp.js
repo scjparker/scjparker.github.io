@@ -652,7 +652,7 @@ function draw() {
                     '<tr><th>eQTL -log<sub>10</sub>(p-value)</th><td>' + d.lp + '</td></tr>' +
                     '<tr><th>Allele 1/2</th><td>' + d.a1 + '/' + d.a2 + '</td></tr>' +
                     '<tr><th>Islet expression specificity index</th><td><progress max="10" value="' + d.si + '"></progress> ' + d.si + '</td></tr>' +
-                    '<tbody></table></div>';
+                    '</tbody></table></div>';
             }
         );
 
