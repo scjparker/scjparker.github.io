@@ -525,6 +525,11 @@ function showShareSessionForm(qs) {
     document.getElementById('sessionURL').focus();
 }
 
+function shareSession(evt) {
+    evt.stopPropagation();
+    showShareSessionForm();
+}
+
 function mapif(map, key, func) {
     if (map.has(key)) {
         return map.get(key).map(func);
@@ -1200,7 +1205,7 @@ function initialize() {
     document.getElementById('search').addEventListener('keyup', handleSearchInput);
     document.getElementById('reset').addEventListener('click', reset);
     document.getElementById('save').addEventListener('click', showSaveSessionForm);
-    document.getElementById('share').addEventListener('click', showShareSessionForm);
+    document.getElementById('share').addEventListener('click', shareSession);
 
     for (var clearButton of querySelectorAll('.inputbox .cleaner')) {
         clearButton.addEventListener('click', clearInput, true);
