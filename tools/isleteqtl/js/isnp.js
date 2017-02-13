@@ -587,13 +587,13 @@ function setStateFromQueryString(qs='') {
     for (let i = 0; i < data.get(currentDataset).variants.length; i++) {
         let v = data.get(currentDataset).variants[i];
         if (variants.indexOf(v.snp) != -1) {
-            addVariantDetails(v, i, false);
+            addVariantDetails(v, i, true);
         }
     }
     makeVariantDetailsTable();
 
     makeSavedSessionsTable();
-};
+}
 
 function loadSavedSession(evt) {
     evt.stopPropagation();
@@ -877,7 +877,7 @@ function makeVariantDetailsTable() {
     }
 }
 
-function addVariantDetails(d, i, makeTable=true) {
+function addVariantDetails(d, i, skipTable=false) {
     if (d3.event) {
         d3.event.preventDefault();
         hideTooltip(d, i);
@@ -895,7 +895,7 @@ function addVariantDetails(d, i, makeTable=true) {
         d.a1 + '/' + d.a2
     ];
     variantDetails[d.snp] = fields;
-    if (makeTable) {
+    if (!skipTable) {
         requestAnimationFrame(makeVariantDetailsTable);
     }
 }
