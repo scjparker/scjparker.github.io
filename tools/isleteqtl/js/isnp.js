@@ -96,8 +96,8 @@ var footprints = ['yes', 'no'];
 
 var biotypes = ['lincRNA', 'protein_coding'];
 
-var data = {};
-var currentData;
+var data = new Map();
+var currentDataset;
 
 var margin = {top: 10, right: 10, bottom: 60, left: 70};
 var plot;
@@ -144,14 +144,17 @@ var filters = {
 
 var geneQuery = null;
 
-var consoleEnabled = false;
+var consoleEnabled = true;
 var variantDetails = {};
 
 var gburlbase = 'http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=arushiv&hgS_otherUserSessionName=2016_04_17_islet_eQTL&position=chr';
 
-function log(msg) {
+var storagePrefix = 'isleteqtl/';
+var storageKeyRE = new RegExp('^' + storagePrefix + '(.*)');
+
+function log(first, ...rest) {
     if (consoleEnabled) {
-        console.log(msg);
+        console.log(first, ...rest);
     }
 }
 
@@ -282,18 +285,354 @@ function combineArrays(arrays) {
     return combinations.join(',');
 }
 
+
+function makeSessionQueryString() {
+    let qs = '';
+    qs += '?version=' + data.get(currentDataset).version;
+    if (geneQuery) {
+        qs += '&g=' + geneQuery;
+    }
+    filters.click.biotypeFilters.map(function(f) {qs += '&btf=' + encodeURIComponent(f);});
+    filters.click.chromatinStateFilters.map(function(f) {qs += '&csf=' + encodeURIComponent(f);});
+    filters.click.footprintFilters.map(function(f) {qs += '&fpf=' + encodeURIComponent(f);});
+    filters.click.iesiFilters.map(function(f) {qs += '&iesif=' + encodeURIComponent(f);});
+    Object.keys(variantDetails).map(function(v) {qs += '&v=' + encodeURIComponent(v);});
+    return qs;
+}
+
+function makeSessionSaveForm() {
+    let f = document.createElement('form');
+    f.setAttribute('id', 'sessionSave');
+
+    let label = document.createElement('label');
+    label.innerHTML = 'Session name:';
+    f.appendChild(label);
+
+    let nameBox = document.createElement('div');
+    nameBox.classList.add('inputbox');
+    label.appendChild(nameBox);
+
+    let name = document.createElement('input');
+    name.setAttribute('id', 'sessionName');
+    name.setAttribute('name', 'sessionName');
+    nameBox.appendChild(name);
+
+    let controls = document.createElement('div');
+    controls.classList.add('formControls');
+    f.appendChild(controls);
+
+    let save = document.createElement('button');
+    save.setAttribute('type', 'submit');
+    save.addEventListener('click', saveSession);
+    save.innerHTML = 'Save';
+    controls.appendChild(save);
+
+    let cancel = document.createElement('button');
+    cancel.setAttribute('type', 'cancel');
+    cancel.addEventListener('click', cancelSaveSession);
+    cancel.innerHTML = 'Cancel';
+    controls.appendChild(cancel);
+
+    return f;
+}
+
+function makeSessionURL(qs) {
+    return window.location.origin + window.location.pathname + (qs || makeSessionQueryString());
+}
+
+function makeSessionShareForm(qs) {
+    let f = document.createElement('form');
+    f.setAttribute('id', 'sessionSave');
+
+    let instruction = document.createElement('p');
+    instruction.innerHTML = 'Share your session with the following URL:';
+    f.appendChild(instruction);
+
+    let urlBox = document.createElement('div');
+    urlBox.classList.add('inputbox');
+    f.append(urlBox);
+
+    let url = document.createElement('input');
+    url.setAttribute('id', 'sessionURL');
+    url.setAttribute('name', 'sessionURL');
+    url.setAttribute('value', makeSessionURL(qs));
+    url.select();
+    urlBox.appendChild(url);
+
+    let controls = document.createElement('div');
+    controls.classList.add('formControls');
+    f.appendChild(controls);
+
+    let copy = document.createElement('button');
+    copy.setAttribute('type', 'button');
+    copy.addEventListener('click', function() {url.select(); document.execCommand('copy');});
+    copy.innerHTML = 'Copy to clipboard';
+    controls.appendChild(copy);
+
+    let cancel = document.createElement('button');
+    cancel.setAttribute('type', 'cancel');
+    cancel.addEventListener('click', cancelSaveSession);
+    cancel.innerHTML = 'Done';
+    controls.appendChild(cancel);
+
+    return f;
+}
+
+function showDialog(header, content) {
+    document.querySelector('#dialog .header').innerHTML = header;
+    if (typeof(content) === 'string') {
+        document.querySelector('#dialog .content').innerHTML = content;
+    } else {
+        let dialogContent = document.querySelector('#dialog .content');
+        dialogContent.innerHTML = '';
+        dialogContent.appendChild(content);
+    }
+
+    document.getElementById('mask').classList.remove('hidden');
+}
+
+function cancelSaveSession(evt) {
+    evt.preventDefault();
+    closeDialog();
+    return false;
+}
+
+function closeDialog() {
+    document.querySelector('#dialog .header').innerHTML = '';
+    document.querySelector('#dialog .content').innerHTML = '';
+    document.getElementById('mask').classList.add('hidden');
+}
+
+function tsj(ary, transformer=function(x) {return x;}, comparator=function(a, b) {return a == b ? 0 : (a < b ? -1 : 1);}, separator=', ') {
+    return (ary && ary.length > 0) && ary.map(transformer).sort(comparator).join(separator) || '';
+}
+
+function labelTextComparator(a, b) {
+    if (a === b) {
+        return 0;
+    }
+
+    let atree = document.createElement('div');
+    let btree = document.createElement('div');
+    atree.innerHTML = a;
+    btree.innerHTML = b;
+    let atext = atree.querySelector('.label').innerText;
+    let btext = btree.querySelector('.label').innerText;
+    return (atext < btext) ? -1 : 1;
+}
+
+function makeSavedSessionsTable() {
+    var sessions = new Map();
+
+    let count = localStorage.length;
+    for (let i = 0; i < count; i++) {
+        let key = localStorage.key(i);
+        let ours = storageKeyRE.exec(key);
+
+        if (ours) {
+            let sessionName = ours[1];
+            let qs = localStorage.getItem(key);
+            let session = parseStateFromQueryString(qs);
+            sessions.set(sessionName, session);
+        }
+    }
+
+    let tbody = document.getElementById('savedSessionsBody');
+    if (sessions.size > 0) {
+        tbody.innerHTML = '';
+
+        for (let sessionName of [...sessions.keys()].sort()) {
+            let session = sessions.get(sessionName);
+            let tr = document.createElement('tr');
+
+            let td = document.createElement('td');
+            td.innerHTML = sessionName;
+            tr.appendChild(td);
+
+            let dataset = data.get(session.version);
+            td = document.createElement('td');
+            td.innerHTML = dataset && dataset.label;
+            tr.appendChild(td);
+
+            td = document.createElement('td');
+            td.innerHTML = session.geneQuery;
+            tr.appendChild(td);
+
+            td = document.createElement('td');
+            td.innerHTML = tsj(session.biotypeFilters, delabel);
+            tr.appendChild(td);
+
+            td = document.createElement('td');
+            let csc = tsj(session.chromatinStateFilters, makeChromatinStateContent, labelTextComparator);
+            td.innerHTML = csc;
+            tr.appendChild(td);
+
+            td = document.createElement('td');
+            td.innerHTML = tsj(session.footprintFilters, makeFootprintContent, labelTextComparator);
+            tr.appendChild(td);
+
+            td = document.createElement('td');
+            td.innerHTML = tsj(session.iesiFilters);
+            tr.appendChild(td);
+
+            td = document.createElement('td');
+            td.innerHTML = tsj(session.variants);
+            tr.appendChild(td);
+
+            td = document.createElement('td');
+            td.classList.add('actions')
+
+            let loader = document.createElement('button');
+            loader.innerHTML = 'Load';
+            loader.addEventListener('click', loadSavedSession, true);
+            td.appendChild(loader);
+
+            let remover = document.createElement('button');
+            remover.innerHTML = 'Remove';
+            remover.addEventListener('click', removeSavedSession, true);
+            td.appendChild(remover);
+
+            let sharer = document.createElement('button');
+            sharer.innerHTML = 'Share';
+            sharer.addEventListener('click', shareSavedSession, true);
+            td.appendChild(sharer);
+
+            tr.appendChild(td);
+
+            tbody.appendChild(tr);
+        }
+    } else {
+        tbody.innerHTML = '<td colspan="8"><span class="instruction">Click the Save button at the top to save your explorer state here.</span></td>';
+    }
+}
+
+function saveSession(evt) {
+    evt.preventDefault()
+    let name = storagePrefix + document.getElementById('sessionName').value;
+    localStorage.setItem(name, makeSessionQueryString());
+    makeSavedSessionsTable();
+    closeDialog();
+    return false;
+}
+
+function showSaveSessionForm() {
+    showDialog('Save session', makeSessionSaveForm());
+    document.getElementById('sessionName').focus();
+}
+
+function showShareSessionForm(qs) {
+    showDialog('Share session', makeSessionShareForm(qs));
+    document.getElementById('sessionURL').focus();
+}
+
+function mapif(map, key, func) {
+    if (map.has(key)) {
+        return map.get(key).map(func);
+    }
+    return [];
+}
+
+function parseStateFromQueryString(qs) {
+    qs = qs || '';
+    if (qs[0] == '?') {
+        qs = qs.substr(1);
+    }
+    let sp = new Map();
+    let kvs = qs.split('&');
+    for (let [key, value] of kvs.map(function(kv) {return kv.split('=');})) {
+        if (!sp.has(key)) {
+            sp.set(key, []);
+        }
+        sp.get(key).push(value);
+    }
+
+    return {
+        version: sp.has('version') && sp.get('version')[0] || null,
+        geneQuery: sp.has('g') && sp.get('g')[0] || null,
+        biotypeFilters: mapif(sp, 'btf', decodeURIComponent),
+        chromatinStateFilters: mapif(sp, 'csf', decodeURIComponent),
+        footprintFilters: mapif(sp, 'fpf', decodeURIComponent),
+        iesiFilters: mapif(sp, 'iesif', function (f) {return parseInt(f);}),
+        variants: mapif(sp, 'v', decodeURIComponent)
+    }
+}
+
+function setStateFromQueryString(qs='') {
+    let state = parseStateFromQueryString(qs);
+    if (state.version) {
+        for (var dataset of data.keys()) {
+            if (data.get(dataset).version == state.version) {
+                currentDataset = dataset;
+            }
+        }
+    }
+
+    populateDataSelector();
+
+    geneQuery = state.geneQuery;
+    document.getElementById('search').value = state.geneQuery;
+    filters.click.biotypeFilters = state.biotypeFilters;
+    filters.click.chromatinStateFilters = state.chromatinStateFilters;
+    filters.click.footprintFilters = state.footprintFilters;
+    filters.click.iesiFilters = state.iesiFilters;
+    setSearchFilter(state.geneQuery);
+
+    variantDetails = {};
+    let variants = state.variants;
+    for (let i = 0; i < data.get(currentDataset).variants.length; i++) {
+        let v = data.get(currentDataset).variants[i];
+        if (variants.indexOf(v.snp) != -1) {
+            addVariantDetails(v, i, false);
+        }
+    }
+    makeVariantDetailsTable();
+
+    makeSavedSessionsTable();
+};
+
+function loadSavedSession(evt) {
+    evt.stopPropagation();
+    let tr = evt.currentTarget.parentNode.parentNode;
+    let sessionName = tr.firstChild.innerHTML;
+    let qs = localStorage.getItem(storagePrefix + sessionName);
+    history.pushState(sessionName, sessionName, makeSessionURL(qs));
+    loadSavedSessionState(sessionName);
+}
+
+function loadSavedSessionState(sessionName) {
+    let qs = localStorage.getItem(storagePrefix + sessionName);
+    setStateFromQueryString(qs);
+    draw();
+}
+
+function removeSavedSession(evt) {
+    evt.stopPropagation();
+    let tr = evt.currentTarget.parentNode.parentNode;
+    let sessionName = tr.firstChild.innerHTML;
+    localStorage.removeItem(storagePrefix + sessionName);
+    makeSavedSessionsTable();
+}
+
+function shareSavedSession(evt) {
+    evt.stopPropagation();
+    let tr = evt.currentTarget.parentNode.parentNode;
+    let sessionName = tr.firstChild.innerHTML;
+    let qs = localStorage.getItem(storagePrefix + sessionName);
+    showShareSessionForm(qs);
+}
+
 function filterDots() {
     var dotCount = 0;
+    var dotSelectors = [];
+
+    var biotypeFilters;
+    var chromatinStateFilters;
+    var footprintFilters;
+    var iesiFilters;
+    var geneFilters = [];
+    var allFilters;
+
     if (shouldFilter()) {
-        var dotSelectors = [];
-
-        var biotypeFilters;
-        var chromatinStateFilters;
-        var footprintFilters;
-        var iesiFilters;
-        var geneFilters = [];
-        var allFilters;
-
         changeClassList('.dot', ['invisible'], ['highlight']);
 
         if (geneQuery && geneQuery !== '') {
@@ -312,7 +651,7 @@ function filterDots() {
         }
     } else {
         changeClassList('.highlight, .invisible', [], ['invisible', 'highlight']);
-        dotCount = currentData.variantCount;
+        dotCount = data.get(currentDataset).variantCount;
     }
     document.getElementById('dotCount').innerHTML = 'Islet eQTL variants shown: <span>' + dotCount + '</span>';
 }
@@ -399,6 +738,7 @@ function setSearchFilter(s) {
     } else if (geneQuery === null || s != geneQuery.source) {
         changed = true;
         geneQuery = s.trim();
+        document.getElementById('search').value = geneQuery;
     }
     if (changed) {
         requestAnimationFrame(filterDots);
@@ -457,8 +797,8 @@ function makeChromatinStateContent(cs) {
 }
 
 var footPrintContent = {
-    'yes': '<span class="filterColor"><svg class="rotate45"><rect x="0.1em" y="0.1em" width="0.85em" height="0.85em" fill="#999"/></svg></span>yes',
-    'no': '<span class="filterColor"><svg><circle cx="0.5em" cy="0.5em" r="0.5em" fill="#999"/></svg></span>no'
+    'yes': '<span class="filterColor"><svg class="rotate45"><rect x="0.1em" y="0.1em" width="0.85em" height="0.85em" fill="#999"/></svg></span><span class="label">yes</span>',
+    'no': '<span class="filterColor"><svg><circle cx="0.5em" cy="0.5em" r="0.5em" fill="#999"/></svg></span><span class="label">no</span>'
 };
 
 function makeFootprintContent(o) {
@@ -508,10 +848,10 @@ function makeVariantDetailsTable() {
     var remover;
 
     var tbody = document.getElementById('variantDetailsBody');
+    tbody.innerHTML = '';
 
     var variants = Object.keys(variantDetails).sort(sortVariants);
     if (variants.length > 0) {
-        tbody.innerHTML = '';
         for (var variant of variants) {
             tr = document.createElement('tr');
             for (var field of variantDetails[variant]) {
@@ -532,9 +872,11 @@ function makeVariantDetailsTable() {
     }
 }
 
-function addVariantDetails(d, i) {
-    d3.event.preventDefault();
-    hideTooltip(d, i);
+function addVariantDetails(d, i, makeTable=true) {
+    if (d3.event) {
+        d3.event.preventDefault();
+        hideTooltip(d, i);
+    }
     var gbwindow = d.chr + ':' + (d.pos - 50000) + '-' + (d.pos + 49999);
     var fields = [
         d.snp,
@@ -548,7 +890,7 @@ function addVariantDetails(d, i) {
         d.a1 + '/' + d.a2
     ];
     variantDetails[d.snp] = fields;
-    if (Object.keys(variantDetails).length > 0) {
+    if (makeTable) {
         requestAnimationFrame(makeVariantDetailsTable);
     }
 }
@@ -580,7 +922,9 @@ function showTooltip(d, i) {
 }
 
 function hideTooltip(d, i) {
-    d3.event.target.classList.remove('opaque');
+    if (d3.event) {
+        d3.event.target.classList.remove('opaque');
+    }
     tip.hide(d, i);
 }
 
@@ -601,7 +945,8 @@ function draw() {
 
     width = Math.max(getWidth(plot) - margin.left - margin.right);
     var controlHeight = getHeight(document.getElementById('control'));
-    height = Math.max(getWidth(plot) * 0.4, controlHeight);
+    // height = Math.max(getWidth(plot) * 0.25, controlHeight);
+    height = 300;
 
     xValue = function(d) { return d.pos + hg19ReferenceByName[d.chr].offset;};
     xMap = function(d) { return xScale(xValue(d));};
@@ -619,7 +964,7 @@ function draw() {
 
     yValue = function(d) { return d.lp;};
     yMap = function(d) { return yScale(yValue(d));};
-    yRange = d3.extent([-1, d3.max(currentData.variants, function(d) { return d.lp; }) + 5]);
+    yRange = d3.extent([-1, d3.max(data.get(currentDataset).variants, function(d) { return d.lp; }) + 5]);
 
     yScale = d3.scale.linear().domain(yRange).range([height, 0]);
 
@@ -718,7 +1063,7 @@ function draw() {
         .attr('height', height);
 
     objects.selectAll('.dot')
-        .data(currentData.variants)
+        .data(data.get(currentDataset).variants)
         .enter().append('path')
         .attr('d', d3.svg.symbol().type(getShape))
         .attr('class', 'dot')
@@ -809,14 +1154,18 @@ function draw() {
 
 function populateDataSelector() {
     var selector = document.getElementById('dataSelector');
-    for (var dataset in data) {
+    selector.innerHTML = '';
+    for (var dataset of data.keys()) {
         var option = document.createElement('option');
         option.value = dataset;
-        option.innerHTML = data[dataset].label;
+        option.innerHTML = data.get(dataset).label;
+        if (dataset == currentDataset) {
+            option.setAttribute('selected', 'selected');
+        }
         selector.appendChild(option);
     }
     selector.addEventListener('change', function(evt) {
-        currentData = data[this.value];
+        currentDataset = this.value;
         draw();
     });
 }
@@ -829,20 +1178,35 @@ function ready(fn) {
     }}
 
 function initialize() {
-    currentData = data[Object.keys(data)[0]];
+    document.getElementById('search').value = '';
+    currentDataset = data.keys().next().value;
+    setStateFromQueryString(location.search);
     populateDataSelector();
-    document.getElementById('variantCount').innerHTML = currentData.variantCount;
+    document.getElementById('variantCount').innerHTML = data.get(currentDataset).variantCount;
+
     window.addEventListener('resize', function() {requestAnimationFrame(draw);});
     window.addEventListener('orientationchange', function() {requestAnimationFrame(draw);});
+    window.addEventListener('popstate', function(evt) {
+        loadSavedSessionState(evt.state);
+    });
+
+    document.getElementById('dialog').addEventListener('keyup', function(evt) {
+        if (evt.keyCode == 27) {
+            closeDialog();
+        }
+    });
+
     document.getElementById('search').addEventListener('change', handleSearchInput);
     document.getElementById('search').addEventListener('keyup', handleSearchInput);
     document.getElementById('reset').addEventListener('click', reset);
+    document.getElementById('save').addEventListener('click', showSaveSessionForm);
+    document.getElementById('share').addEventListener('click', showShareSessionForm);
+
     for (var clearButton of querySelectorAll('.inputbox .cleaner')) {
         clearButton.addEventListener('click', clearInput, true);
     }
-    document.getElementById('search').value = '';
     makeReporters();
-    d3.shuffle(currentData.variants);
+    d3.shuffle(data.get(currentDataset).variants);
     draw();
 }
 

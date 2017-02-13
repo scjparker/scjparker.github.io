@@ -21,8 +21,14 @@
         <script src="js/data.r9.js"></script>
     </head>
     <body>
+        <div id="mask" class="hidden">
+            <div id="dialog">
+                <h2 class="header"></h2>
+                <div class="content"></div>
+            </div>
+        </div>
         <header id="banner">
-            <h1 id="title">ISLET eQTL EXPLORER</h1>
+            <h1 id="title"><a href=".">ISLET eQTL EXPLORER</a></h1>
             <nav>
                 <ul>
                     <li><a href="http://theparkerlab.org/">THE PARKER LAB</a></li>
@@ -35,26 +41,16 @@
         <div id="main">
             <div id="plotContainer">
                 <section id="control">
-                    <h2>Filters</h2>
+                    <h2>Controls</h2>
                     <div>
                         <div>
                             <h4>Chromatin state annotation LD threshold</h4>
                             <select id="dataSelector"></select>
-                        </div>
-                        <div>
                             <h4>Gene</h4>
                             <div id="searchContainer" class="inputbox">
                                 <input type="search" id="search" placeholder="Search for a gene by name or Ensembl ID..."/>
                                 <button class="cleaner"><i class="fa fa-times-circle"></i></button>
                             </div>
-                        </div>
-                    </div>
-                    <div id="filters">
-                        <div>
-                            <h4>Chromatin state</h4>
-                            <ul id="chromatinStateFilterList" class="filterList"></ul>
-                        </div>
-                        <div>
                             <div>
                                 <h4>Footprint</h4>
                                 <ul id="footprintFilterList" class="filterList"></ul>
@@ -68,11 +64,15 @@
                                 <ul id="iesiFilterList" class="numeric filterList"></ul>
                             </div>
                         </div>
-                    </div>
-                    <div>
                         <div>
-                            <button id="reset">Reset plot</button>
+                            <h4>Chromatin state</h4>
+                            <ul id="chromatinStateFilterList" class="filterList"></ul>
                         </div>
+                    </div>
+                    <div class="flexleft">
+                        <button id="reset" title="Clear all filters and reset the plot">Reset plot</button>
+                        <button id="save" title="Save the current session so you can come back to it later.">Save session</button>
+                        <button id="share" title="Share this session with others.">Share session</button>
                     </div>
                 </section>
                 <section id="plotBox">
@@ -107,13 +107,40 @@
                     </table>
                 </div>
             </section>
+
+            <section id="savedSessionsContainer">
+                <h2>Saved sessions</h2>
+                <div>
+                    <table id="variantDetails">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>LD threshold</th>
+                                <th>Gene query</th>
+                                <th>Biotypes</th>
+                                <th>Chromatin states</th>
+                                <th>Footprint</th>
+                                <th>iESI</th>
+                                <th>Variants</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="savedSessionsBody">
+                            <tr id="savedSessionsInstruction">
+                                <td colspan="7"><span class="instruction">Click the Save button at the top to save your explorer state here.</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
         </div>
 
         <div id="doc">
             <section id="about">
                 <h2>About</h2>
                 <div>
-                    <p>The data from our 2016 manuscript includes <span id="variantCount">over 3000</span> variants
+                    <p>The data from our 2017 paper <cite>Genetic regulatory signatures underlying islet gene expression and type 2 diabetes</cite> includes <span id="variantCount">over 3000</span> variants
                         in islet cis-eQTLs. This tool lets you quickly find those relevant to your research.</p>
                 </div>
             </section>
@@ -148,6 +175,10 @@
                     <h4>Printing</h4>
                     <p>You should be able to print the page at any time using your browser's default print dialog. If you notice
                         problems with the output, please let us know.</p>
+                    <h4>Sessions</h4>
+                    <p>You can save the state of the explorer at any time with the <b>Save</b> button at the top right. In the resulting dialog, enter a name to save the session under, and it will be added to the <b>Sessions</b> table. In that table, you can press <b>Load</b> to load a saved session, or <b>Remove</b> to delete them.</p>
+
+                    <p>At any time you can press the <b>Share</b> button at top right to get a URL to share your current session. It has to be copied to the clipboard manually, for browser security reasons; just press the <b>Copy to clipboard</b> button or use the keyboard: Command-C on Macs, Control-C elsewhere.</p>
                 </div>
             </section>
 
