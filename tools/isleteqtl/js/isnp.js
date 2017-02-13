@@ -350,7 +350,7 @@ function makeSessionShareForm(qs) {
 
     let urlBox = document.createElement('div');
     urlBox.classList.add('inputbox');
-    f.append(urlBox);
+    f.appendChild(urlBox);
 
     let url = document.createElement('input');
     url.setAttribute('id', 'sessionURL');
