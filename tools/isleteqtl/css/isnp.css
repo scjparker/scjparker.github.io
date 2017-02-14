@@ -15,7 +15,7 @@
     font-family: "Source Sans Pro";
     font-style: normal;
     font-weight: 600;
-    src: local("Source Sans Pro SemiBold"), url("../fonts/SourceSansPro-SemiBold.ttf");
+    src: local("Source Sans Pro SemiBold"), url("../fonts/SourceSansPro-Semibold.ttf");
 }
 
 @font-face {
@@ -29,7 +29,7 @@
     font-family: "Source Sans Pro";
     font-style: italic;
     font-weight: 600;
-    src: local("Source Sans Pro SemiBold Italic"), url("../fonts/SourceSansPro-SemiBoldItalic.ttf");
+    src: local("Source Sans Pro SemiBold Italic"), url("../fonts/SourceSansPro-SemiboldItalic.ttf");
 }
 
 *,
@@ -51,6 +51,8 @@ body {
 
 button {
     padding: 0.5em;
+    margin-right: 0.5em;
+    margin-bottom: 0.25em;
     outline: none;
     border-radius: 4px;
     border: 1px solid #06c;
@@ -173,6 +175,14 @@ td {
     padding: 0.25em 10px 0.25em 0.25em;
     text-align: left;
     vertical-align: top;
+}
+
+.formControls {
+    text-align: right;
+}
+
+.formControls * {
+    margin: 0.25em;
 }
 
 .inputbox {
@@ -321,7 +331,12 @@ td {
 }
 
 #doc h2 {
+    margin-top: 0;
     border-bottom: 2px solid #f0f0f0;
+}
+
+#doc section {
+    padding: 1em;
 }
 
 #main {
@@ -350,6 +365,47 @@ td {
     margin: 0.25em 0;
 }
 
+#mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 9999;
+}
+
+#dialog {
+    background: #fff;
+    margin: auto;
+    width: 50%;
+}
+
+#dialog .header {
+    padding: 0.5em;
+    background: #06c;
+    color: #fff;
+}
+
+#dialog .content {
+    padding: 0.5em;
+}
+
+#status {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+#messages {
+    flex: 1 1 90%;
+}
+
+#controls {
+    flex: 1 1 10%;
+    text-align: right;
+}
+
 #plotContainer {
     position: relative;
 }
@@ -358,7 +414,6 @@ td {
     position: relative;
     pointer-events: none;
     background: #fff;
-    min-height: 320px;
 }
 
 #plot {
@@ -382,7 +437,7 @@ td {
 }
 
 .axis {
-    font-size: 0.6em;
+    font-size: 0.75em;
 }
 
 .axis path,
@@ -426,6 +481,7 @@ td {
 
 .filterList li.selected {
     font-weight: 700;
+    color: #06c;
 }
 
 .filterList li span.label {
@@ -571,6 +627,10 @@ td {
         flex-wrap: wrap;
         justify-content: space-between;
         flex: 0 1 auto;
+    }
+
+    #control > .flexleft {
+        justify-content: flex-start;
     }
 
     #control > div > div {
