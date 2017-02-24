@@ -28,8 +28,10 @@
         <script src="js/d3.v3.js"></script>
         <script src="js/d3-tip.js"></script>
         <script src="js/isnp.js"></script>
-        <script src="js/data.r8.js"></script>
-        <script src="js/data.r9.js"></script>
+        <script src="js/data.r8_20170217.js"></script>
+        <script src="js/data.r9_20170217.js"></script>
+        <script src="js/data.r8_20170210.js"></script>
+        <script src="js/data.r9_20170210.js"></script>
     </head>
     <body>
         <div id="mask" class="hidden">
@@ -98,6 +100,7 @@
                     <table id="variantDetails">
                         <thead>
                             <tr>
+                                <th>Explorer ID</th>
                                 <th>Variant</th>
                                 <th>Gene</th>
                                 <th>Gene name</th>
@@ -190,6 +193,19 @@
                     <p>You can save the state of the explorer at any time with the <b>Save</b> button at the top right. In the resulting dialog, enter a name to save the session under, and it will be added to the <b>Sessions</b> table. In that table, you can press <b>Load</b> to load a saved session, or <b>Remove</b> to delete them.</p>
 
                     <p>At any time you can press the <b>Share</b> button at top right to get a URL to share your current session. It has to be copied to the clipboard manually, for browser security reasons; just press the <b>Copy to clipboard</b> button or use the keyboard: Command-C on Macs, Control-C elsewhere.</p>
+                </div>
+            </section>
+
+            <section id="history">
+                <h2>History</h2>
+                <div>
+                    <h3>17 February 2017</h3>
+                    <p>We discovered some duplicate records in the data. This should have had no effect beyond overstated variant counts (3360 total, compared to 3314 after these duplicates were removed, and if you searched for a record with duplicates, e.g. SIX3, you'd see one spot in the plot but the tool would claim it was showing more).</p>
+                    <p>We've kept the old data available, labeled 10 Feb 2017, so you can review any sessions you might have created.</p>
+                    <p>This was of course found because someone with an interest in a particular variant spotted the discrepancy. We appreciate the help; if anything in the data doesn't make sense to you, please let us know at <a class="reporter" href="#">parkerlab-software at umich.edu</a>.</p>
+
+                    <h3>10 February 2017</h3>
+                    <p>Published with session saving and sharing.</p>
                 </div>
             </section>
 
