@@ -14,11 +14,24 @@
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/isnp.css">
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-57854873-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+
         <script src="js/d3.v3.js"></script>
         <script src="js/d3-tip.js"></script>
         <script src="js/isnp.js"></script>
-        <script src="js/data.r8.js"></script>
-        <script src="js/data.r9.js"></script>
+        <script src="js/data.r8_20170217.js"></script>
+        <script src="js/data.r9_20170217.js"></script>
+        <script src="js/data.r8_20170210.js"></script>
+        <script src="js/data.r9_20170210.js"></script>
     </head>
     <body>
         <div id="mask" class="hidden">
@@ -87,6 +100,7 @@
                     <table id="variantDetails">
                         <thead>
                             <tr>
+                                <th>Explorer ID</th>
                                 <th>Variant</th>
                                 <th>Gene</th>
                                 <th>Gene name</th>
@@ -140,8 +154,14 @@
             <section id="about">
                 <h2>About</h2>
                 <div>
-                    <p>The data from our 2017 paper <cite>Genetic regulatory signatures underlying islet gene expression and type 2 diabetes</cite> includes <span id="variantCount">over 3000</span> variants
-                        in islet cis-eQTLs. This tool lets you quickly find those relevant to your research.</p>
+                    <p>The data from our 2017 paper <a target="_blank" rel="noopener noreferrer" href="https://dx.doi.org/10.1073/pnas.1621192114">Genetic regulatory signatures underlying islet gene expression and type 2 diabetes</a> includes <span id="variantCount">over 3000</span> variants in islet cis-eQTLs. This tool lets you quickly find those relevant to your research.</p>
+
+                    <p>You can find processed data from the paper <a target="_blank" rel="noopener noreferrer" href="https://theparkerlab.med.umich.edu/data/papers/doi/10.1073/pnas.1621192114/">here</a>, including:</p>
+                    <ol>
+                        <li>Chromatin state annotations for 31 cell types (see Methods, Chromatin state analyses)</li>
+                        <li>ATAC-seq peak calls for two islet samples, skeletal muscle, adipose and GM12878 (see Methods, Open chromatin profiling (ATAC-seq))</li>
+                        <li>Transcription factor footprint calls for two islet samples (see Methods, ATAC-seq footprints)</li>
+                    </ol>
                 </div>
             </section>
 
@@ -179,6 +199,19 @@
                     <p>You can save the state of the explorer at any time with the <b>Save</b> button at the top right. In the resulting dialog, enter a name to save the session under, and it will be added to the <b>Sessions</b> table. In that table, you can press <b>Load</b> to load a saved session, or <b>Remove</b> to delete them.</p>
 
                     <p>At any time you can press the <b>Share</b> button at top right to get a URL to share your current session. It has to be copied to the clipboard manually, for browser security reasons; just press the <b>Copy to clipboard</b> button or use the keyboard: Command-C on Macs, Control-C elsewhere.</p>
+                </div>
+            </section>
+
+            <section id="history">
+                <h2>History</h2>
+                <div>
+                    <h3>17 February 2017</h3>
+                    <p>We discovered some duplicate records in the data. This should have had no effect beyond overstated variant counts (3360 total, compared to 3314 after these duplicates were removed, and if you searched for a record with duplicates, e.g. SIX3, you'd see one spot in the plot but the tool would claim it was showing more).</p>
+                    <p>We've kept the old data available, labeled 10 Feb 2017, so you can review any sessions you might have created.</p>
+                    <p>This was of course found because someone with an interest in a particular variant spotted the discrepancy. We appreciate the help; if anything in the data doesn't make sense to you, please let us know at <a class="reporter" href="#">parkerlab-software at umich.edu</a>.</p>
+
+                    <h3>10 February 2017</h3>
+                    <p>Published with session saving and sharing.</p>
                 </div>
             </section>
 

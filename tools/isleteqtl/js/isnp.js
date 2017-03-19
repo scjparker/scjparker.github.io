@@ -145,7 +145,7 @@ var filters = {
 var geneQuery = null;
 
 var consoleEnabled = true;
-var variantDetails = {};
+var variantDetails = new Map();
 
 var gburlbase = 'http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=arushiv&hgS_otherUserSessionName=2016_04_17_islet_eQTL&position=chr';
 
@@ -296,7 +296,7 @@ function makeSessionQueryString() {
     filters.click.chromatinStateFilters.map(function(f) {qs += '&csf=' + encodeURIComponent(f);});
     filters.click.footprintFilters.map(function(f) {qs += '&fpf=' + encodeURIComponent(f);});
     filters.click.iesiFilters.map(function(f) {qs += '&iesif=' + encodeURIComponent(f);});
-    Object.keys(variantDetails).map(function(v) {qs += '&v=' + encodeURIComponent(v);});
+    [...variantDetails.keys()].map(function(v) {qs += '&v=' + encodeURIComponent(v);});
     return qs;
 }
 
@@ -582,11 +582,11 @@ function setStateFromQueryString(qs='') {
     filters.click.iesiFilters = state.iesiFilters;
     setSearchFilter(state.geneQuery);
 
-    variantDetails = {};
+    variantDetails.clear();
     let variants = state.variants;
     for (let i = 0; i < data.get(currentDataset).variants.length; i++) {
         let v = data.get(currentDataset).variants[i];
-        if (variants.indexOf(v.snp) != -1) {
+        if (variants.indexOf(v.id) != -1) {
             addVariantDetails(v, i, true);
         }
     }
@@ -819,18 +819,18 @@ function placeDot(d) {
     return tx;
 }
 
-function makeVariantSortKey(variantID) {
-    var chr = Number(variantID.split(':')[0]);
-    var pos = Number(variantID.split(':')[1].split('_')[0]);
-    var alleles = variantID.split('_')[1];
+function makeVariantSortKey(variantSNP) {
+    var chr = Number(variantSNP.split(':')[0]);
+    var pos = Number(variantSNP.split(':')[1].split('_')[0]);
+    var alleles = variantSNP.split('_')[1];
     return [chr, pos, alleles];
 }
 
 function sortVariants(a, b) {
     var i;
     var cmp;
-    var k1 = makeVariantSortKey(a);
-    var k2 = makeVariantSortKey(b);
+    var k1 = makeVariantSortKey(a.snp);
+    var k2 = makeVariantSortKey(b.snp);
     for (i = 0; i < k1.length; i++) {
         cmp = k1[i] - k2[i];
         if (cmp !== 0) {
@@ -843,33 +843,68 @@ function sortVariants(a, b) {
 function removeVariantDetails(evt) {
     evt.stopPropagation();
     var tr = evt.currentTarget.parentNode.parentNode;
-    delete variantDetails[tr.firstChild.innerHTML];
+    let id = tr.firstChild.innerHTML;
+    variantDetails.delete(id);
     requestAnimationFrame(makeVariantDetailsTable);
 }
 
 function makeVariantDetailsTable() {
-    var tr;
-    var td;
-    var remover;
-
-    var tbody = document.getElementById('variantDetailsBody');
+    let tbody = document.getElementById('variantDetailsBody');
     tbody.innerHTML = '';
 
-    var variants = Object.keys(variantDetails).sort(sortVariants);
+    var variants = [...variantDetails.values()].sort(sortVariants);
     if (variants.length > 0) {
-        for (var variant of variants) {
-            tr = document.createElement('tr');
-            for (var field of variantDetails[variant]) {
-                td = document.createElement('td');
-                td.innerHTML = field;
-                tr.appendChild(td);
-            }
-            td = document.createElement('td');
-            remover = document.createElement('button');
+        for (let v of variants) {
+            let tr = document.createElement('tr');
+
+            let id_cell = document.createElement('td');
+            id_cell.innerHTML = v.id;
+            tr.appendChild(id_cell);
+
+            let gbwindow = v.chr + ':' + (v.pos - 50000) + '-' + (v.pos + 49999);
+            let variant_cell = document.createElement('td');
+            variant_cell.innerHTML = v.snp;
+            tr.appendChild(variant_cell);
+
+            let gene_cell = document.createElement('td');
+            gene_cell.innerHTML = '<a target="_blank" href="http://www.ensembl.org/id/' + v.g + '">' + v.g + '</a>';
+            tr.appendChild(gene_cell);
+
+            let genename_cell = document.createElement('td');
+            genename_cell.innerHTML = v.gn;
+            tr.appendChild(genename_cell);
+
+            let gb_cell = document.createElement('td');
+            gb_cell.innerHTML = '<a target="_blank" href="' + gburlbase + gbwindow + '">' + v.chr + ':' + format_number_for_locale(v.pos) + '</a>';
+            tr.appendChild(gb_cell);
+
+            let bt_cell = document.createElement('td');
+            bt_cell.innerHTML = delabel(v.bt);
+            tr.appendChild(bt_cell);
+
+            let cs_cell = document.createElement('td');
+            cs_cell.innerHTML = makeChromatinStateContent(v.cs);
+            tr.appendChild(cs_cell);
+
+            let fp_cell = document.createElement('td');
+            fp_cell.innerHTML = makeFootprintContent(v);
+            tr.appendChild(fp_cell);
+
+            let lp_cell = document.createElement('td');
+            lp_cell.innerHTML = v.lp;
+            tr.appendChild(lp_cell);
+
+            let allele_cell = document.createElement('td');
+            allele_cell.innerHTML = v.a1 + '/' + v.a2;
+            tr.appendChild(allele_cell);
+
+            let action_cell = document.createElement('td');
+            let remover = document.createElement('button');
             remover.innerHTML = 'Remove';
             remover.addEventListener('click', removeVariantDetails, true);
-            td.appendChild(remover);
-            tr.appendChild(td);
+            action_cell.appendChild(remover);
+            tr.appendChild(action_cell);
+
             tbody.appendChild(tr);
         }
     } else {
@@ -882,19 +917,9 @@ function addVariantDetails(d, i, skipTable=false) {
         d3.event.preventDefault();
         hideTooltip(d, i);
     }
-    var gbwindow = d.chr + ':' + (d.pos - 50000) + '-' + (d.pos + 49999);
-    var fields = [
-        d.snp,
-        '<a target="_blank" href="http://www.ensembl.org/id/' + d.g + '">' + d.g + '</a>',
-        d.gn,
-        '<a target="_blank" href="' + gburlbase + gbwindow + '">' + d.chr + ':' + format_number_for_locale(d.pos) + '</a>',
-        delabel(d.bt),
-        makeChromatinStateContent(d.cs),
-        makeFootprintContent(d),
-        d.lp,
-        d.a1 + '/' + d.a2
-    ];
-    variantDetails[d.snp] = fields;
+
+    variantDetails.set(d.id, d);
+
     if (!skipTable) {
         requestAnimationFrame(makeVariantDetailsTable);
     }
