@@ -143,6 +143,7 @@ var filters = {
 };
 
 var geneQuery = null;
+var filterRequested = false;
 
 var consoleEnabled = true;
 var variantDetails = new Map();
@@ -480,7 +481,7 @@ function makeSavedSessionsTable() {
             tr.appendChild(td);
 
             td = document.createElement('td');
-            td.classList.add('actions')
+            td.classList.add('actions');
 
             let loader = document.createElement('button');
             loader.innerHTML = 'Load';
@@ -507,7 +508,7 @@ function makeSavedSessionsTable() {
 }
 
 function saveSession(evt) {
-    evt.preventDefault()
+    evt.preventDefault();
     let name = storagePrefix + document.getElementById('sessionName').value;
     localStorage.setItem(name, makeSessionQueryString());
     makeSavedSessionsTable();
@@ -559,7 +560,7 @@ function parseStateFromQueryString(qs) {
         footprintFilters: mapif(sp, 'fpf', decodeURIComponent),
         iesiFilters: mapif(sp, 'iesif', function (f) {return parseInt(f);}),
         variants: mapif(sp, 'v', decodeURIComponent)
-    }
+    };
 }
 
 function setStateFromQueryString(qs='') {
@@ -637,8 +638,10 @@ function filterDots() {
     var geneFilters = [];
     var allFilters;
 
+    filterRequested = false;
+
     if (shouldFilter()) {
-        changeClassList('.dot', ['invisible'], ['highlight']);
+        changeClassList('.dot', ['invisible'], []);
 
         if (geneQuery && geneQuery !== '') {
             geneFilters = ['[data-g*="' + geneQuery.toUpperCase() + '"]', '[data-gn*="' + geneQuery.toUpperCase() + '"]'];
@@ -652,13 +655,20 @@ function filterDots() {
         dotSelectors = combineArrays(allFilters);
 
         if (dotSelectors.length > 0) {
-            dotCount = changeClassList(dotSelectors, ['highlight'], ['invisible']);
+            dotCount = changeClassList(dotSelectors, [], ['invisible']);
         }
     } else {
-        changeClassList('.highlight, .invisible', [], ['invisible', 'highlight']);
+        changeClassList('.invisible', [], ['invisible']);
         dotCount = data.get(currentDataset).variantCount;
     }
     document.getElementById('dotCount').innerHTML = 'Islet eQTL variants shown: <span>' + dotCount + '</span>';
+}
+
+function requestFilter() {
+    if (!filterRequested) {
+        filterRequested = true;
+        requestAnimationFrame(filterDots);
+    }
 }
 
 function addFilter(filters, selector) {
@@ -694,7 +704,7 @@ function makeDotHighlighter(filters) {
         evt.stopPropagation();
         var filter = evt.currentTarget.dataset.filter;
         addFilter(filters, filter);
-        requestAnimationFrame(filterDots);
+        requestFilter();
     };
 }
 
@@ -703,35 +713,35 @@ function makeDotHighlightResetter(filters) {
         evt.stopPropagation();
         var filter = evt.currentTarget.dataset.filter;
         removeFilter(filters, filter);
-        requestAnimationFrame(filterDots);
+        requestFilter();
     };
 }
 
 function handleBiotypeClick(evt) {
     evt.stopPropagation();
     if (changeFilters(filters.click.biotypeFilters, evt.currentTarget)) {
-        requestAnimationFrame(filterDots);
+        requestFilter();
     }
 }
 
 function handleChromatinStateClick(evt) {
     evt.stopPropagation();
     if (changeFilters(filters.click.chromatinStateFilters, evt.currentTarget)) {
-        requestAnimationFrame(filterDots);
+        requestFilter();
     }
 }
 
 function handleFootprintClick(evt) {
     evt.stopPropagation();
     if (changeFilters(filters.click.footprintFilters, evt.currentTarget)) {
-        requestAnimationFrame(filterDots);
+        requestFilter();
     }
 }
 
 function handleIESIClick(evt) {
     evt.stopPropagation();
     if (changeFilters(filters.click.iesiFilters, evt.currentTarget)) {
-        requestAnimationFrame(filterDots);
+        requestFilter();
     }
 }
 
@@ -746,7 +756,7 @@ function setSearchFilter(s) {
         document.getElementById('search').value = geneQuery;
     }
     if (changed) {
-        requestAnimationFrame(filterDots);
+        requestFilter();
     }
 }
 
@@ -874,6 +884,14 @@ function makeVariantDetailsTable() {
             genename_cell.innerHTML = v.gn;
             tr.appendChild(genename_cell);
 
+            let rsid_cell = document.createElement('td');
+            if (v.rsid) {
+                rsid_cell.innerHTML = '<a target="_blank" href="https://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?searchType=adhoc_search&type=rs&rs=' + v.rsid + '">' + v.rsid + '</a>';
+            } else {
+                rsid_cell.innerHTML = v.rsid;
+            }
+            tr.appendChild(rsid_cell);
+
             let gb_cell = document.createElement('td');
             gb_cell.innerHTML = '<a target="_blank" href="' + gburlbase + gbwindow + '">' + v.chr + ':' + format_number_for_locale(v.pos) + '</a>';
             tr.appendChild(gb_cell);
@@ -897,6 +915,10 @@ function makeVariantDetailsTable() {
             let allele_cell = document.createElement('td');
             allele_cell.innerHTML = v.a1 + '/' + v.a2;
             tr.appendChild(allele_cell);
+
+            let effect_cell = document.createElement('td');
+            effect_cell.innerHTML = v.z;
+            tr.appendChild(effect_cell);
 
             let action_cell = document.createElement('td');
             let remover = document.createElement('button');
@@ -975,8 +997,7 @@ function draw() {
 
     width = Math.max(getWidth(plot) - margin.left - margin.right);
     var controlHeight = getHeight(document.getElementById('control'));
-    // height = Math.max(getWidth(plot) * 0.25, controlHeight);
-    height = 300;
+    height = Math.max(getWidth(plot) * 0.25, controlHeight);
 
     xValue = function(d) { return d.pos + hg19ReferenceByName[d.chr].offset;};
     xMap = function(d) { return xScale(xValue(d));};
@@ -1020,12 +1041,14 @@ function draw() {
                     '<table><tbody>' +
                     '<tr><th>Gene</th><td>' + d.g + '</td></tr>' +
                     '<tr><th>Gene name</th><td>' + d.gn + '</td></tr>' +
+                    '<tr><th>RefSeq ID</th><td>' + d.rsid + '</td></tr>' +
                     '<tr><th>Position</th><td>' + d.chr + ':' + d.pos + '</td></tr>' +
                     '<tr><th>Biotype</th><td>' + delabel(d.bt) + '</td></tr>' +
                     '<tr><th>Chromatin state</th><td>' + makeChromatinStateContent(d.cs) + '</td></tr>' +
                     '<tr><th>ATAC-seq footprint?</th><td>' + makeFootprintContent(d) + '</td></tr>' +
                     '<tr><th>eQTL -log<sub>10</sub>(p-value)</th><td>' + d.lp + '</td></tr>' +
-                    '<tr><th>Allele 1/2</th><td>' + d.a1 + '/' + d.a2 + '</td></tr>' +
+                    '<tr><th>Allele 1 (effect allele) / Allele 2</th><td>' + d.a1 + '/' + d.a2 + '</td></tr>' +
+                    '<tr><th>Effect size</th><td>' + d.z + '</td></tr>' +
                     '<tr><th>Islet expression specificity index</th><td><progress max="10" value="' + d.si + '"></progress> ' + d.si + '</td></tr>' +
                     '</tbody></table></div>';
             }
@@ -1128,7 +1151,7 @@ function draw() {
         li.dataset.filter = chromatinState;
         li.innerHTML = makeChromatinStateContent(chromatinState) + makeEnrichmentBar(chromatinState);
         li.addEventListener('mouseover', makeDotHighlighter(filters.hover.chromatinStateFilters), true);
-        li.addEventListener('mouseleave', makeDotHighlightResetter(filters.hover.chromatinStateFilters), true);
+        li.addEventListener('mouseout', makeDotHighlightResetter(filters.hover.chromatinStateFilters), true);
         li.addEventListener('click', handleChromatinStateClick, true);
         chromatinStateFilterList.appendChild(li);
     });
@@ -1143,7 +1166,7 @@ function draw() {
         li.dataset.filter = footprint;
         li.innerHTML = makeFootprintContent(footprint);
         li.addEventListener('mouseover', makeDotHighlighter(filters.hover.footprintFilters), true);
-        li.addEventListener('mouseleave', makeDotHighlightResetter(filters.hover.footprintFilters), true);
+        li.addEventListener('mouseout', makeDotHighlightResetter(filters.hover.footprintFilters), true);
         li.addEventListener('click', handleFootprintClick, true);
         footprintFilterList.appendChild(li);
     });
@@ -1158,7 +1181,7 @@ function draw() {
         li.dataset.filter = biotype;
         li.innerHTML = delabel(biotype);
         li.addEventListener('mouseover', makeDotHighlighter(filters.hover.biotypeFilters), true);
-        li.addEventListener('mouseleave', makeDotHighlightResetter(filters.hover.biotypeFilters), true);
+        li.addEventListener('mouseout', makeDotHighlightResetter(filters.hover.biotypeFilters), true);
         li.addEventListener('click', handleBiotypeClick, true);
         biotypeFilterList.appendChild(li);
     });
@@ -1173,12 +1196,12 @@ function draw() {
         li.dataset.filter = iesi;
         li.innerHTML = delabel(iesi);
         li.addEventListener('mouseover', makeDotHighlighter(filters.hover.iesiFilters), true);
-        li.addEventListener('mouseleave', makeDotHighlightResetter(filters.hover.iesiFilters), true);
+        li.addEventListener('mouseout', makeDotHighlightResetter(filters.hover.iesiFilters), true);
         li.addEventListener('click', handleIESIClick, true);
         iesiFilterList.appendChild(li);
     });
 
-    requestAnimationFrame(filterDots);
+    requestFilter();
     drawing = false;
 }
 

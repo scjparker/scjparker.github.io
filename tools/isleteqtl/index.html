@@ -28,6 +28,8 @@
         <script src="js/d3.v3.js"></script>
         <script src="js/d3-tip.js"></script>
         <script src="js/isnp.js"></script>
+        <script src="js/data.r8_20170524.js"></script>
+        <script src="js/data.r9_20170524.js"></script>
         <script src="js/data.r8_20170217.js"></script>
         <script src="js/data.r9_20170217.js"></script>
         <script src="js/data.r8_20170210.js"></script>
@@ -104,12 +106,14 @@
                                 <th>Variant</th>
                                 <th>Gene</th>
                                 <th>Gene name</th>
+                                <th>RefSeq ID</th>
                                 <th>Position</th>
                                 <th>Biotype</th>
                                 <th>Chromatin state</th>
                                 <th>Footprint</th>
                                 <th>-log<sub>10</sub>(p-value)</th>
-                                <th>Allele 1/2</th>
+                                <th>Allele 1 (effect allele) / Allele 2</th>
+                                <th>Effect size</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -205,6 +209,12 @@
             <section id="history">
                 <h2>History</h2>
                 <div>
+                    <h3>24 May 2017</h3>
+                    <ul>
+                        <li>Added RefSeq IDs</li>
+                        <li>Added effect size</li>
+                        <li>Made allele ordering consistent in labels; allele 1 is now always the effect allele.</li>
+                    </ul>
                     <h3>17 February 2017</h3>
                     <p>We discovered some duplicate records in the data. This should have had no effect beyond overstated variant counts (3360 total, compared to 3314 after these duplicates were removed, and if you searched for a record with duplicates, e.g. SIX3, you'd see one spot in the plot but the tool would claim it was showing more).</p>
                     <p>We've kept the old data available, labeled 10 Feb 2017, so you can review any sessions you might have created.</p>

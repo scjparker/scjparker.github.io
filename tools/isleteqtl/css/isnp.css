@@ -432,10 +432,6 @@ td {
     cursor: pointer;
 }
 
-.dot.highlight {
-    visibility: visible;
-}
-
 .axis {
     font-size: 0.75em;
 }
