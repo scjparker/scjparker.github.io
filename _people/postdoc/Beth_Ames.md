@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Beth Ames, M.D., Ph.D.
-title: Pediatric and Medical Genetics Fellow
+title: Pediatric and Medical Genetics Fellow</br>(starting Feb. 2018)
 picture: bames.jpg
 google-scholar: 
 CV:
