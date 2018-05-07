@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Vivek Rai
-title: PIBS rotation student
+title: Computational Medicine & Bioinformatics Pre-Candidate
 picture: vrai.jpg
 google-scholar: 
 CV:
