@@ -12,9 +12,9 @@
 {% if person.path contains include.category %}
 <div style="overflow: hidden">
   {% if person.picture %}
-    <div class="cover" style="background-image: url('/assets/people/{{ person.picture }}">
+    <div class="cover" style="background-image: url('./assets/people/{{ person.picture }}">
   {% else %}
-    <div class="cover" style="background-image: url('/assets/people/placeholder.jpg">
+    <div class="cover" style="background-image: url('./assets/people/placeholder.jpg">
   {% endif %}
     </div>
   <div class="tools-desc">
