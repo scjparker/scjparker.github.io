@@ -7,20 +7,18 @@
 
 {% if count != '0' %}
 <div class="Nheader">{{ include.title }}</div>
-<table>
 
 {% for person in site.people %}
 {% if person.path contains include.category %}
-  <tr>
-    <td>
-      {% if person.picture %}
-      <img src="assets/people/{{ person.picture }}" height="150px">
-      {% else %}
-      <img src="assets/people/placeholder.png" height="150px">
-      {% endif %}
-    </td>
-    <td>
-    <p>
+<div style="overflow: hidden">
+  {% if person.picture %}
+    <div class="cover" style="background-image: url('/assets/people/{{ person.picture }}">
+  {% else %}
+    <div class="cover" style="background-image: url('/assets/people/placeholder.jpg">
+  {% endif %}
+    </div>
+  <div class="tools-desc">
+    <p style="margin: 1rem 0 1rem 0">
       <b> {{ person.name }} </b> <br />
       {{ person.title }} <br />
 
@@ -42,8 +40,8 @@
       {% endif %}
       </span>
     </p>
-    </td>
-  </tr>
+  </div>
+</div>
 {% endif %}
 {% endfor %}
 

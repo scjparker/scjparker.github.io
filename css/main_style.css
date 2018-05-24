@@ -15,6 +15,15 @@
      width: 960px;
      background: #fff;
 }
+ .cover {
+    width:  16vh;
+    height:  16vh;
+    border-radius: 25%;
+    background-position: center center;
+    background-size:  cover;
+    float: left;
+    margin: .5rem;
+ }
  #header {
      border-collapse: collapse;
      border-spacing: 0;
