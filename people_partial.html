@@ -1,50 +1,40 @@
-{% assign count = '0' %}
-{% for subtype in site.people %}
- {% if subtype.path contains include.category %}
-  {% capture count %}{{ count | plus: '1' }}{% endcapture %}
- {% endif %}
-{% endfor %}
+<div class="people-category">
+  <div class="header">{{ include.title }}</div>
 
-{% if count != '0' %}
-<div class="Nheader">{{ include.title }}</div>
+  {% for person in site.people %}
+    {% if person.path contains include.category %}
+    <div class="people">
+      {% if person.picture %}
+        <div class="people-cover" style="background-image: url('/assets/people/{{ person.picture }}"> </div>
+      {% else %}
+        <div class="people-cover" style="background-image: url('./assets/people/placeholder.jpg"> </div>
+      {% endif %}
 
-{% for person in site.people %}
-{% if person.path contains include.category %}
-<div style="overflow: hidden">
-  {% if person.picture %}
-    <div class="cover" style="background-image: url('./assets/people/{{ person.picture }}">
-  {% else %}
-    <div class="cover" style="background-image: url('./assets/people/placeholder.jpg">
-  {% endif %}
+      <div class="people-details">
+        <p>
+          <b> {{ person.name }} </b> <br />
+          {{ person.title }} <br />
+
+          <span class="wsite-social">
+          {% if person.google-scholar %}
+            <a class='wsite-social-item wsite-social-flickr' href='http://scholar.google.com/citations?user={{ person.google-scholar }}' target='_blank'></a>
+          {% endif %}
+          {% if person.CV %}
+            <a class='wsite-social-item wsite-social-plus' href='assets/{{ person.CV }}' target='_blank'></a>
+          {% endif %}
+          {% if person.twitter %}
+            <a class='wsite-social-item wsite-social-twitter' href='http://twitter.com/{{ person.twitter }}' target='_blank'></a>
+          {% endif %}
+          {% if person.linked-in %}
+            <a class='wsite-social-item wsite-social-linkedin' href='http://www.linkedin.com/{{ person.linked-in }}' target='_blank'></a>
+          {% endif %}
+          {% if person.email %}
+            <a class='wsite-social-item wsite-social-mail' href='mailto:{{ person.email }}' target='_blank'></a>
+          {% endif %}
+          </span>
+        </p>
+      </div>
     </div>
-  <div class="tools-desc">
-    <p style="margin: 1rem 0 1rem 0">
-      <b> {{ person.name }} </b> <br />
-      {{ person.title }} <br />
-
-      <span class="wsite-social">
-      {% if person.google-scholar %}
-        <a class='wsite-social-item wsite-social-flickr' href='http://scholar.google.com/citations?user={{ person.google-scholar }}' target='_blank'></a>
-      {% endif %}
-      {% if person.CV %}
-        <a class='wsite-social-item wsite-social-plus' href='assets/{{ person.CV }}' target='_blank'></a>
-      {% endif %}
-      {% if person.twitter %}
-        <a class='wsite-social-item wsite-social-twitter' href='http://twitter.com/{{ person.twitter }}' target='_blank'></a>
-      {% endif %}
-      {% if person.linked-in %}
-        <a class='wsite-social-item wsite-social-linkedin' href='http://www.linkedin.com/{{ person.linked-in }}' target='_blank'></a>
-      {% endif %}
-      {% if person.email %}
-        <a class='wsite-social-item wsite-social-mail' href='mailto:{{ person.email }}' target='_blank'></a>
-      {% endif %}
-      </span>
-    </p>
-  </div>
+    {% endif %}
+  {% endfor %}
 </div>
-{% endif %}
-{% endfor %}
-
-</table>
-
-{% endif %}

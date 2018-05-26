@@ -1,0 +1,56 @@
+{% assign current = page.url | downcase | split: '/' %}
+
+<!DOCTYPE html>
+<html lang='en'>
+
+  {% include header.html %}
+
+  <body>
+	<div class="container">
+
+		{% include nav.html %}
+
+		{% include banner.html %}
+
+		<div class="content">
+			{{content}}
+		</div>
+
+		<div class="footer">
+
+		</div>
+
+	</div>
+  </body>
+  <!--
+  <script>
+	$("#slideshow-1 > div:gt(0)").hide();
+	setInterval(function() {
+	  $('#slideshow-1 > div:first')
+	    .fadeOut(1000)
+	    .next()
+	    .fadeIn(1000)
+	    .end()
+	    .appendTo('#slideshow-1');
+	},  3000);
+		$("#slideshow-2 > div:gt(0)").hide();
+	setInterval(function() {
+	  $('#slideshow-2 > div:first')
+	    .fadeOut(1000)
+	    .next()
+	    .fadeIn(1000)
+	    .end()
+	    .appendTo('#slideshow-2');
+	},  3000);
+		$("#slideshow-3 > div:gt(0)").hide();
+	setInterval(function() {
+	  $('#slideshow-3 > div:first')
+	    .fadeOut(1000)
+	    .next()
+	    .fadeIn(1000)
+	    .end()
+	    .appendTo('#slideshow-3');
+	},  3000);
+	-->
+</script>
+  </html>

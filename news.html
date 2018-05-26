@@ -1,6 +1,19 @@
 ---
 title: Updates and News
-layout: news
+layout: new
 ---
 
-Coming soon
+<div class="news">
+	{% for news in site.news reversed %}
+		<div class="news-item">
+			<div>
+				<img src="./assets/images/{{news.image}}" height="150px" width="100%">
+			</div>
+			<div class="news-desc">
+				<div class="sub-header">
+							 {{ news.title }} {{ news.output }}
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+</div>
