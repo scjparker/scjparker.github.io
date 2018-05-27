@@ -22,6 +22,22 @@ body, html {
     list-style-position: inside;
  }
 
+p {
+     color:#000;
+     font-weight: 400;
+     margin-top: 2rem;
+}
+
+figure {
+    text-align: center;
+}
+
+figcaption p {
+    color: #666;
+    text-transform: uppercase;
+    font-size: .8rem;
+}
+
 .container {
 	display: flex;
 	margin: 0 auto;
@@ -71,29 +87,10 @@ body, html {
 	/*align-items: center; */
 	justify-content: space-between;
 	flex-direction: column;
+	padding: 2rem 0 5rem 0;
 }
 
 .content > * {
-}
-
-.footer {
-	display: flex;
-}
-
-p {
-     color:#000;
-     font-weight: 400;
-     margin-top: 2rem;
-}
-
-figure {
-    text-align: center;
-}
-
-figcaption p {
-    color: #666;
-    text-transform: uppercase;
-    font-size: .8rem;
 }
 
 .header {
@@ -132,6 +129,41 @@ figcaption p {
      font-size:34px;
      font-weight:300 !important;
      text-transform: uppercase;
+}
+
+.research-item {
+	display: flex;
+	flex-direction: column;
+}
+
+.adjust-img {
+	margin-top: 2rem;
+}
+.row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.row-flex-auto {
+	flex: initial;
+}
+.row-flex-1 {
+	flex: 1;
+}
+.row-flex-2 {
+	flex: 2;
+}
+.row-flex-3 {
+	flex: 3;
+}
+.row-flex-4 {
+	flex:4;
+}
+.row-order-1 {
+	order: 1;
+}
+.row-order-2 {
+	order: 2;
 }
 
 .people-cover {
@@ -194,6 +226,12 @@ figcaption p {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+.footer {
+	display: flex;
+	margin-bottom: 5rem;
+	justify-content: space-between;
+}
 /*
 #slideshow-1 , #slideshow-2, #slideshow-3 {
     margin: 3rem auto;
@@ -213,3 +251,25 @@ figcaption p {
     width: 300px;
 }
 */
+.portfolio-item .portfolio-pic,
+.portfolio-item #portfolio-video {
+    overflow: hidden;
+    display: block;
+    position: relative;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: #ededed;
+}
+.portfolio-item .portfolio-pic img {
+    -webkit-transition: all 0.7s ease;
+    -moz-transition:    all 0.7s ease;
+    -o-transition:      all 0.7s ease;
+    -ms-transition:     all 0.7s ease;
+    transition:         all 0.7s ease;
+}
+.portfolio-item {
+    margin-bottom: 20px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
