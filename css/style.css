@@ -9,33 +9,100 @@ body, html {
     font: 1rem/1.8rem 'Roboto Slab', 'Georgia', serif;
 }
 
- a {
-     text-decoration: none;
+a {
+  text-decoration: none;
 }
- a:hover {
-    text-decoration: underline;
-    text-decoration-style: dashed;
- }
 
- ul, ol, li {
-    margin-top: 1rem;
-    list-style-position: inside;
- }
+a:hover {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+}
+
+ul, ol, li {
+  margin-top: 1rem;
+  list-style-position: inside;
+  }
 
 p {
-     color:#000;
-     font-weight: 400;
-     margin-top: 2rem;
+  color:#000;
+  font-weight: 400;
+  margin-top: 2rem;
 }
 
 figure {
-    text-align: center;
+  text-align: center;
 }
 
-figcaption p {
-    color: #666;
-    text-transform: uppercase;
-    font-size: .8rem;
+figcaption > * {
+  color: #666;
+  text-transform: uppercase;
+  font-size: .6rem;
+}
+
+/* Generic class items */
+
+.adjust-img {
+  margin-top: 2rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.row-flex-auto {
+  flex: initial;
+}
+
+.row-flex-1 {
+  flex: 1;
+}
+
+.row-flex-2 {
+  flex: 2;
+}
+
+.row-flex-3 {
+  flex: 3;
+}
+
+.row-flex-4 {
+  flex: 4;
+}
+
+.row-order-1 {
+  order: 1;
+}
+
+.row-order-2 {
+  order: 2;
+}
+
+.row-order-3 {
+  order: 3;
+}
+
+.row-order-4 {
+  order: 4;
+}
+
+.fixed {
+  position: fixed;
+  z-index: 999;
+}
+
+.no-decoration {
+  text-decoration: none
+}
+
+/* Specific classes */
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  width: 40% !important;
+  z-index: 999;
+  background-color: white;
 }
 
 .container {
@@ -45,7 +112,6 @@ figcaption p {
 	height: 100%;
 	justify-content: center;
 	flex-direction: column;
-	align-items: stretch; /* test */
 }
 
 .container > * {
@@ -58,10 +124,10 @@ figcaption p {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  border: 1px solid #fff;  /* For debugging */
 }
 
 .menu > .menu-items {
+    font-family: 'Open Sans', 'Helvetica', sans-serif;
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
@@ -78,32 +144,24 @@ figcaption p {
 	justify-content: flex-start;
 }
 
-.header {
-	display: flex;
-}
-
 .content {
 	display: flex;
-	/*align-items: center; */
 	justify-content: space-between;
 	flex-direction: column;
 	padding: 2rem 0 5rem 0;
 }
 
 .content > * {
+  /* nothing here */
 }
 
 .header {
-	 /*background-color:#f4f4f4;
-	 border-left:4px solid #ccc;*/
-	 font-family: 'Open Sans', 'Helvetica', sans-serif;
-	 margin-top: 1.5rem;
-	 /*color:#505050;*/
-	 font-size:1.4rem;
-	 line-height:2em;
-	 /*padding:0px 0px 0px 10px;
-	 #margin:0px 0px 10px 0px;*/
-	}
+  font-family: 'Open Sans', 'Helvetica', sans-serif;
+  display: flex;
+  margin-top: 1.5rem;
+  font-size: 1.4rem;
+  line-height: 2em;
+}
 
 .sub-header {
 	font-family: 'Open Sans', 'Helvetica', sans-serif;
@@ -112,23 +170,14 @@ figcaption p {
 
 }
 
-.index-intro {
-	flex: 2;
-}
-
-.index-fig {
-	flex: 1;
-}
-
 .lab-name {
-     font-family: 'Open Sans', sans-serif;
-     color:#555;
-     line-height:38px;
-     float:left;
-     letter-spacing: 0.1rem;
-     font-size:34px;
-     font-weight:300 !important;
-     text-transform: uppercase;
+  font-family: 'Open Sans', 'Helvetica', sans-serif;
+  color: #f30;
+  line-height:38px;
+  letter-spacing: 0.1rem;
+  font-size:34px;
+  font-weight:300 !important;
+  text-transform: uppercase;
 }
 
 .research-item {
@@ -136,45 +185,21 @@ figcaption p {
 	flex-direction: column;
 }
 
-.adjust-img {
-	margin-top: 2rem;
-}
-.row {
-	display: flex;
-	justify-content: space-between;
-}
-
-.row-flex-auto {
-	flex: initial;
-}
-.row-flex-1 {
-	flex: 1;
-}
-.row-flex-2 {
-	flex: 2;
-}
-.row-flex-3 {
-	flex: 3;
-}
-.row-flex-4 {
-	flex:4;
-}
-.row-order-1 {
-	order: 1;
-}
-.row-order-2 {
-	order: 2;
+.uofm {
+	font-size: 1.4rem;
+	top: 0;
+	left: 0;
+	box-shadow: 0 2px 0 rgba(93, 96, 99, .1);
+	background-color: white;
+	margin-bottom: 5rem;
 }
 
 .people-cover {
-    width:  12vh;
-    height:  12vh;
-    border-radius: 50%;
-    background-position: center center;
-    background-size:  cover;
-    /*float: left;
-    margin: .5rem;
-	*/
+  width:  12vh;
+  height:  12vh;
+  border-radius: 50%;
+  background-position: center center;
+  background-size:  cover;
  }
 
 .people-category {

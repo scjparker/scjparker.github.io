@@ -6,7 +6,11 @@
   {% include header.html %}
 
   <body>
+
+
 	<div class="container">
+
+		<!-- {% include uofm.html %} -->
 
 		{% include nav.html %}
 
@@ -48,6 +52,17 @@
 	    .end()
 	    .appendTo('#slideshow-3');
 	},  3000);
+	</script>
 	-->
+	<script>
+$(window).scroll(function(){
+    if ($(window).scrollTop() >= 100) {
+        $('.menu').addClass('fixed-header');
+    }
+    else {
+        $('.menu').removeClass('fixed-header');
+    }
+});
+
 </script>
   </html>
