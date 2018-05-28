@@ -9,6 +9,15 @@ body, html {
     font: 1rem/1.8rem 'Roboto Slab', 'Georgia', serif;
 }
 
+h1, h2, h3, h4 {
+  font-family: 'Open Sans', 'Helvetica', sans-serif;
+}
+
+code, pre, kbd {
+  font-family: monospace;
+  background-color: lightgrey;
+}
+
 a {
   text-decoration: none;
 }
@@ -36,7 +45,7 @@ figure {
 figcaption > * {
   color: #666;
   text-transform: uppercase;
-  font-size: .6rem;
+  font-size: .6rem !important;
 }
 
 /* Generic class items */
@@ -48,6 +57,11 @@ figcaption > * {
 .row {
   display: flex;
   justify-content: space-between;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
 }
 
 .row-flex-auto {
@@ -124,10 +138,11 @@ figcaption > * {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
+  border-bottom: 1px solid #EAEDF0;
 }
 
 .menu > .menu-items {
-    font-family: 'Open Sans', 'Helvetica', sans-serif;
+  font-family: 'Open Sans', 'Helvetica', sans-serif;
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
@@ -185,6 +200,21 @@ figcaption > * {
 	flex-direction: column;
 }
 
+.portfolio {
+  /* nothing here yet */
+}
+
+.port-image {
+  display: flex;
+  width: 25%;
+  margin-left: 0;
+  transition: transform 1s;
+}
+
+.port-image:hover {
+  transform: scale(1.2);
+}
+
 .uofm {
 	font-size: 1.4rem;
 	top: 0;
@@ -211,7 +241,7 @@ figcaption > * {
 	margin-top: 2rem;
  }
 
- .people-details{
+ .people-details {
 	display: flex;
 	margin-left: 2rem;
 	align-items: center;
@@ -254,47 +284,7 @@ figcaption > * {
 
 .footer {
 	display: flex;
-	margin-bottom: 5rem;
+	margin: 5rem 0;
 	justify-content: space-between;
-}
-/*
-#slideshow-1 , #slideshow-2, #slideshow-3 {
-    margin: 3rem auto;
-    position: relative;
-    width: 240px;
-    height: 240px;
-    padding: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
-}
-
-#slideshow-1 > div, #slideshow-2 > div, #slideshow-3 > div {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    width: 300px;
-}
-*/
-.portfolio-item .portfolio-pic,
-.portfolio-item #portfolio-video {
-    overflow: hidden;
-    display: block;
-    position: relative;
-    border-width: 1px 1px 1px 1px;
-    border-style: solid;
-    border-color: #ededed;
-}
-.portfolio-item .portfolio-pic img {
-    -webkit-transition: all 0.7s ease;
-    -moz-transition:    all 0.7s ease;
-    -o-transition:      all 0.7s ease;
-    -ms-transition:     all 0.7s ease;
-    transition:         all 0.7s ease;
-}
-.portfolio-item {
-    margin-bottom: 20px;
-    padding: 0;
-    position: relative;
-    overflow: hidden;
+  border-top: 1px solid #EAEDF0;
 }

@@ -23,46 +23,14 @@
 		{% include footer.html %}
 	</div>
   </body>
-  <!--
-  <script>
-	$("#slideshow-1 > div:gt(0)").hide();
-	setInterval(function() {
-	  $('#slideshow-1 > div:first')
-	    .fadeOut(1000)
-	    .next()
-	    .fadeIn(1000)
-	    .end()
-	    .appendTo('#slideshow-1');
-	},  3000);
-		$("#slideshow-2 > div:gt(0)").hide();
-	setInterval(function() {
-	  $('#slideshow-2 > div:first')
-	    .fadeOut(1000)
-	    .next()
-	    .fadeIn(1000)
-	    .end()
-	    .appendTo('#slideshow-2');
-	},  3000);
-		$("#slideshow-3 > div:gt(0)").hide();
-	setInterval(function() {
-	  $('#slideshow-3 > div:first')
-	    .fadeOut(1000)
-	    .next()
-	    .fadeIn(1000)
-	    .end()
-	    .appendTo('#slideshow-3');
-	},  3000);
-	</script>
-	-->
 	<script>
-$(window).scroll(function(){
-    if ($(window).scrollTop() >= 100) {
-        $('.menu').addClass('fixed-header');
-    }
-    else {
-        $('.menu').removeClass('fixed-header');
-    }
-});
-
+	$(window).scroll(function(){
+	    if ($(window).scrollTop() >= 100) {
+	        $('.menu').addClass('fixed-header');
+	    }
+	    else {
+	        $('.menu').removeClass('fixed-header');
+	    }
+	});
 </script>
   </html>
