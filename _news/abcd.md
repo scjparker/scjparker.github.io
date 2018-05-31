@@ -1,7 +1,7 @@
 ---
 publish: true
-title: Ricardo at Biology of Genomes
+title: YAMDA YAMDA
 image: congrats.jpg
 ---
 
-Ricardo Albanus, a PhD candidate from our lab gave a talk at Biology of Genomes 2018!
+YAMDA published

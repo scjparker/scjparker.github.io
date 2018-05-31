@@ -112,25 +112,34 @@ figcaption > * {
 
 /* Specific classes */
 
+.banner-img {
+  background: url(../assets/images/banner_long_med.png) no-repeat;
+  width: 100%;
+  height: 259px;
+  margin-top: 2rem;
+ }
+
 .fixed-header {
   position: fixed;
   top: 0;
-  width: 50vw !important;
+  width: 60% !important;
+  max-width: 960px;
   z-index: 999;
   background-color: white;
 }
 
 .container {
-	display: flex;
-	margin: 0 auto;
-	width: 50vw;
-	height: 100%;
-	justify-content: center;
-	flex-direction: column;
+  display: flex;
+  margin: 0 auto;
+  width: 60%;
+  max-width: 960px;
+  height: 100%;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .container > * {
-	width: 100%;
+  width: 100%;
 }
 
 .menu {
