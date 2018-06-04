@@ -7,5 +7,5 @@ google-scholar:
 CV:
 linked-in: 
 twitter:
-email: stephanie.laureano1@upr.edu
+email: laureasm@umich.edu
 ---
