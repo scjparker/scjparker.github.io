@@ -4,16 +4,11 @@ layout: new
 ---
 
 <div class="news">
-	{% for news in site.news reversed %}
-		<div class="news-item">
-			<div>
-				<img src="./assets/images/{{news.image}}" height="150px" width="100%">
-			</div>
-			<div class="news-desc">
-				<div class="sub-header">
-							 {{ news.title }} {{ news.output }}
-				</div>
-			</div>
-		</div>
-	{% endfor %}
+  {% for news in site.news reversed %}
+  <div class="news-item">
+    <div class="news-desc">
+      <b>{{ news.title }}</b> <p> {% if news.image %} <img src={{news.image}} class="news-img" width=100%> {% endif %} </p> {{ news.output }}
+    </div>
+  </div>
+  {% endfor %}
 </div>

@@ -1,7 +1,9 @@
 ---
 publish: true
 title: Ricardo at Biology of Genomes
-image: congrats.jpg
+image: http://meetings.cshl.edu/images/cshl_logo_mc.png
+type: presentation
 ---
 
-Ricardo Albanus, a PhD candidate from our lab gave a talk at Biology of Genomes 2018!
+Ricardo's submission was selected for a talk at Biology of Genomes 2018! Read
+more about his research here.

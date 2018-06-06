@@ -1,19 +1,16 @@
 {% assign current = page.url | downcase | split: '/' %}
-
-<div class="uofm">
-</div>
-
 <div class="menu">
-<a href="/" style="text-decoration: none"><div class='lab-name'>The Parker Lab</div></a>
-<div class='menu-items'>
-		<div class='menu-items-each' {% if current[1] == 'index.html' %}id='active'{% endif %}><a href='index.html'>Home</a></div>
-		<div class='menu-items-each' {% if current[1] == 'research.html' %}id='active'{% endif %}><a href='research.html'>Research</a></div>
-		<div class='menu-items-each' {% if current[1] == 'news.html' %}id='active'{% endif %}><a href='news.html'>News</a></div>
-		<div class='menu-items-each' {% if current[1] == 'publications.html' %}id='active'{% endif %}><a href='publications.html'>Publications</a></div>
-		<div class='menu-items-each' {% if current[1] == 'people.html' %}id='active'{% endif %}><a href='people.html'>People</a></div>
-		<div class='menu-items-each' {% if current[1] == 'tools.html' %}id='active'{% endif %}><a href='tools.html'>Tools</a></div>
-		<div class='menu-items-each' > <a href='https://theparkerlab.med.umich.edu'>Wiki</a> </div>
-		<div class='menu-items-each' {% if current[1] == 'jobs.html' %}id='active'{% endif %}><a href='jobs.html'>Jobs</a></div>
-		<div class='menu-items-each' {% if current[1] == 'contact.html' %}id='active'{% endif %}><a href='contact.html'>Contact</a></div>
-</div>
+    <a href="/" style="text-decoration: none">
+        <div class='lab-name'>The Parker Lab</div>
+    </a>
+    <div class='menu-items'>
+        <div class='menu-items-each' {% if current[-1]=='research.html' %}id='active' {% endif %}><a href='research.html'>Research</a></div>
+        <div class='menu-items-each' {% if current[-1]=='news.html' %}id='active' {% endif %}><a href='news.html'>News</a></div>
+        <div class='menu-items-each' {% if current[-1]=='publications.html' %}id='active' {% endif %}><a href='publications.html'>Publications</a></div>
+        <div class='menu-items-each' {% if current[-1]=='people.html' %}id='active' {% endif %}><a href='people.html'>People</a></div>
+        <div class='menu-items-each' {% if current[-1]=='tools.html' %}id='active' {% endif %}><a href='tools.html'>Tools</a></div>
+        <!--<div class='menu-items-each'> <a href='https://theparkerlab.med.umich.edu'>Wiki</a> </div>-->
+        <div class='menu-items-each' {% if current[-1]=='jobs.html' %}id='active' {% endif %}><a href='jobs.html'>Jobs</a></div>
+        <div class='menu-items-each' {% if current[-1]=='contact.html' %}id='active' {% endif %}><a href='contact.html'>Contact</a></div>
+    </div>
 </div>

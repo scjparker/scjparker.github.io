@@ -6,11 +6,8 @@
   {% include header.html %}
 
   <body>
-
-
-	<div class="container">
-
-		<!-- {% include uofm.html %} -->
+  	<div class="container">
+  		{% include uofm.html %}
 
 		{% include nav.html %}
 
@@ -24,13 +21,17 @@
 	</div>
   </body>
 	<script>
-	$(window).scroll(function(){
+	/*$(window).scroll(function(){
 	    if ($(window).scrollTop() >= 100) {
 	        $('.menu').addClass('fixed-header');
+            $('.banner').css('padding-top', $('.menu').outerHeight());
+            $('.fixed-header').css('width', $('.container').width())
 	    }
 	    else {
 	        $('.menu').removeClass('fixed-header');
+            $('.banner').css('padding-top', 0);
+
 	    }
-	});
+	}); */
 </script>
   </html>

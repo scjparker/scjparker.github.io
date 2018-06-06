@@ -1,3 +1,12 @@
+{% assign count = '0' %}
+{% for subtype in site.people %}
+ {% if subtype.path contains include.category %}
+  {% capture count %}{{ count | plus: '1' }}{% endcapture %}
+ {% endif %}
+{% endfor %}
+
+{% if count != '0' %}
+
 <div class="people-category">
   <div class="header">{{ include.title }}</div>
 
@@ -5,7 +14,7 @@
     {% if person.path contains include.category %}
     <div class="people">
       {% if person.picture %}
-        <div class="people-cover" style="background-image: url('/assets/people/{{ person.picture }}"> </div>
+        <div class="people-cover" style="background-image: url('./assets/people/{{ person.picture }}"> </div>
       {% else %}
         <div class="people-cover" style="background-image: url('./assets/people/placeholder.jpg"> </div>
       {% endif %}
@@ -38,3 +47,5 @@
     {% endif %}
   {% endfor %}
 </div>
+
+{% endif %}
