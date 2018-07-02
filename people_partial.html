@@ -23,24 +23,26 @@
         <p>
           <b> {{ person.name }} </b> <br />
           {{ person.title }} <br />
-
-          <span class="wsite-social">
+        </p>
+          <p class="people-social">
           {% if person.google-scholar %}
-            <a class='wsite-social-item wsite-social-flickr' href='http://scholar.google.com/citations?user={{ person.google-scholar }}' target='_blank'></a>
+          <a href='http://scholar.google.com/citations?user={{ person.google-scholar }}' target='_blank'><i class='fab fa-google fa-lg'></i></a>
           {% endif %}
           {% if person.CV %}
-            <a class='wsite-social-item wsite-social-plus' href='assets/{{ person.CV }}' target='_blank'></a>
+            <a href='assets/{{ person.CV }}' target='_blank'><i class="fas fa-file-pdf fa-lg"></i></a>
           {% endif %}
           {% if person.twitter %}
-            <a class='wsite-social-item wsite-social-twitter' href='http://twitter.com/{{ person.twitter }}' target='_blank'></a>
+            <a href='http://twitter.com/{{ person.twitter }}' target='_blank'><i class="fab fa-twitter fa-lg"></i></a>
           {% endif %}
           {% if person.linked-in %}
-            <a class='wsite-social-item wsite-social-linkedin' href='http://www.linkedin.com/{{ person.linked-in }}' target='_blank'></a>
+            <a href='http://www.linkedin.com/{{ person.linked-in }}' target='_blank'><i class="fab fa-linkedin fa-lg"></i></a>
           {% endif %}
           {% if person.email %}
-            <a class='wsite-social-item wsite-social-mail' href='mailto:{{ person.email }}' target='_blank'></a>
+            <a href='mailto:{{ person.email }}' target='_blank'><i class="fas fa-at fa-lg"></i></a>
           {% endif %}
-          </span>
+          {% if person.github %}
+            <a href="https://github.com/{{ person.github }}" target='_blank'><i class="fab fa-github fa-lg"></i></a>
+          {% endif %}
         </p>
       </div>
     </div>

@@ -21,11 +21,12 @@ code, pre, kbd {
 
 a {
   text-decoration: none;
+  color: #2A5DB0;
 }
 
 p a:hover {
-  text-decoration: underline;
-  text-decoration-style: dashed;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #8d8df3;
 }
 
 ul, ol, li {
@@ -36,7 +37,7 @@ ul, ol, li {
 
 p {
   font-weight: 400;
-  margin-top: 2rem;
+  margin-top: 1rem;
   line-height: 1.8rem;
 }
 
@@ -58,6 +59,10 @@ figcaption {
 
 .adjust-img-left {
   margin-left: 2rem;
+}
+
+.adjust-img-right {
+  margin-right: 2rem;
 }
 
 .row {
@@ -185,7 +190,7 @@ figcaption {
 .header {
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
   display: flex;
-  margin-top: 1rem;
+  margin-top: 2rem;
   font-size: 1.25rem;
   line-height: 2em;
 }
@@ -216,6 +221,10 @@ figcaption {
   color: #00274c;
 }
 
+.mapouter {
+  margin-bottom: 2rem;
+}
+
 .research-item {
   display: flex;
   flex-direction: column;
@@ -237,8 +246,8 @@ figcaption {
 }
 
 .people-cover {
-  width:  12vh;
-  height:  12vh;
+  width:  calc(4rem + 4vh);
+  height:  calc(4rem + 4vh);
   border-radius: 20%;
   background-position: center center;
   background-size:  cover;
@@ -256,8 +265,9 @@ figcaption {
 
 .people-details {
   display: flex;
+  flex-direction: column;
   margin-left: 2rem;
-  align-items: center;
+  align-self: center;
 }
 
 .people-details > p {
@@ -338,4 +348,22 @@ figcaption {
 
 .uofm {
   justify-content: flex-end;
+}
+
+.flex-self-center {
+  align-self: center;
+}
+
+
+.people-social a {
+  text-decoration: none;
+  color: black;
+  margin-right: 1rem;
+  -webkit-transition-duration: 0.2s; /* Safari */
+  transition-duration: 0.2s;
+}
+
+.people-social a:hover {
+  color: #2A5DB0;
+  border: none;
 }
