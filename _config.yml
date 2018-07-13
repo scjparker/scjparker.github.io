@@ -1,3 +1,4 @@
 collections:
-- jobs
-- people
+  - jobs
+  - news
+  - people
