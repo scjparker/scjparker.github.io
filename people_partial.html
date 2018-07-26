@@ -14,9 +14,9 @@
     {% if person.path contains include.category %}
     <div class="people">
       {% if person.picture %}
-        <div class="people-cover" style="background-image: url('./assets/people/{{ person.picture }}"> </div>
+        <div class="people-cover" style="background-image: url('/assets/people/{{ person.picture }}"> </div>
       {% else %}
-        <div class="people-cover" style="background-image: url('./assets/people/placeholder.jpg"> </div>
+        <div class="people-cover" style="background-image: url('/assets/people/placeholder.jpg"> </div>
       {% endif %}
 
       <div class="people-details">
@@ -25,6 +25,15 @@
           {{ person.title }} <br />
         </p>
           <p class="people-social">
+          {% if person.email %}
+            <a href='mailto:{{ person.email }}' target='_blank'><i class="fas fa-at fa-lg"></i></a>
+          {% endif %}
+          {% if person.github %}
+            <a href="https://github.com/{{ person.github }}" target='_blank'><i class="fab fa-github fa-lg"></i></a>
+          {% endif %}
+          {% if person.linked-in %}
+            <a href='http://www.linkedin.com/{{ person.linked-in }}' target='_blank'><i class="fab fa-linkedin fa-lg"></i></a>
+          {% endif %}
           {% if person.google-scholar %}
           <a href='http://scholar.google.com/citations?user={{ person.google-scholar }}' target='_blank'><i class='fab fa-google fa-lg'></i></a>
           {% endif %}
@@ -33,15 +42,6 @@
           {% endif %}
           {% if person.twitter %}
             <a href='http://twitter.com/{{ person.twitter }}' target='_blank'><i class="fab fa-twitter fa-lg"></i></a>
-          {% endif %}
-          {% if person.linked-in %}
-            <a href='http://www.linkedin.com/{{ person.linked-in }}' target='_blank'><i class="fab fa-linkedin fa-lg"></i></a>
-          {% endif %}
-          {% if person.email %}
-            <a href='mailto:{{ person.email }}' target='_blank'><i class="fas fa-at fa-lg"></i></a>
-          {% endif %}
-          {% if person.github %}
-            <a href="https://github.com/{{ person.github }}" target='_blank'><i class="fab fa-github fa-lg"></i></a>
           {% endif %}
         </p>
       </div>
