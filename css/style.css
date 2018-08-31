@@ -146,6 +146,7 @@ figcaption {
 
 .no-decoration {
   text-decoration: none
+  color: #00274c
 }
 
 /* Specific classes */
@@ -446,7 +447,7 @@ figcaption {
 
 .funding .row {
   -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
 }
 
 .funding-logo {

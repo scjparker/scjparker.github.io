@@ -11,11 +11,10 @@ pagination:
     <div class="news-desc">
       <b>{{ news.title }}</b> 
       <p> {% if news.image %} <img src={{news.image}} class="news-img" width=100%> {% endif %}
-      {{ news.output }} <br> Read <a href={{news.url}}>more</a>.
-      </p>
+      {{ news.summary }} </p>
     </div>
-    <div class="news-desc-tag">
-      <p> {{ news.date | date_to_string }} </p>
+    <div class="news-desc-tag" style="display: flex; justify-content: space-between;">
+      <p> {{ news.date | date_to_string }} </p> <p><a href={{news.url}} style="text-decoration:none;">Read more</a> </p>
     </div>
   </div>
   {% endfor %}
