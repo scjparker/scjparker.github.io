@@ -10,3 +10,5 @@ date: Feb 23, 2018
 tag: accolades
 ---
 
+Arushi Varshney was awarded the prestigious Rackham Pre-Doctoral Fellowship for
+her excellent research contributions! Congratulations.

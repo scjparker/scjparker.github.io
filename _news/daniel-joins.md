@@ -10,3 +10,5 @@ date: september 15, 2017
 tag: accolades
 ---
 
+Daniel Quang will be working jointly with Guan lab and Parker lab to develop
+deep-learning based tools and methods for functional genomics.

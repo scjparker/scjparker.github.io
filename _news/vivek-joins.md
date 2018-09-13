@@ -8,3 +8,6 @@ url:
 date: May 1, 2018
 tag: people
 ---
+
+Vivek Rai, a first year student in Program in Biomedical Sciences, has joined
+Parker lab!

@@ -8,3 +8,6 @@ url:
 date: sep 1, 2017
 tag: accolades
 ---
+
+Ricardo was awarded the second "Best Poster Award" at the Department of
+Computational Medicine and Bioinformatics annual retreat of 2017.

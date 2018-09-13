@@ -11,4 +11,6 @@ tag: accolades
 ---
 
 YAMDA, a GPU accelerated motif discovery algorithm developed by postdoctoral
-fellow Daniel Quang is now published in Bioinformatics.
+fellow Daniel Quang is now published in Bioinformatics. YAMDA is developed in
+Python and available under MIT license. Check out the code on
+[Github](https://github.com/daquang/YAMDA).
