@@ -3,6 +3,7 @@ plugins:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - deploy.sh
 collections:
   news:
     output: true
