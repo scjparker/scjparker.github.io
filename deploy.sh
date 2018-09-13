@@ -13,4 +13,4 @@ git commit -m "Build: `date`"
 
 ## git subtree deployment to gh-pages here
 ## basically, just pushes the `_site` directory to the specified <remote>/<branch>
-git diff --exit-code && git subtree push --prefix _site origin gh-pages
+[ -n "$(git status --porcelain)" ] && git subtree push --prefix _site origin gh-pages
