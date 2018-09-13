@@ -4,6 +4,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - deploy.sh
+  - README.md
 collections:
   news:
     output: true
