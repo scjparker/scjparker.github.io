@@ -1,3 +1,4 @@
+/* Common | Base CSS */
 * {
   margin: 0;
   padding: 0;
@@ -52,7 +53,7 @@ figcaption {
   font-size: .8rem !important;
 }
 
-/* Generic class items */
+/* Generic classes */
 
 .adjust-img-top {
   margin-top: 2rem;
@@ -83,6 +84,12 @@ figcaption {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.flex-self-center {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
 .row-flex-auto {
@@ -149,23 +156,7 @@ figcaption {
   color: #00274c
 }
 
-/* Specific classes */
-
-.banner-img {
-  background: url(/assets/images/banner_long_med.png) no-repeat;
-  width: 100%;
-  height: 259px;
-  margin-top: 2rem;
-}
-
-.fixed-header {
-  position: fixed;
-  top: 0;
-  z-index: 999;
-  background-color: white;
-  -webkit-animation: smoothScroll .5s forwards;
-          animation: smoothScroll .5s forwards;
-}
+/* Setup page */
 
 .container {
   display: -webkit-box;
@@ -186,6 +177,52 @@ figcaption {
 
 .container > * {
   width: 100%;
+}
+
+
+/* Menu | Banner */
+
+.uofm {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.banner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.banner-img {
+  background: url(/assets/images/banner_long_med.png) no-repeat;
+  width: 100%;
+  height: 259px;
+  margin-top: 2rem;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  background-color: white;
+  -webkit-animation: smoothScroll .5s forwards;
+          animation: smoothScroll .5s forwards;
+}
+
+.lab-name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  font-family: 'Open Sans', 'Helvetica', sans-serif;
+  letter-spacing: 0.1rem;
+  font-size:2rem;
+  font-weight:300 !important;
+  text-transform: uppercase;
+  color: #00274c;
 }
 
 .menu {
@@ -228,6 +265,9 @@ figcaption {
   border-bottom:2px solid #0D57AA;
 }
 
+
+/* Content */
+
 .content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -257,20 +297,6 @@ figcaption {
   font-size: 1.1rem;
 }
 
-.lab-name {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  font-family: 'Open Sans', 'Helvetica', sans-serif;
-  letter-spacing: 0.1rem;
-  font-size:2rem;
-  font-weight:300 !important;
-  text-transform: uppercase;
-  color: #00274c;
-}
 
 .mapouter {
   margin-bottom: 2rem;
@@ -309,12 +335,15 @@ figcaption {
           transform: scale(1.2);
 }
 
+
+/* People | Tools */
+
 .people-cover {
   width:  calc(4rem + 6vh);
   height:  calc(4rem + 6vh);
   border-radius: 20%;
   background-position: center center;
-  background-size:  cover;
+  background-size: cover;
   align-self: center;
 }
 
@@ -350,6 +379,20 @@ figcaption {
   margin: 0;
 }
 
+.people-social a {
+  text-decoration: none;
+  color: #333;
+  margin-right: 1rem;
+  -webkit-transition-duration: 0.2s; /* Safari */
+  -o-transition-duration: 0.2s;
+     transition-duration: 0.2s;
+}
+
+.people-social a:hover {
+  color: #2A5DB0;
+  border: none;
+}
+
 .tools-head {
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -362,11 +405,7 @@ figcaption {
           flex: 4;
 }
 
-.banner {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
+/* News */
 
 .news {
   display: -webkit-box;
@@ -377,7 +416,7 @@ figcaption {
           justify-content: space-between;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .news-item {
@@ -419,6 +458,8 @@ figcaption {
      text-overflow: ellipsis;
 }
 
+/* Footer */
+
 .footer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -434,6 +475,8 @@ figcaption {
   border-bottom:2px solid #0D57AA;
   color:#000;
 }
+
+/* Funding | Sponsors */
 
 .funding {
   display: -webkit-box;
@@ -462,29 +505,41 @@ figcaption {
   padding:  1rem;
 }
 
-.uofm {
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+
+/* Animations (if used) */
+
+.animated {
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+  -webkit-animation-duration: 2.5s;
+  animation-duration: 2.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
 }
 
-.flex-self-center {
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
+@-webkit-keyframes bounce {
+  0%, 30% {
+    -webkit-transform: translateY(0);
+  }
+  15% {
+    -webkit-transform: translateY(-5px);
+  }
 }
 
-
-.people-social a {
-  text-decoration: none;
-  color: #333;
-  margin-right: 1rem;
-  -webkit-transition-duration: 0.2s; /* Safari */
-  -o-transition-duration: 0.2s;
-     transition-duration: 0.2s;
+@keyframes bounce {
+  0%, 30% {
+    transform: translateY(0);
+  }
+  15% {
+    transform: translateY(-5px);
+  }
 }
 
-.people-social a:hover {
-  color: #2A5DB0;
-  border: none;
+.bounce {
+  -webkit-animation-name: bounce;
+  animation-name: bounce;
 }
