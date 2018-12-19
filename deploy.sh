@@ -13,4 +13,4 @@ bundle exec jekyll build
 
 ## git subtree deployment to gh-pages here
 ## basically, just pushes the `_site` directory to the specified <remote>/<branch>
-git subtree push --prefix _site origin gh-pages
+git subtree push --prefix _site origin master

@@ -5,7 +5,7 @@ title: Assistant Professor</br>Departments of <a href="http://www.ccmb.med.umich
 picture: steve_motorcycle.jpg
 google-scholar: F4UZ_jIAAAAJ
 CV: files/SParker_CV.pdf
-linked-in: in/scjparker/
-twitter: 
+linkedin: in/scjparker/
+twitter:
 email: scjp@umich.edu
 ---
