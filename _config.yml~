@@ -1,0 +1,25 @@
+plugins:
+  - jekyll-paginate-v2
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - deploy.sh
+  - README.md
+collections:
+  news:
+    output: true
+    permalink: '/news/:path/'
+  jobs:
+  people:
+permalink: pretty
+pagination:
+  enabled: true
+  collection: news
+  per_page: 8
+  permalink: '/:num/'
+  sort_reverse: true
+autopages:
+  collections:
+    enabled: true
+    layouts:
+      - news.html
