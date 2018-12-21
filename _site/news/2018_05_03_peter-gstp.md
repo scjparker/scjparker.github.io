@@ -1,9 +1,9 @@
 ﻿---
 publish: true
+layout: new
 title: Peter receives 3rd year as GSTP fellow
 summary: Peter Orchard will remain a trainee on the NHGRI-funded Genome Sciences 
   Training Program, a training grant for PhD students and postdocs.
-layout: new
 image:
 url:
 date: May 3, 2018

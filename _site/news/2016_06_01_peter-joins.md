@@ -1,8 +1,8 @@
 ﻿---
 publish: true
+layout: new
 title: Welcome Peter to our lab!
 summary: Peter has joined our lab as a PhD student!
-layout: new
 image:
 url:
 date: June 1, 2016
