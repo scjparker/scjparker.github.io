@@ -6,7 +6,7 @@ summary: Peter Orchard will remain a trainee on the NHGRI-funded Genome Sciences
 layout: new
 image:
 url:
-date: May 03, 2018
+date: May 3, 2018
 tag: accolades
 ---
 
