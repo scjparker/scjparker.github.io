@@ -5,7 +5,7 @@ title: Welcome Peter to the lab!
 summary: Peter has joined the lab as a PhD student!
 image: 
 url:
-date: May 1, 2018
+date: June 1, 2016
 tag: people
 ---
 
