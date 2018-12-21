@@ -15,7 +15,7 @@ permalink: pretty
 pagination:
   enabled: true
   collection: news
-  per_page: 8
+  per_page: 9
   permalink: '/:num/'
   sort_reverse: true
 autopages:
