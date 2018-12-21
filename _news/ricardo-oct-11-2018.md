@@ -4,7 +4,7 @@ layout: new
 title: Ricardo awarded at Data Science Symposium
 summary: Ricardo Albanus was awarded the "Most Likely Transformative Scientific
   Award" at the Michigan Institute for Data Science (MIDAS) Symposium for his poster.
-Congratulations!
+  Congratulations!
 image: 
 url:
 date: october 11, 2017
