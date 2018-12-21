@@ -5,7 +5,7 @@ summary: Peter has joined our lab as a PhD student!
 layout: new
 image:
 url:
-date: June 01, 2016
+date: June 1, 2016
 tag: accolades
 ---
 
