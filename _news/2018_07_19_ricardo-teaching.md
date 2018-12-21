@@ -1,6 +1,6 @@
 ---
 publish: true
-title: Ricardo nominated for prestigious teaching award
+title: Ricardo nominated for a teaching award
 summary: Ricardo was nominated by the Bioinformatics Department for the Excellence in 
   Teaching Award
 layout: new
