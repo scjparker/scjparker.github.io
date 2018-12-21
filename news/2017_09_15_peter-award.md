@@ -1,9 +1,9 @@
 ﻿---
 publish: true
+layout: new
 title: Peter receives departmental student award
 summary: Peter was awarded the 2017 Bioinformatics Academic Achievement award,
   given to a second-year PhD student with strong performance in coursework and prelims.
-layout: new
 image:
 url:
 date: September 15, 2017
