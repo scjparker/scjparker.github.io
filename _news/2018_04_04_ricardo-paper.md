@@ -12,4 +12,4 @@ tag: papers
 
 This study used ATAC-seq data obtained from developing mouse thymocytes to
 understand the developmental regulatory dynamics. You can
-read the paper (here)[https://www.nature.com/articles/s41598-018-23774-9]
+read the paper [here](https://www.nature.com/articles/s41598-018-23774-9)
