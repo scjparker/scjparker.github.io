@@ -458,11 +458,6 @@ figcaption {
      text-overflow: ellipsis;
 }
 
-.paginate {
-  text-align: center;
-  margin-top: 1rem;
-}
-
 /* Footer */
 
 .footer {
