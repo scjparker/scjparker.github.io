@@ -5,7 +5,7 @@ summary: Our work with the Mohlke lab at UNC: "A Type 2 Diabetes–Associated Fu
 layout: new
 image: http://diabetes.diabetesjournals.org/sites/default/files/diabetes_jnl_main_logo_0.png
 url: http://diabetes.diabetesjournals.org/content/66/9/2521
-date: 2017-10-28 00:00:00
+date: October 28, 2017
 tag: accolades
 --- 
 
