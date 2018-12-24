@@ -1,0 +1,32 @@
+---
+title: Updates and News
+layout: new
+pagination:
+  enabled: true
+---
+
+<div class="news">
+  {% for news in paginator.posts %}
+  <div class="news-item">
+    <div class="news-desc">
+      <b>{{ news.title }}</b> 
+      <p> {% if news.image %} <img src={{news.image}} class="news-img" width=100%> {% endif %}
+      {{ news.summary }} </p>
+    </div>
+    <div class="news-desc-tag" style="display: flex; justify-content: space-between;">
+      <p> {{ news.date | date_to_string }} </p> <p><a href={{news.url}} style="text-decoration:none;">Read more</a> </p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div class="paginate">
+  {% if paginator.total_pages > 1 %}
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | prepend: site.baseurl }}"><i class="fas fa-angle-right fa-2x"></i></a>
+    {% endif %}
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}">
+        <i class="fas fa-angle-left fa-2x"></i></a>
+    {% endif %}
+  {% endif %}
+</div>
