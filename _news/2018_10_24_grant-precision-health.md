@@ -1,6 +1,6 @@
 ---
 publish: true
-title: Parker and Bielas lab collaboration awarded Precision Health Initiative grant
+title: Parker and Bielas labs awarded Precision Health Initiative grant!
 summary: The Parker and Bielas labs have teamed up and were awarded a Precision Health Initiative grant titled "Genetic modulators of opioid exposure in human neurologic development." Congrats to the team!
 
 layout: new
