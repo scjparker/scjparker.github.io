@@ -6,6 +6,6 @@ picture: steve_motorcycle.jpg
 google-scholar: F4UZ_jIAAAAJ
 CV: files/SParker_CV.pdf
 linkedin: in/scjparker/
-twitter: @theparkerlab
+twitter: theparkerlab
 email: scjp@umich.edu
 ---
