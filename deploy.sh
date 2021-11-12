@@ -22,13 +22,13 @@ git push $REMOTE $CODE_BRANCH
 echo "\n2. Building website.."
 bundle exec jekyll build
 
+echo "\n4. Savings change"
+git add -A
+git commit -m "Build: `date`"
+
 echo "\n3. Pushing built website (--force)"
 ## git subtree deployment to $SITE_BRANCH here
 ## basically, push the `_site` directory to $SITE_BRANCH
 git subtree split --prefix _site -b build
-
-## Add and commit build changes
-git add -A
-git commit -m "Build: `date`"
 
 git push -f $REMOTE build:$SITE_BRANCH
