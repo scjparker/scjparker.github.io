@@ -21,12 +21,13 @@ pagination:
 </div>
 <div class="paginate">
   {% if paginator.total_pages > 1 %}
-    {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path | prepend: site.baseurl }}"><i class="fas fa-angle-left fa-3x"></i></a>
-    {% endif %}
     {% if paginator.previous_page %}
       <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}">
-        <i class="fas fa-angle-right fa-3x"></i> </a>
+        <i class="fas fa-angle-left fa-2x"></i> previous page</a> | 
+    {% endif %}
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | prepend: site.baseurl }}">
+	next page <i class="fas fa-angle-right fa-2x"></i></a>
     {% endif %}
   {% endif %}
 </div>

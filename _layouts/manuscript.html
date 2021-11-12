@@ -1,0 +1,117 @@
+{% assign current = page.url | downcase | split: '/' %}
+
+<!DOCTYPE html>
+<html lang='en'>
+
+  {% include header.html %}
+
+  <body>
+    <div class="container">
+      {% include uofm.html %}
+
+      {% include nav.html %}
+
+      <div class="content">
+        <h1> {{ page.title }} </h1>
+        <figure style="padding-top: 2rem;">
+          <a href="/assets/images/{{ page.banner }}">
+            <img src="/assets/images/{{ page.banner }}"
+                 alt="{{ page.short_title }}"
+                 style="margin-bottom: .5rem; height: 40vh; text-align: center;">
+          </a>
+          <figcaption>
+            {{ page.banner-caption }}
+          </figcaption>
+        </figure>
+
+        <div class="row">
+          <div class="wrap-collabsible coauthors">
+            <input id="collapsible" class="toggle" type="checkbox" checked>
+            <label for="collapsible" class="lbl-toggle">Authors</label>
+            <div class="collapsible-content">
+              <div class="content-inner">
+                <p> {{ page.coauthors }} </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% if page.highlights %}
+        <h2> Highlights </h2>
+        <ol>
+          {% for item in page.highlights %}
+            <li> {{ item }} </li>
+          {% endfor %}
+        </ol>
+        {% endif %}
+
+        <div class="row">
+          {% if page.doi %}
+          <a href="https://dx.doi.org/{{ page.doi }}" target="_blank" class="button">HTML</a>
+          {% endif %}
+
+          {% if page.pdf %}
+          <a href="{{page.pdf}}" target="_blank" class="button">PDF</a>
+          {% endif %}
+        </div>
+
+        <h2> Abstract </h2>
+
+        <div class="row">
+          <div class="row-flex-auto">
+            <p> {{ page.abstract }} </p>
+          </div>
+        </div>
+
+        {{ content }}
+
+        <h2> Lead authors </h2>
+
+        <div class="people-category">
+          {% for person in page.first-authors %}
+          <div class="people">
+            {% if person.picture %}
+            <div class="people-cover" style="scale: 90%; background-image: url('/assets/people/{{ person.picture }}"> </div>
+            {% else %}
+            <div class="people-cover" style="scale: 90%; background-image: url('/assets/people/placeholder.jpg"> </div>
+            {% endif %}
+
+            <div class="people-details">
+              <p> <b> {{ person.name }} </b> </p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <h2> Corresponding authors </h2>
+
+        <div class="people-category">
+          {% for person in page.corresponding-authors %}
+          {% for lab_people in site.people %}
+          {% if lab_people.name == person %}
+          {% assign person = lab_people %}
+          {% endif %}
+          {% endfor %}
+
+          <div class="people">
+            {% if person.picture %}
+            <div class="people-cover" style="scale: 90%; background-image: url('/assets/people/{{ person.picture }}"> </div>
+            {% else %}
+            <div class="people-cover" style="scale: 90%; background-image: url('/assets/people/placeholder.jpg"> </div>
+            {% endif %}
+
+            <div class="people-details">
+              <p> <b>{{ person.name }}</b> <br/>{{ person.affiliation }} </p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+
+      {% include footer.html %}
+    </div>
+
+  </body>
+
+</html>

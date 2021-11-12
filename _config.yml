@@ -1,21 +1,26 @@
 plugins:
   - jekyll-paginate-v2
+  - jekyll-redirect-from
 exclude:
   - Gemfile
   - Gemfile.lock
   - deploy.sh
   - README.md
+  - vendor
 collections:
   news:
     output: true
     permalink: '/news/:path/'
   jobs:
   people:
+  manuscripts:
+    output: false
+    permalink: '/manuscripts/:title'
 permalink: pretty
 pagination:
   enabled: true
   collection: news
-  per_page: 8
+  per_page: 9
   permalink: '/:num/'
   sort_reverse: true
 autopages:
