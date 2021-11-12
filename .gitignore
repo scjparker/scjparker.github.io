@@ -3,3 +3,4 @@ Gemfile.lock
 .emacs.desktop*
 .bundle/
 vendor/
+_site/

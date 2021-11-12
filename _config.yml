@@ -6,6 +6,7 @@ exclude:
   - Gemfile.lock
   - deploy.sh
   - README.md
+  - vendor
 collections:
   news:
     output: true
