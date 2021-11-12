@@ -3,7 +3,7 @@ name: Build and Deploy to Github Pages
 on:
   push:
     branches:
-      - source2  # Source code is pushed to this branch
+      - source  # Source code is pushed to this branch
 
 jobs:
   build_and_deploy:

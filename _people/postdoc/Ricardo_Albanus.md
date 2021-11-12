@@ -1,7 +1,7 @@
 ---
 publish: true
-name: Ricardo D'Oliveira Albanus
-title: Computational Medicine & Bioinformatics Candidate
+name: Ricardo D'Oliveira Albanus, Ph.D.
+title: Postdoctoral Fellow
 picture: ralbanus.jpg
 google-scholar: 
 CV:

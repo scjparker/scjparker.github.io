@@ -50,6 +50,10 @@ ul, ol {
   line-height: 1.8rem;
 }
 
+li {
+  margin-top: .5rem;
+}
+
 figure {
   text-align: center;
 }
@@ -58,6 +62,15 @@ figcaption {
   color: #666;
   text-transform: uppercase;
   font-size: .8rem !important;
+}
+
+.paginate {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.paginate a i {
+  vertical-align: middle;
 }
 
 /* Generic classes */

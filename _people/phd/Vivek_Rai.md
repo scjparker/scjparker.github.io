@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Vivek Rai
-title: Computational Medicine & Bioinformatics Pre-Candidate
+title: Bioinformatics Candidate
 picture: vrai.jpg
 google-scholar: 
 CV:
