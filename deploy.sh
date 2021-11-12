@@ -9,6 +9,9 @@ echo "Make sure all your changes are committed."
 read -n 1 -s -r -p "Press any key to continue"
 
 ## Build: requires `bundler`
+echo "\n0. Making sure dependencies are installed"
+bundle install
+
 echo "\n1. Building website.."
 bundle exec jekyll build
 

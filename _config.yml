@@ -1,5 +1,6 @@
 plugins:
   - jekyll-paginate-v2
+  - jekyll-redirect-from
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -11,6 +12,9 @@ collections:
     permalink: '/news/:path/'
   jobs:
   people:
+  manuscripts:
+    output: false
+    permalink: '/manuscripts/:title'
 permalink: pretty
 pagination:
   enabled: true

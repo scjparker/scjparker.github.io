@@ -1,3 +1,6 @@
 Gemfile.lock
 .ruby-version
 .emacs.desktop*
+.bundle/
+vendor/
+_site/
