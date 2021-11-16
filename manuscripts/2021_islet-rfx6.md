@@ -60,10 +60,10 @@ highlights:
 
 
 ## Important links
-- [**Co-expression network modules**: R Shiny app to explore celltype WGCNA modules
-  modules](https://theparkerlab.shinyapps.io/Islet-RNAseq-WGCNA)
-- [**Pseudoislet single-cell multiome**: Explore single-cell data from RFX6 Kd/Ctrl multiome profiling experiment](https://theparkerlab.med.umich.edu/data/vivekrai/cellbrowser/?ds=Pseudoislet10XMultiome)
-- [**Pancreatlas**: Browse immunofluorescence and CODEX images used for spatial analyses](https://pancreatlas.org/datasets/904/explore)
+- [**Co-expression network modules**: R Shiny app to explore celltype WGCNA
+  modules](https://theparkerlab.shinyapps.io/Islet-RNAseq-WGCNA){:target="_blank"}
+- [**Pseudoislet single-cell multiome**: Explore single-cell data from RFX6 Kd/Ctrl multiome profiling experiment](https://theparkerlab.med.umich.edu/data/public/cellbrowser/?ds=Pseudoislet10XMultiome){:target="_blank"}
+- [**Pancreatlas**: Browse immunofluorescence and CODEX images used for spatial analyses](https://pancreatlas.org/datasets/904/explore){:target="_blank"}
 
 ## Code and data availability
 
