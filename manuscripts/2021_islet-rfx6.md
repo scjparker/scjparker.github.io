@@ -1,14 +1,14 @@
 ---
 layout: manuscript
 publish: true
-title: RFX6-mediated dysregulation mediates human β cell dysfunction in early type 2 diabetes
+title: RFX6-mediated dysregulation defines human β cell dysfunction in early type 2 diabetes
 short-title: Walker, Saunders, Rai et al. (2021) Islet RFX Study
 coauthors: 
     John T. Walker†, Diane C. Saunders†, Vivek Rai†, Chunhua Dai, Peter Orchard, Alexander
     L. Hopkirk, Conrad V. Reihsmann, Yicheng Tao, Simin Fan, Shristi Shrestha, Arushi
     Varshney, Jordan J. Wright, Yasminye D. Pettway, Christa Ventresca, Samir Agarwala,
     Radhika Aramandla, Greg Poffenberger, Regina Jenkins, Nathaniel J. Hart, Dale L. Greiner,
-    Leonard D. Shultz, Rita Bottino, Jie Liu, Stephen C.J. Parker#, Alvin C.
+    Leonard D. Shultz, Rita Bottino, HPAP Consortium, Jie Liu, Stephen C.J. Parker#, Alvin C.
     Powers#, Marcela Brissova#
 doi: 
 pdf: 
@@ -53,6 +53,7 @@ abstract:
     define early-stage T2D signatures.
 highlights:
   - Physiological, transcriptomic, and image profiling of short-duration T2D and ND pancreatic islets
+  - Changes in islet microenvironment changes and reduced β cell function define key features of early-stage T2D
   - Co-expression network analyses identified gene modules related to donor and islet traits and revealed disrupted metabolism and cilia homeostasis in T2D 
   - β cell hub gene <b>RFX6</b> is reduced in T2D and controls glucose-stimulated insulin secretion
   - RFX6 knockdown alters the β cell chromatin and transcriptional landscape and downregulates secretory vesicle components
