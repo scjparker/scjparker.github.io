@@ -27,7 +27,7 @@ first-authors:
   - name: Vivek Rai
     picture: "vrai.jpg"
 corresponding-authors:
-  - name: Stephen Parker
+  - name: Steve Parker
     picture: scjp.jpg
     affiliation: University of Michigan
   - name: Marcela Brissova
