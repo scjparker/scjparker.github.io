@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Jessie Ebeling
-title: <a href="https://lsa.umich.edu/urop" target='_blank'>UROP</a> Biological Sciences
+title: Research Lab Specialist Associate
 picture: jebeling.jpg
 google-scholar: 
 CV:
