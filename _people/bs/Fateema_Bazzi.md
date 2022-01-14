@@ -1,6 +1,6 @@
 ---
 publish: true
-name: Fateema Brazzi
+name: Fateema Bazzi
 title: Computer Science Major, Bioinformatics Track
 picture: fbrazzi.jpg
 google-scholar: 
