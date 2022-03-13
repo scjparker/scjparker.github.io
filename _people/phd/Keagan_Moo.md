@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Keagan Moo
-title: Bioinformatics Rotation Student
+title: Bioinformatics Pre-Candidate
 picture: kmoo.jpg
 google-scholar: 
 CV:
