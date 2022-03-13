@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Vivek Rai
-title: Bioinformatics Candidate
+title: Bioinformatics Candidate, <br/>MS Candidate, Statistics
 picture: vrai.jpg
 google-scholar: 
 CV:
