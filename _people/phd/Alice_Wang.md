@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Alice Wang
-title: Bioinformatics Rotation Student
+title: Bioinformatics Pre-Candidate
 picture: awang.jpg
 google-scholar: 
 CV:
