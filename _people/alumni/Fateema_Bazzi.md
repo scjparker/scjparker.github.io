@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Fateema Bazzi
-title: Computer Science Major, Bioinformatics Track
+title: Undergraduate student, Computer Science Major, Bioinformatics Track
 picture: fbrazzi.jpg
 google-scholar: 
 CV:

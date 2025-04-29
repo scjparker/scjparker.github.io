@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Samir Agarwala
-title: Engineering Computer Science
+title: Undergraduate student, Engineering Computer Science
 picture: sagarwala.jpg
 google-scholar: 
 CV:

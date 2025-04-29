@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Elli Gasper
-title: Biology, Health and Society (BHS)
+title: Undergraduate student, Biology, Health and Society (BHS)
 picture: ellig.jpg
 google-scholar: 
 CV:

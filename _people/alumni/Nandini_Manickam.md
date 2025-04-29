@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Nandini Manickam, Ph.D.
-title: Research Lab Specialist Senior<br/>Now at 10x Genomics
+title: Research Lab Specialist Senior<br/>Now at Scale Biosciences
 picture: nmanickam.jpg
 google-scholar: 
 CV:

@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Alice Wang
-title: Bioinformatics Pre-Candidate
+title: Bioinformatics Phd Candidate
 picture: awang.jpg
 google-scholar: 
 CV:

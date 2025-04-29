@@ -1,7 +1,7 @@
 ---
 publish: true
-name: Vivek Rai
-title: Bioinformatics Candidate, <br/>MS Candidate, Statistics<br/>Now Scientist at Roche-Genentech
+name: Vivek Rai, Ph.D.
+title: Bioinformatics Candidate, <br/>MS Candidate, Statistics<br/>Now  Principal Bioinformatics Scientist at Roche-Genentech
 picture: vrai.jpg
 google-scholar: 
 CV:

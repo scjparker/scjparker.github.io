@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Keagan Moo
-title: Bioinformatics Pre-Candidate
+title: Bioinformatics Candidate
 picture: kmoo.jpg
 google-scholar: 
 CV:

@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Lovelyn Epelle
-title: Master's in Human Genetics
+title: Genetics and Genomics Candidate
 picture: lovelyne.jpg
 google-scholar: 
 CV:

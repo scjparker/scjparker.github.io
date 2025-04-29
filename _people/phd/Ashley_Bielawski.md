@@ -1,11 +1,11 @@
 ---
 publish: true
-name: Ben Li
+name: Ashley Bielawski
 title: MSTP, Bioinformatics PhD candidate
-picture: bli.jpg
+picture: 
 google-scholar: 
 CV:
 linked-in: 
 twitter:
-email: benyli@med.umich.edu
+email: 
 ---

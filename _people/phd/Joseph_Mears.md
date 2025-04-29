@@ -1,11 +1,11 @@
 ---
 publish: true
-name: Ben Li
+name: Joseph Mears
 title: MSTP, Bioinformatics PhD candidate
-picture: bli.jpg
+picture: 
 google-scholar: 
 CV:
 linked-in: 
 twitter:
-email: benyli@med.umich.edu
+email: 
 ---
