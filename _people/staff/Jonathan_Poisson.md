@@ -1,6 +1,6 @@
 ---
 publish: true
-name: Jonathan Poisson, Ph.D.
+name: Jonathan Poisson
 title: Technical Support Manager
 picture: 
 google-scholar: 

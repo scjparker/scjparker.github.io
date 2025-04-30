@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Joseph Mears
-title: MSTP, Bioinformatics PhD candidate
+title: MSTP, Bioinformatics PhD pre-candidate
 picture: 
 google-scholar: 
 CV:
