@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Lori Lin
-title: Research Lab Specialist Associate
+title: Research Lab Specialist Assoc
 picture: 
 google-scholar: 
 CV:
