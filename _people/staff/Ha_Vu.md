@@ -1,6 +1,6 @@
 ---
 publish: true
-name: Ha Vu, Ph.D.
+name: Ha T.H. Vu, Ph.D.
 title: Lead Bioinformatician
 picture: 
 google-scholar: 
