@@ -1,8 +1,8 @@
 ---
 publish: true
 name: Peter Orchard, Ph.D.
-title: Bioinformatician and Computational Biologist Senior
-picture: porchard.jpg
+title: Assistant Research Scientist / Bioinformatician
+picture: porchard_2025.jpg
 google-scholar: 
 CV:
 linked-in: 

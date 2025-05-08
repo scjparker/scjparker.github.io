@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Ben Li
-title: MSTP, Bioinformatics PhD candidate
+title: Bioinformatics PhD candidate, MSTP
 picture: bli.jpg
 google-scholar: 
 CV:

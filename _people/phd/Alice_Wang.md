@@ -1,11 +1,11 @@
 ---
 publish: true
-name: Alice Wang
+name: Xiaoou (Alice) Wang, MS
 title: Bioinformatics Phd Candidate
-picture: awang.jpg
+picture: awang_2025.jpg
 google-scholar: 
 CV:
 linked-in: 
 twitter:
-email: xiaoouw@umich.edu
+email:
 ---
