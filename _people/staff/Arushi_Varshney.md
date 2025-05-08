@@ -5,7 +5,7 @@ title: Research Investigator
 picture: avarshney.jpg
 google-scholar: 
 CV:
-linked-in: 
+linkedin: 
 twitter:
 email: arushiv@umich.edu
 ---

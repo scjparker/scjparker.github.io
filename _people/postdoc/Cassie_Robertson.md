@@ -5,7 +5,7 @@ title: Postdoctoral Fellow
 picture: crobertson.jpg
 google-scholar: 
 CV:
-linked-in: 
+linkedin: 
 twitter:
 email: ccrober@umich.edu
 ---

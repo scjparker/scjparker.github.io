@@ -5,7 +5,7 @@ title: Technical Support Manager
 picture: 
 google-scholar: 
 CV:
-linked-in: 
+linkedin: 
 twitter:
 email:
 ---

@@ -5,7 +5,7 @@ title: Assistant Research Scientist / Bioinformatician
 picture: porchard_2025.jpg
 google-scholar: 
 CV:
-linked-in: 
+linkedin: 
 twitter:
 email: porchard@umich.edu
 ---

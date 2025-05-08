@@ -5,7 +5,7 @@ title: Bioinformatics Analyst
 picture: nickc.jpg
 google-scholar: 
 CV:
-linked-in: 
+linkedin: 
 twitter:
 email: ncarruth@med.umich.edu
 ---

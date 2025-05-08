@@ -5,7 +5,7 @@ title: Postdoctoral Fellow (joint with the <a href="https://medicine.umich.edu/d
 picture: atovar.jpg
 google-scholar: 
 CV:
-linked-in: 
+linkedin: 
 twitter:
 email: tovar@umich.edu
 ---

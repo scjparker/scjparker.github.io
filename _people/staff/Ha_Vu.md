@@ -5,7 +5,7 @@ title: Lead Bioinformatician
 picture: hvu_2025.jpg
 google-scholar: iYGlgQcAAAAJ
 CV:
-linked-in: in/hahongvu96/
+linkedin: in/hahongvu96/
 twitter:
 email: 
 ---

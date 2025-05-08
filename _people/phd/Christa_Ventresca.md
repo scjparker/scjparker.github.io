@@ -6,6 +6,6 @@ picture: cventresca.jpg
 google-scholar: 
 CV:
 linked-in: 
-twitter:
-email: christav@umich.edu
+twitter: chrispr-cas9
+email:
 ---

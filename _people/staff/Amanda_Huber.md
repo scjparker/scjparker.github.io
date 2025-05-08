@@ -5,7 +5,7 @@ title: Clinical Research Project Manager
 picture: 
 google-scholar: 
 CV:
-linked-in: 
+linkedin: 
 twitter:
 email: ahuber@umich.edu
 ---

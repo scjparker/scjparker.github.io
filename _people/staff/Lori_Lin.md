@@ -5,7 +5,7 @@ title: Research Lab Specialist Assoc
 picture: 
 google-scholar: 
 CV:
-linked-in: 
+linkedin: 
 twitter:
 email: linshuyu@umich.edu
 ---
