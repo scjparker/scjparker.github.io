@@ -1,11 +1,11 @@
 ---
 publish: true
-name: Ben Li
-title: Bioinformatics PhD candidate, MSTP
+name: Benjamin Li
+title: Bioinformatics PhD candidate (MSTP), <br/><a href="http://csg.sph.umich.edu/training/" target='_blank'>Genome Science Training Program Fellow</a>
 picture: bli.jpg
-google-scholar: 
+google-scholar: NH8DgbYAAAAJ
 CV:
-linked-in: 
+linkedin:
 twitter:
-email: benyli@med.umich.edu
+email: benyli@umich.edu
 ---

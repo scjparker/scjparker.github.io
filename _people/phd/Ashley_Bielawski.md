@@ -5,7 +5,7 @@ title: Bioinformatics PhD candidate
 picture: 
 google-scholar: 
 CV:
-linked-in: 
+linkedin:
 twitter:
 email: 
 ---

@@ -5,7 +5,7 @@ title: Undergraduate Student
 picture: 
 google-scholar: 
 CV:
-linked-in: 
+linkedin:
 twitter:
 email: 
 ---

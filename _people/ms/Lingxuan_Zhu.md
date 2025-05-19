@@ -1,11 +1,11 @@
 ---
 publish: true
 name: Lingxuan Zhu
-title: Bioinformatics student
+title: Bioinformatics MS student
 picture: 
 google-scholar: 
 CV:
-linked-in: 
+linkedin: 
 twitter:
 email: 
 ---

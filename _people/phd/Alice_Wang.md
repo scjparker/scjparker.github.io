@@ -5,7 +5,7 @@ title: Bioinformatics Phd Candidate
 picture: awang_2025.JPG
 google-scholar: 
 CV:
-linked-in: 
+linkedin: in/xiaoou-wang-alice/
 twitter:
 email:
 ---
