@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Lovelyn Epelle, M.S.
-title: Genetics and Genomics Ph.D candidate,  <br/>Bioinformatics MS candidate
+title: Genetics and Genomics PhD candidate,  <br/>Bioinformatics MS candidate
 picture: lepelle_2025.jpeg
 google-scholar: 
 CV:

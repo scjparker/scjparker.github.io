@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Maya Bose
-title: Bioinformatics Candidate, <br/><a href="http://csg.sph.umich.edu/training/" target='_blank'>Genome Science Training Program Fellow</a>
+title: Bioinformatics PhD Candidate, <br/><a href="http://csg.sph.umich.edu/training/" target='_blank'>Genome Science Training Program Fellow</a>
 picture: mbose_2025.jpg
 google-scholar: CxHIRA4AAAAJ
 CV: files/mbose_cv_0525.pdf
