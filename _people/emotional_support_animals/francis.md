@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Francis
-title: 
+title: Emotional support specialist
 picture: francis_2025.jpeg
 google-scholar: 
 CV:

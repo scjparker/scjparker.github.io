@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Mushu
-title: 
+title: Emotional support specialist
 picture: mushu_2025.jpg
 google-scholar: 
 CV:

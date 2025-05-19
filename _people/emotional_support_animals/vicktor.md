@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Vicktor
-title: 
+title: Emotional support specialist
 picture: vicktor_2025.jpg
 google-scholar: 
 CV:

@@ -1,7 +1,7 @@
 ---
 publish: true
 name: HDMI Cable
-title: 
+title: Emotional support specialist
 picture: hdmi_cable_2025.jpg
 google-scholar: 
 CV:

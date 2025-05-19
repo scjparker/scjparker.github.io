@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Mary Jane
-title: 
+title: Emotional support specialist
 picture: mary_jane_2025.jpg
 google-scholar: 
 CV:

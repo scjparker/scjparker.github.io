@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Euler
-title: 
+title: Emotional support specialist
 picture: euler_2025.jpeg
 google-scholar: 
 CV:
