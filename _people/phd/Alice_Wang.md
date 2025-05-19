@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Xiaoou (Alice) Wang, M.S.
-title: Bioinformatics Phd Candidate
+title: Bioinformatics PhD Candidate
 picture: awang_2025.JPG
 google-scholar: 
 CV:
