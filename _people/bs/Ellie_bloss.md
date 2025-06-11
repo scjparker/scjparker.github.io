@@ -1,11 +1,11 @@
 ---
 publish: true
 name: Ellie Bloss
-title: Undergraduate Student
-picture: 
+title: Undergraduate Student, Biochemistry
+picture: ebloss.jpg
 google-scholar: 
 CV:
 linkedin:
 twitter:
-email: 
+email: ebloss@umich.edu
 ---

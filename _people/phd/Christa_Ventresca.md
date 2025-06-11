@@ -7,5 +7,5 @@ google-scholar:
 CV:
 linkedin:
 twitter: chrispr-cas9
-email:
+email: christav@umich.edu
 ---

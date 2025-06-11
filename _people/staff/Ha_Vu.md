@@ -7,5 +7,5 @@ google-scholar: iYGlgQcAAAAJ
 CV: 
 linkedin: in/hahongvu96/
 twitter:
-email: 
+email: vthihong@umich.edu
 ---

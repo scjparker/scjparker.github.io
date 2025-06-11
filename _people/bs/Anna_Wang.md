@@ -1,11 +1,11 @@
 ---
 publish: true
 name: Anna Wang
-title: Undergraduate Student
-picture: 
+title: Undergraduate Student, Molecular, Cellular, and Developmental Biology (MCDB)
+picture: annawang_2025.jpeg
 google-scholar: 
 CV:
 linkedin: 
 twitter:
-email: 
+email: annayw@umich.edu
 ---
