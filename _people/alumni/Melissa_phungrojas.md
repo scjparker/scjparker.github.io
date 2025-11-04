@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Melissa Phung-Rojas
-title: MSTP Student (Rotation, Fall 2025)
+title: MSTP Rotation Student (2025)
 picture: mphungrojas_2025.jpg
 google-scholar: holrSTUAAAAJ&hl=en
 CV: 

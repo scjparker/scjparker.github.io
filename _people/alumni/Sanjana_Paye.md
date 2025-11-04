@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Sanjana Paye
-title: MSTP rotation student
+title: MSTP rotation student (2024)
 picture: 
 google-scholar: 
 CV:
