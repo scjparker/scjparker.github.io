@@ -657,3 +657,10 @@ input[type='checkbox'] {
   padding: .5rem 1rem;
 }
 
+/* LL added 4/21/2026: Keep images inside post content from overflowing */
+.content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+}
