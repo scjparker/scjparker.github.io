@@ -3,7 +3,7 @@ publish: true
 title: Arushi presents at 2016 ASHG closing plenary session
 summary: Arushi presented her genetic regulatory convergence work at the American Society for Human Genetics closing plenary session!
 layout: new
-image: http://www.ashg.org/2016meeting/images/template/ASHG-2016-logo-blk-v2.png
+image: 
 url: 
 date: October 22, 2016
 tag: accolades
