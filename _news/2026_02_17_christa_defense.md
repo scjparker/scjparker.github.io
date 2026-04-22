@@ -3,7 +3,7 @@ publish: true
 title: Christa defended her dissertation!
 summary: Congrats Dr. Ventresca
 layout: new
-image: ../assets/images/news/2026_christa_defense_lab_pic.jpg
+image: ../assets/images/news/2026_christa_podium.jpg
 url: 
 date: Feb 12, 2026
 tag: accolades
