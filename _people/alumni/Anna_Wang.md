@@ -1,7 +1,7 @@
 ---
 publish: true
 name: Anna Wang
-title: Undergraduate Student, Molecular, Cellular, and Developmental Biology (MCDB)
+title: Undergraduate Student, Molecular, Cellular, and Developmental Biology (MCDB), '26
 picture: annawang_2025.jpeg
 google-scholar: 
 CV:

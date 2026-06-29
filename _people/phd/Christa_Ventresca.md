@@ -1,7 +1,7 @@
 ---
 publish: true
-name: Christa Ventresca
-title: Genetics and Genomics PhD Candidate,  <br/>Bioinformatics MS candidate
+name: Christa Ventresca, M.S., Ph.D.
+title: Research Laboratory Tech Sr
 picture: cventresca.jpg
 google-scholar: 
 CV:
