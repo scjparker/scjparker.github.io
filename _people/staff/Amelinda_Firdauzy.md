@@ -1,6 +1,6 @@
 ---
 publish: true
-name: Amelinda Firdauzy, M.S
+name: Amelinda Firdauzy, M.S.
 title: Research Lab Specialist Assoc
 picture: afirdauzy_2026.jpg
 google-scholar: 
