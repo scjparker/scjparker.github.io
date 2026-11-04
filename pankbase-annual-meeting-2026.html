@@ -829,6 +829,51 @@ footer a { color: var(--maize); text-decoration: none; }
   filter: drop-shadow(0 6px 24px rgba(0,0,0,0.45));
 }
 
+/* ===== ZOOM ===== */
+.hero-zoom {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 999px;
+  background: var(--maize);
+  color: #00274C;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: filter 0.15s;
+}
+.zoom-btn:hover { filter: brightness(1.08); }
+.zoom-creds {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.75);
+  font-variant-numeric: tabular-nums;
+}
+.zoom-creds strong { color: #fff; font-weight: 600; }
+.zoom-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--maize);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+  margin-bottom: 26px;
+}
+.zoom-box-title { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.zoom-box-detail { font-size: 0.82rem; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.zoom-box-detail strong { color: var(--text); font-weight: 600; }
+
 /* ===== ADD TO CALENDAR ===== */
 .cal-row {
   display: flex;
@@ -906,6 +951,12 @@ footer a { color: var(--maize); text-decoration: none; }
       <span class="hero-meta-label">Venue</span>
       <span class="hero-meta-value">Michigan League, Second Floor, Vandenberg Room &nbsp;&middot;&nbsp; 911 N University Ave, Ann Arbor</span>
     </div>
+  </div>
+
+  <!-- Zoom -->
+  <div class="hero-zoom">
+    <a class="zoom-btn" href="https://umich.zoom.us/j/96903165405" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg> Join on Zoom</a>
+    <div class="zoom-creds">Meeting ID: <strong>969 0316 5405</strong> &nbsp;&middot;&nbsp; Passcode: <strong>pancreas</strong></div>
   </div>
 
   <!-- Add to Calendar -->
@@ -1111,6 +1162,13 @@ footer a { color: var(--maize); text-decoration: none; }
   <div class="section-inner">
     <div class="section-eyebrow">Program</div>
     <h2 class="section-title">Agenda</h2>
+    <div class="zoom-box">
+      <div>
+        <div class="zoom-box-title">Joining remotely?</div>
+        <div class="zoom-box-detail">Meeting ID: <strong>969 0316 5405</strong> &nbsp;&middot;&nbsp; Passcode: <strong>pancreas</strong></div>
+      </div>
+      <a class="zoom-btn" href="https://umich.zoom.us/j/96903165405" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg> Join on Zoom</a>
+    </div>
 
     <div class="tab-bar">
       <button class="tab-btn active" onclick="switchTab(1, this)">Day 1 &mdash; Thu, Nov 12</button>
