@@ -829,6 +829,15 @@ footer a { color: var(--maize); text-decoration: none; }
   filter: drop-shadow(0 6px 24px rgba(0,0,0,0.45));
 }
 
+.bk-time {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--maize);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  font-variant-numeric: tabular-nums;
+}
 /* ===== ZOOM ===== */
 .hero-zoom {
   margin-top: 30px;
@@ -1181,9 +1190,9 @@ footer a { color: var(--maize); text-decoration: none; }
       <div class="schedule-wrap">
         <table class="schedule">
           <tr><td class="s-time">8:15 &ndash; 9:00 AM</td><td class="s-body"><div class="s-title">Breakfast &amp; Networking</div><div class="s-detail">Vandenberg Room &mdash; Second Floor</div></td></tr>
-          <tr><td class="s-time">9:00 &ndash; 9:30</td><td class="s-body"><div class="s-title">Welcome to Michigan &amp; Platform Overview</div><div class="s-detail">Welcome to Michigan: Steve Parker &middot; Meeting goals and brief overview of Platform: Steve Parker &amp; Kyle Gaulton &mdash; Program objectives and milestones, major accomplishments, new resources and capabilities, use cases and important scientific findings, challenges and opportunities for collaboration</div></td></tr>
-          <tr class="row-highlight"><td class="s-time">9:30 &ndash; 10:00</td><td class="s-body"><div class="s-title">Invited External Speaker &mdash; Emily Sims (Virtual)</div><div class="s-detail">Indiana University School of Medicine &mdash; Vandenberg Room &mdash; 15-min talk + 15-min discussion &mdash; Title: TBD</div></td></tr>
-          <tr><td class="s-time">10:00 &ndash; 10:40</td><td class="s-body"><div class="s-title">Working Group Reports</div><div class="s-detail">Vandenberg Room &mdash; 15-min presentation (overall design, progress, and next steps) + 5-min Q&amp;A each &mdash; Major accomplishments &amp; milestones, platform &amp; community growth, use cases and their scientific problems, key challenges &amp; lessons learned, priorities requiring attention<br><br>&nbsp;&nbsp;10:00&ndash;10:20 &nbsp;Outreach &amp; Engagement Team<br>&nbsp;&nbsp;10:20&ndash;10:40 &nbsp;Data / Metadata Team</div></td></tr>
+          <tr><td class="s-time">9:00 &ndash; 9:30</td><td class="s-body"><div class="s-title">Welcome to Michigan &amp; Platform Overview</div><div class="s-detail">Welcome to Michigan: Steve Parker &middot; Meeting goals and brief overview of Platform: Steve Parker &amp; Kyle Gaulton</div></td></tr>
+          <tr class="row-highlight"><td class="s-time">9:30 &ndash; 10:00</td><td class="s-body"><div class="s-title">Invited External Speaker &mdash; Emily Sims (Virtual)</div><div class="s-detail">Indiana University School of Medicine &mdash; Vandenberg Room &mdash; 15-min talk + 15-min discussion &mdash; &ldquo;A Different PD-L1 Message: Alternative Splicing of PD-L1 Shapes &beta; Cell Communication in Response to Interferon&rdquo;</div></td></tr>
+          <tr><td class="s-time">10:00 &ndash; 10:40</td><td class="s-body"><div class="s-title">Working Group Reports</div><div class="s-detail">Vandenberg Room &mdash; 15-min presentation + 5-min Q&amp;A each<br><br>&nbsp;&nbsp;10:00&ndash;10:20 &nbsp;Outreach &amp; Engagement Team<br>&nbsp;&nbsp;10:20&ndash;10:40 &nbsp;Data / Metadata Team</div></td></tr>
           <tr class="row-break"><td class="s-time">10:40 &ndash; 11:00</td><td class="s-body"><div class="s-title">Break</div><div class="s-detail">Vandenberg Room &mdash; Restrooms &amp; Refreshments</div></td></tr>
           <tr><td class="s-time">11:00 &ndash; 11:20</td><td class="s-body"><div class="s-title">Working Group Reports <em>(continued)</em></div><div class="s-detail">Platform Team</div></td></tr>
           <tr><td class="s-time">11:20 &ndash; 12:00 PM</td><td class="s-body"><div class="s-title">2026 OP Fund Awardees Presentations</div><div class="s-detail">10-min presentations on proposed projects &mdash; Shuibing Chen, Cornell University &nbsp;&bull;&nbsp; Michael Stitzel, Jackson Laboratory &nbsp;&bull;&nbsp; Noel Burtt &amp; Jason Flannick, Broad Institute</div></td></tr>
@@ -1195,20 +1204,17 @@ footer a { color: var(--maize); text-decoration: none; }
             <div class="s-title">Parallel Breakout Sessions <span class="badge-parallel">Parallel</span></div>
             <div class="s-detail" style="margin-top:8px">
               <strong>Room 4, First Floor &mdash; Trainees &amp; Staff</strong><br>
-              &nbsp;&nbsp;2:30&ndash;4:00 &nbsp;Trainees Track 1 proposal generation workshop (facilitated by NIH program staff): grant writing advice from NIDDK personnel (20 min); find a work partner and pair up (30 min); brainstorm a dataset, tool, or improvement PanKbase or PanKgraph could use, and develop it into two slides to present later in the meeting (40 min). Pairs present 2-minute flash talks at 5:15 PM.<br>
-              &nbsp;&nbsp;4:00&ndash;4:15 &nbsp;Break<br>
-              &nbsp;&nbsp;4:15&ndash;5:00 &nbsp;2025 OP Fund awardees and non-SC PIs face-to-face meetings (associated trainees and staff are also welcome to stay):<br>
+              &nbsp;&nbsp;<span class="bk-time">2:30&ndash;4:00</span> &nbsp;Trainees Track 1 proposal generation workshop (facilitated by NIH program staff): writing a letter of intent/specific aims page (20 min); find a work partner and pair up (30 min); brainstorm a dataset, tool, or improvement PanKbase or PanKgraph could use, and develop it into two slides to present later in the meeting (40 min). Pairs present 2-minute flash talks at 5:15 PM.<br>
+              &nbsp;&nbsp;<span class="bk-time">4:00&ndash;4:15</span> &nbsp;Break<br>
+              &nbsp;&nbsp;<span class="bk-time">4:15&ndash;5:00</span> &nbsp;2025 OP Fund awardees and non-SC PIs face-to-face meetings (associated trainees and staff are also welcome to stay):<br>
               &nbsp;&nbsp;&nbsp;&nbsp;&bull; Drs. Tang and Kaddis meet with PI Parker team members: Drs. Brissova, Liu, Chen and Cartailler<br>
               &nbsp;&nbsp;&nbsp;&nbsp;&bull; Dr. Johnson meets with PI Gaulton team members: Drs. Flannick, Burtt and Gloyn<br><br>
               <strong>Room A, Third Floor &mdash; Closed PI Session</strong><br>
-              &nbsp;&nbsp;2:30&ndash;3:20 &nbsp;<em>Led by Jean-Philippe Cartailler (Vanderbilt University) and Benjamin Voight (University of Pennsylvania)</em><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;Success metrics and community impact: how should we measure PanKbase&rsquo;s success, and how do we become the first stop for researchers? Advisors agreed that community use and impact should be the primary measure of success, ahead of original consortium publications.<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;Questions for the group: How are we currently measuring community use, and are existing metrics (site visits, downloads, citations of PanKbase-derived data, inclusion in grants, mentions in talks, social media) sufficient? Are there specific knowledge gaps to close before broadening outreach?<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<strong>Outcome:</strong> a defined plan for collecting metrics that measure the community use and impact of the platform.<br>
-              &nbsp;&nbsp;3:20&ndash;3:35 &nbsp;Break<br>
-              &nbsp;&nbsp;3:35&ndash;4:15 &nbsp;PanKbase looking forward: next steps for the platform, science direction, and future data/project suggestions.<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<strong>Outcome:</strong> identify 3&ndash;5 scientific/platform priorities and emerging opportunities for the coming year.<br>
-              &nbsp;&nbsp;4:15&ndash;5:00 &nbsp;Closed session: Steering Committee with NIDDK program staff (all other PIs to Room 4)
+              &nbsp;&nbsp;<span class="bk-time">2:30&ndash;3:20</span> &nbsp;<em>Led by Jean-Philippe Cartailler (Vanderbilt University) and Benjamin Voight (University of Pennsylvania)</em><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;Success metrics and community impact: how should we measure PanKbase&rsquo;s success, and how do we become the first stop for researchers?<br>
+              &nbsp;&nbsp;<span class="bk-time">3:20&ndash;3:35</span> &nbsp;Break<br>
+              &nbsp;&nbsp;<span class="bk-time">3:35&ndash;4:15</span> &nbsp;PanKbase looking forward: working with other consortia; next steps for the platform, science direction, and future data/project suggestions<br>
+              &nbsp;&nbsp;<span class="bk-time">4:15&ndash;5:00</span> &nbsp;Closed session: Steering Committee with NIDDK program staff (all other PIs to Room 4)
             </div>
           </td></tr>
           <tr><td class="s-time">5:15 &ndash; 5:30</td><td class="s-body"><div class="s-title">Trainee Proposal Flash Talks &amp; Day 1 Wrap-Up</div><div class="s-detail">Room 4 &mdash; First Floor &mdash; 2-minute flash talks (~4&ndash;5 talks) &middot; Wrap-up: Steve Parker</div></td></tr>
@@ -1224,11 +1230,11 @@ footer a { color: var(--maize); text-decoration: none; }
         <table class="schedule">
           <tr><td class="s-time">8:15 &ndash; 9:00 AM</td><td class="s-body"><div class="s-title">Breakfast &amp; Networking</div><div class="s-detail">Vandenberg Room &mdash; Second Floor</div></td></tr>
           <tr><td class="s-time">9:00 &ndash; 9:15</td><td class="s-body"><div class="s-title">Welcome &amp; Brief Recap of Day 1</div><div class="s-detail">Kyle Gaulton</div></td></tr>
-          <tr><td class="s-time">9:15 &ndash; 10:30</td><td class="s-body"><div class="s-title">Early Career Scientist Talks</div><div class="s-detail">10-min talk + 5-min Q&amp;A each &mdash; Matthew Ishahak, University of Miami &nbsp;&bull;&nbsp; Alex Ghaben, Rady Children&rsquo;s Hospital &nbsp;&bull;&nbsp; Gloyn lab member (TBD), Stanford &nbsp;&bull;&nbsp; <em>Two additional speakers TBA</em></div></td></tr>
+          <tr><td class="s-time">9:15 &ndash; 10:30</td><td class="s-body"><div class="s-title">Early Career Scientist Talks</div><div class="s-detail">10-min talk + 5-min Q&amp;A each &mdash; Matthew Ishahak, University of Miami &nbsp;&bull;&nbsp; Alex Ghaben, Rady Children&rsquo;s Hospital &nbsp;&bull;&nbsp; Thomas Bate, Vanderbilt University Medical Center &nbsp;&bull;&nbsp; Claire Kim, Stanford University &nbsp;&bull;&nbsp; Ringo Mao, University of Michigan</div></td></tr>
           <tr class="row-break"><td class="s-time">10:30 &ndash; 10:45</td><td class="s-body"><div class="s-title">Break</div></td></tr>
           <tr><td class="s-time">10:45 &ndash; 11:00</td><td class="s-body"><div class="s-title">The CDE Collaboration with Partner Programs</div><div class="s-detail">Steve Parker</div></td></tr>
           <tr class="row-highlight"><td class="s-time">11:00 &ndash; 11:30</td><td class="s-body"><div class="s-title">Invited External Speaker &mdash; Todd Brusko (Virtual)</div><div class="s-detail">University of Florida &mdash; 15-min talk + 15-min discussion &mdash; &ldquo;Integrating multimodal single cell and spatial data to inform clinical interventions in T1D&rdquo;</div></td></tr>
-          <tr><td class="s-time">11:30 &ndash; 12:30 PM</td><td class="s-body"><div class="s-title">2025 OP Fund Awardee Talks</div><div class="s-detail">15-min talk + 5-min Q&amp;A each &mdash; Dr. John Kaddis, City of Hope &nbsp;&bull;&nbsp; Dr. Ruixiang Tang, Rutgers University &nbsp;&bull;&nbsp; Dr. Randi Johnson, University of Colorado Anschutz</div></td></tr>
+          <tr><td class="s-time">11:30 &ndash; 12:30 PM</td><td class="s-body"><div class="s-title">2025 OP Fund Awardee Talks</div><div class="s-detail">15-min talk + 5-min Q&amp;A each &mdash; John Kaddis, City of Hope &nbsp;&bull;&nbsp; Ruixiang Tang, Rutgers University &nbsp;&bull;&nbsp; Randi Johnson, PhD, University of Colorado Anschutz</div></td></tr>
           <tr><td class="s-time">12:30 &ndash; 12:40 PM</td><td class="s-body"><div class="s-title">Wrap-Up &amp; Closing</div><div class="s-detail">Steve Parker</div></td></tr>
           <tr class="row-break"><td class="s-time">12:40 &ndash; 2:00 PM</td><td class="s-body"><div class="s-title">Lunch, Networking &amp; Departure</div></td></tr>
         </table>
@@ -1267,7 +1273,7 @@ footer a { color: var(--maize); text-decoration: none; }
             <strong>Day 1 &mdash; Thursday, November 12</strong><br>
             9:30 &ndash; 10:00 AM &middot; Virtual<br>
             15-minute talk followed by 15-minute discussion<br>
-            Title: TBD
+            &ldquo;A Different PD-L1 Message: Alternative Splicing of PD-L1 Shapes &beta; Cell Communication in Response to Interferon&rdquo;
           </div>
         </div>
       </div>
