@@ -412,6 +412,8 @@ nav {
 .speaker-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .speaker-card-sm { padding: 26px; gap: 22px; max-width: none; }
 .speaker-card-sm .speaker-initials { width: 76px; height: 76px; }
+.speaker-talk { font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.45; margin: -6px 0 12px; }
+.speaker-bio { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 16px; }
 .speaker-inst { font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 16px; }
 .speaker-session {
   font-size: 0.83rem;
@@ -838,6 +840,31 @@ footer a { color: var(--maize); text-decoration: none; }
   text-underline-offset: 3px;
   font-variant-numeric: tabular-nums;
 }
+/* ===== ABSTRACT ===== */
+details.abstract { margin-top: 8px; }
+details.abstract summary {
+  display: inline-flex; align-items: center; gap: 6px;
+  cursor: pointer; list-style: none;
+  font-size: 0.8rem; font-weight: 600; color: var(--maize-dim);
+}
+details.abstract summary::-webkit-details-marker { display: none; }
+details.abstract summary::before {
+  content: '\25B8'; display: inline-block; transition: transform 0.15s;
+}
+details.abstract[open] summary::before { transform: rotate(90deg); }
+details.abstract[open] summary { margin-bottom: 8px; }
+details.abstract summary:hover { text-decoration: underline; }
+.abstract-body {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-left: 3px solid var(--maize); border-radius: 0 6px 6px 0;
+  padding: 12px 16px; font-size: 0.83rem; color: var(--text-secondary); line-height: 1.65;
+}
+.abstract-body p + p { margin-top: 8px; }
+.speaker-card details.abstract { margin: -4px 0 14px; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) details.abstract summary { color: var(--maize); }
+}
+:root[data-theme="dark"] details.abstract summary { color: var(--maize); }
 /* ===== ZOOM ===== */
 .hero-zoom {
   margin-top: 30px;
@@ -1198,13 +1225,17 @@ footer a { color: var(--maize); text-decoration: none; }
           <tr><td class="s-time">11:20 &ndash; 12:00 PM</td><td class="s-body"><div class="s-title">2026 OP Fund Awardees Presentations</div><div class="s-detail">10-min presentations on proposed projects &mdash; Shuibing Chen, Cornell University &nbsp;&bull;&nbsp; Michael Stitzel, Jackson Laboratory &nbsp;&bull;&nbsp; Noel Burtt &amp; Jason Flannick, Broad Institute</div></td></tr>
           <tr class="row-break"><td class="s-time">12:00 &ndash; 1:30 PM</td><td class="s-body"><div class="s-title">Lunch</div></td></tr>
           <tr class="row-highlight"><td class="s-time">1:00 &ndash; 1:30 PM</td><td class="s-body"><div class="s-title">2026 PanKbase Awards for Excellence</div><div class="s-detail">Presented during lunch</div></td></tr>
-          <tr class="row-highlight"><td class="s-time">1:30 &ndash; 2:15</td><td class="s-body"><div class="s-title">Keynote Lecture &mdash; Dr. Chen Li</div><div class="s-detail">UC Irvine &mdash; 30-min presentation + 15-min Q&amp;A &mdash; Title: TBD</div></td></tr>
+          <tr class="row-highlight"><td class="s-time">1:30 &ndash; 2:15</td><td class="s-body"><div class="s-title">Keynote Lecture &mdash; Dr. Chen Li</div><div class="s-detail">UC Irvine &mdash; 30-min presentation + 15-min Q&amp;A &mdash; &ldquo;Beyond Chatbots: Empowering Scientific Discovery through Human&ndash;Agent Collaboration&rdquo;<details class="abstract"><summary>Read abstract</summary><div class="abstract-body"><p>Recent advances in large language models (LLMs) are creating exciting opportunities to transform how scientists analyze data and conduct research. While general-purpose AI assistants can answer questions, generate code, and reason about scientific problems, they often lack seamless access to the datasets, computational resources, analytical workflows, and machine learning models needed for complex scientific investigations.</p><p>In this talk, I will present our vision of an agent-centric platform for collaborative data science and AI, building on our work on Apache Texera, the NIH dkNET Computational Core, and the NSF BRIDGE cyberinfrastructure. In this vision, a conversational AI agent serves as the primary interface through which scientists can manage datasets and models, perform analyses using natural language, access external information, and leverage computational and analytical resources shared by their research communities. Rather than simply generating scripts, the agent can construct, execute, and refine reproducible workflows while keeping scientists actively involved in the analytical process.</p><p>As part of this vision, I will introduce BobFlow, our recently developed framework for human&ndash;agent collaborative data science. BobFlow uses dataflows as a shared computational abstraction for humans and agents, providing a more transparent and efficient alternative to traditional script-based agent frameworks. I will highlight its design, experimental results, and implications for building trustworthy AI-powered scientific research environments. Together, these developments point toward a future in which AI agents become powerful scientific collaborators, helping domain scientists accelerate discovery while retaining control and understanding of their analyses.</p></div></details></div></td></tr>
           <tr class="row-break"><td class="s-time">2:15 &ndash; 2:30</td><td class="s-body"><div class="s-title">Break &amp; Move to Breakout Sessions</div><div class="s-detail">Refreshments will be provided in Breakout Rooms</div></td></tr>
           <tr><td class="s-time">2:30 &ndash; 5:00</td><td class="s-body">
             <div class="s-title">Parallel Breakout Sessions <span class="badge-parallel">Parallel</span></div>
             <div class="s-detail" style="margin-top:8px">
               <strong>Room 4, First Floor &mdash; Trainees &amp; Staff</strong><br>
-              &nbsp;&nbsp;<span class="bk-time">2:30&ndash;4:00</span> &nbsp;Trainees Track 1 proposal generation workshop (facilitated by NIH program staff): writing a letter of intent/specific aims page (20 min); find a work partner and pair up (30 min); brainstorm a dataset, tool, or improvement PanKbase or PanKgraph could use, and develop it into two slides to present later in the meeting (40 min). Pairs present 2-minute flash talks at 5:15 PM.<br>
+              &nbsp;&nbsp;<span class="bk-time">2:30&ndash;4:00</span> &nbsp;Trainee PanKbase improvement brainstorming session &mdash; proposal generation workshop:<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;1. Writing a letter of intent/specific aims page (20 min)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;2. Finding a work partner(s) and pair up (30 min)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;3. Brainstorm a dataset, tool, or improvement that the PanKbase or PanKgraph platform could use. Develop your idea and create two slides to present later in the meeting (40 min)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;Pairs will present ideas in 2-minute flash talks during the 5:15 PM session.<br>
               &nbsp;&nbsp;<span class="bk-time">4:00&ndash;4:15</span> &nbsp;Break<br>
               &nbsp;&nbsp;<span class="bk-time">4:15&ndash;5:00</span> &nbsp;2025 OP Fund awardees and non-SC PIs face-to-face meetings (associated trainees and staff are also welcome to stay):<br>
               &nbsp;&nbsp;&nbsp;&nbsp;&bull; Drs. Tang and Kaddis meet with PI Parker team members: Drs. Brissova, Liu, Chen and Cartailler<br>
@@ -1254,10 +1285,12 @@ footer a { color: var(--maize); text-decoration: none; }
       <div>
         <div class="speaker-name">Dr. Chen Li</div>
         <div class="speaker-inst">University of California, Irvine</div>
+        <div class="speaker-talk">&ldquo;Beyond Chatbots: Empowering Scientific Discovery through Human&ndash;Agent Collaboration&rdquo;</div>
+        <details class="abstract"><summary>Read abstract</summary><div class="abstract-body"><p>Recent advances in large language models (LLMs) are creating exciting opportunities to transform how scientists analyze data and conduct research. While general-purpose AI assistants can answer questions, generate code, and reason about scientific problems, they often lack seamless access to the datasets, computational resources, analytical workflows, and machine learning models needed for complex scientific investigations.</p><p>In this talk, I will present our vision of an agent-centric platform for collaborative data science and AI, building on our work on Apache Texera, the NIH dkNET Computational Core, and the NSF BRIDGE cyberinfrastructure. In this vision, a conversational AI agent serves as the primary interface through which scientists can manage datasets and models, perform analyses using natural language, access external information, and leverage computational and analytical resources shared by their research communities. Rather than simply generating scripts, the agent can construct, execute, and refine reproducible workflows while keeping scientists actively involved in the analytical process.</p><p>As part of this vision, I will introduce BobFlow, our recently developed framework for human&ndash;agent collaborative data science. BobFlow uses dataflows as a shared computational abstraction for humans and agents, providing a more transparent and efficient alternative to traditional script-based agent frameworks. I will highlight its design, experimental results, and implications for building trustworthy AI-powered scientific research environments. Together, these developments point toward a future in which AI agents become powerful scientific collaborators, helping domain scientists accelerate discovery while retaining control and understanding of their analyses.</p></div></details>
+        <p class="speaker-bio">Chen Li is a professor in the Department of Computer Science at UC Irvine. He received his Ph.D. degree in Computer Science from Stanford University, and his M.S. and B.S. in Computer Science from Tsinghua University, China, respectively. He&rsquo;s the Director of the recently funded NSF BRIDGE cyberinfrastructure, and an MPI of the NIDDK dkNET project. He was a recipient of an NSF CAREER award and several test-of-time publication awards, a part-time visiting research scientist at Google, PC co-chair of VLDB 2015, an ACM distinguished member, and an IEEE fellow. Since January 2020, he&rsquo;s the treasurer and a board member of the VLDB Endowment. He was a co-founder and CTO of a startup to commercialize his research.</p>
         <div class="speaker-session">
           <strong>Day 1 Keynote &mdash; Thursday, November 12</strong><br>
-          1:30 &ndash; 2:15 PM &mdash; 30-minute presentation followed by 15-minute Q&amp;A<br>
-          Title: TBD
+          1:30 &ndash; 2:15 PM &mdash; 30-minute presentation followed by 15-minute Q&amp;A
         </div>
       </div>
     </div>
